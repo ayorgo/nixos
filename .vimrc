@@ -10,6 +10,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tomasiser/vim-code-dark'
 call plug#end()
 
+" Fix scrolling slowness https://github.com/vim/vim/issues/2712
+set re=1
 " NERD Tree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
