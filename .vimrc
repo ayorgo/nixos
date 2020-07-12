@@ -61,15 +61,6 @@ let g:indentLine_char = '▏'
 let g:indentLine_leadingSpaceChar='·'
 let g:indentLine_leadingSpaceEnabled='1'
 
-" Commentary
-autocmd FileType python setlocal commentstring=#\ %s
-
-"
-" Key mappings
-"
-
-" Move line up and down (gvim only)
-" nnoremap <A-j> :m +1<CR>==
-" nnoremap <A-k> :m -2<CR>==
-" vnoremap <A-j> :m '>+1<CR>gv=gv
-" vnoremap <A-k> :m '<-2<CR>gv=gv
+" Map Caps to Esc on enter, remap back on exit
+au VimEnter * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+au VimLeave * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
