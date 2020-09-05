@@ -12,18 +12,24 @@ call plug#end()
 
 " Fix scrolling slowness https://github.com/vim/vim/issues/2712
 set re=1
-" NERD Tree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Have the cursor at the center of the screen at all times
+set so=999
+
+" No swap files
+set noswapfile
 
 " Convenient copy/paste
 set clipboard=unnamedplus
+
+" UTF-8 encoding everywhere
+set encoding=UTF-8
 
 " Autosave as you type
 let g:auto_save = 1
 let g:auto_save_events = ["CursorHold"]
 set updatetime=300
-" autocmd TextChanged,TextChangedI * silent write
+set nobackup nowritebackup " no .swp files
 
 " Tabs as spaces
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
@@ -35,6 +41,7 @@ set timeoutlen=1000 ttimeoutlen=0
 set colorcolumn=80,100
 
 " Relative line numbers
+set number
 set relativenumber
 
 " Search highlight
@@ -48,13 +55,15 @@ set smartcase
 "  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 " endfunction
 
-set number
-filetype on
-syntax on
+" NERD Tree
+au VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+let NERDTreeShowHidden=1
 
 " Syntax highlighting
+syntax on
+filetype on
 let g:python_highlight_all = 1
-colorscheme codedark
+colorscheme morning
 
 " Indentation
 let g:indentLine_char = '▏'
