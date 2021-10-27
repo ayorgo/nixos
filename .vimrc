@@ -8,6 +8,8 @@ Plug '907th/vim-auto-save'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary' 
 Plug 'tomasiser/vim-code-dark'
+" Plug 'ryanoasis/vim-devicons'
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 call plug#end()
 
 " Fix scrolling slowness https://github.com/vim/vim/issues/2712
@@ -18,6 +20,9 @@ set so=999
 
 " No swap files
 set noswapfile
+
+" Mouse support
+set mouse=a
 
 " Convenient copy/paste
 set clipboard=unnamedplus
@@ -49,15 +54,27 @@ set hlsearch
 set ignorecase
 set smartcase
 
-" NERDTress File highlighting
+" NERDTrees File highlighting
+" set conceallevel=3
 " function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-"  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-"  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+"  exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+"  exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 " endfunction
-
-" NERD Tree
-au VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-let NERDTreeShowHidden=1
+" au VimEnter * call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+" au VimEnter * call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+" au VimEnter * call NERDTreeHighlightFile('py', 'blue', 'none', '#3366FF', '#151515')
+" au VimEnter * call NERDTreeHighlightFile('yml', 'Magenta', 'none', '#ff00ff', '#151515')
+" au VimEnter * call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+" au VimEnter * call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+" au VimEnter * call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+" au VimEnter * call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+" au VimEnter * call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+" au VimEnter * call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+" au VimEnter * call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', '#151515')
+" au VimEnter * call NERDTreeHighlightFile('gitconfig', 'Gray', 'none', '#686868', '#151515')
+" au VimEnter * call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#686868', '#151515')
+" au VimEnter * call NERDTreeHighlightFile('bashrc', 'Gray', 'none', '#686868', '#151515')
+" au VimEnter * call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')
 
 " Syntax highlighting
 syntax on
@@ -71,8 +88,14 @@ let g:indentLine_leadingSpaceChar='·'
 let g:indentLine_leadingSpaceEnabled='1'
 
 " Map Caps to Esc on enter, remap back on exit
-au VimEnter * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
-au VimLeave * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
+" au VimEnter * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+" au VimLeave * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
+
+" NERD Tree
+autocmd StdinReadPre * let s:std_in=1
+au VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+let NERDTreeShowHidden=1
+let NERDTreeQuitOnOpen = 0
 
 " Pane navigation
 nnoremap <C-h> <C-w>h
