@@ -8,6 +8,7 @@ Plug '907th/vim-auto-save'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary' 
 Plug 'tomasiser/vim-code-dark'
+Plug 'tpope/vim-fugitive'
 " Plug 'ryanoasis/vim-devicons'
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 call plug#end()
@@ -80,12 +81,20 @@ set smartcase
 syntax on
 filetype on
 let g:python_highlight_all = 1
-colorscheme morning
+colorscheme default
 
 " Indentation
 let g:indentLine_char = '▏'
 let g:indentLine_leadingSpaceChar='·'
 let g:indentLine_leadingSpaceEnabled='1'
+let g:indentLine_fileTypeExclude = ['json']
+
+let g:vim_json_syntax_conceal = 0
+" let g:vim_markdown_conceal = 0
+" let g:vim_markdown_conceal_code_blocks = 0
+
+" Disable quote concealing in JSON files
+" let g:vim_json_conceal=0
 
 " Map Caps to Esc on enter, remap back on exit
 " au VimEnter * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
