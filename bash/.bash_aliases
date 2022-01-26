@@ -1,1 +1,2 @@
 function dockerize() { docker run -it -p 8888:8888 -v $(pwd):/home/ayorgo/code -v ~/.aws:/ayorgo/home/.aws -v ~/.aws/credentials:/ayorgo/home/.aws/credentials -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix "$@"; }
+function dockerize() { docker run -it -p 8888:8888 -v $(pwd):/home/ayorgo/code -v ~/.aws:/home/ayorgo/.aws -v ~/.aws/credentials:/home/ayorgo/.aws/credentials -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix "$@"; }
