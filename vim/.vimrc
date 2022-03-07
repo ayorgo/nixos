@@ -7,8 +7,9 @@ Plug 'Yggdroot/indentLine'
 Plug '907th/vim-auto-save'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary' 
-Plug 'tomasiser/vim-code-dark'
-Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'itchyny/lightline.vim'
+Plug 'itchyny/vim-gitbranch'
 " Plug 'ryanoasis/vim-devicons'
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 call plug#end()
@@ -82,6 +83,36 @@ syntax on
 filetype on
 let g:python_highlight_all = 1
 colorscheme default
+
+" vim-gitgutter
+highlight clear SignColumn
+
+" lightline
+let g:lightline = {
+      \ 'colorscheme': 'one',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'fileencoding' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gitbranch#name'
+      \ },
+      \ }
+
+" lightline: disable in NERDTree
+augroup filetype_nerdtree
+    au!
+    au FileType nerdtree call s:disable_lightline_on_nerdtree()
+    au WinEnter,BufWinEnter,TabEnter * call s:disable_lightline_on_nerdtree()
+augroup END
+
+fu s:disable_lightline_on_nerdtree() abort
+    let nerdtree_winnr = index(map(range(1, winnr('$')), {_,v -> getbufvar(winbufnr(v), '&ft')}), 'nerdtree') + 1
+    call timer_start(0, {-> nerdtree_winnr && setwinvar(nerdtree_winnr, '&stl', '%#Normal#')})
+endfu
 
 " Indentation
 let g:indentLine_char = '▏'
