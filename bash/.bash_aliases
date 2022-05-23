@@ -10,6 +10,9 @@ alias l='ls -CF'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# Spotify scaling
+alias spotify='spotify --force-device-scale-factor=1.25'
+
 # Add some colors
 if [ -x /usr/bin/dircolors ]; then
    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -21,7 +24,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-function dockerize() { docker run -it -p 8888:8888 -v $(pwd):/home/ayorgo/code -v ~/.aws:/ayorgo/home/.aws -v ~/.aws/credentials:/ayorgo/home/.aws/credentials -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --net=host "$@"; }
+function dockerize() {
+    (set -x; docker run -it -p 8888:8888 -v $(pwd):/home/ayorgo/code -v ~/.aws:/home/ayorgo/.aws -v ~/.aws/credentials:/home/ayorgo/.aws/credentials -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --env IPYTHONDIR=/home/ayorgo/code/.ipython --env HISTFILE=/home/ayorgo/code/.bash_history "$@")
+}
 
 # Implies multiline pass output: username\npassword
 function vpn() {
