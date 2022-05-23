@@ -51,12 +51,8 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 " Remove delay when Esc from visual mode
 set timeoutlen=1000 ttimeoutlen=0
 
-" Ruler
-set colorcolumn=80,100
-
 " Relative line numbers
 set number
-set relativenumber
 
 " Search highlight
 set hlsearch
@@ -94,34 +90,6 @@ colorscheme default
 " vim-gitgutter
 highlight clear SignColumn
 
-" " lightline
-" let g:lightline = {
-"       \ 'colorscheme': 'one',
-"       \ 'active': {
-"       \   'left': [ [ 'mode', 'paste' ],
-"       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-"       \   'right': [ [ 'lineinfo' ],
-"       \              [ 'percent' ],
-"       \              [ 'fileencoding' ] ]
-"       \ },
-"       \ 'component_function': {
-"       \   'gitbranch': 'gitbranch#name'
-"       \ },
-"       \ }
-
-" " lightline: disable in NERDTree
-
-augroup filetype_nerdtree
-    au!
-    au FileType nerdtree call s:disable_lightline_on_nerdtree()
-    au WinEnter,BufWinEnter,TabEnter * call s:disable_lightline_on_nerdtree()
-augroup END
-
-fu s:disable_lightline_on_nerdtree() abort
-    let nerdtree_winnr = index(map(range(1, winnr('$')), {_,v -> getbufvar(winbufnr(v), '&ft')}), 'nerdtree') + 1
-    call timer_start(0, {-> nerdtree_winnr && setwinvar(nerdtree_winnr, '&stl', '%#Normal#')})
-endfu
-
 " Indentation
 let g:indentLine_char = '▏'
 let g:indentLine_leadingSpaceChar='·'
@@ -150,3 +118,7 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" Ruler
+set colorcolumn=80
+highlight ColorColumn ctermbg=1
