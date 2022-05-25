@@ -1,5 +1,7 @@
 alias clone=/home/ayorgo/lyst/clone.sh
 
+function task() { /usr/bin/task "$@" | less ; }
+
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
