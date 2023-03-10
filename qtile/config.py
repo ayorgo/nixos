@@ -159,8 +159,13 @@ screens = [
                 widget.Spacer(),
                 widget.Systray(icon_size=32),
                 widget.TextBox("|"),
+                widget.Backlight(
+                    backlight_name="intel_backlight",
+                    fmt="Backlight:{:>4}",
+                ),
+                widget.TextBox("|"),
                 widget.Volume(
-                    fmt="Vol:{:>4}",
+                    fmt="Volume:{:>4}",
                 ),
                 widget.TextBox("|"),
                 widget.CPU(
