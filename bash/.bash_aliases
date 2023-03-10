@@ -36,3 +36,10 @@ function vpn() {
     VPN_CREDENTIALS="$(pass show work/openvpn)"
     sudo bash -c 'openvpn --config '"$VPN_CONFIG_FILE"' --auth-user-pass <(echo "'"$VPN_CREDENTIALS"'")'
 }
+
+# WiFi connection
+function connect() {
+    WIFI_SSID="$1"
+    WIFI_PASSWORD="$(pass show wifi/$WIFI_SSID)"
+    sudo nmcli dev wifi con $WIFI_SSID password $WIFI_PASSWORD
+}
