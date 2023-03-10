@@ -43,3 +43,8 @@ function connect() {
     WIFI_PASSWORD="$(pass show wifi/$WIFI_SSID)"
     sudo nmcli dev wifi con $WIFI_SSID password $WIFI_PASSWORD
 }
+
+# Fonts
+function fonts() {
+    fc-list | grep -ioE ": [^:]*$1[^:]+:" | sed -E 's/(^: |:)//g' | tr , \\n | sort | uniq
+}
