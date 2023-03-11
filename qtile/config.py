@@ -207,7 +207,7 @@ screens = [
                 widget.Battery(
                     show_short_text=False,
                     full_char = "󰂅",
-                    charge_char="󰢜",
+                    charge_char="󰢝",
                     discharge_char="󰁾",
                     update_interval=1,
                     format="<span size='large'>{char}</span>{percent: >4.0%}",
