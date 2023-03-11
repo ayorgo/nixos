@@ -151,6 +151,7 @@ screens = [
                 widget.CurrentLayoutIcon(),
                 widget.Spacer(length=20),
                 widget.GroupBox(
+                    rounded=False,
                     disable_drag=True,
                     borderwidth=2,
                     this_screen_border=foreground_color,
@@ -167,6 +168,7 @@ screens = [
                 widget.Spacer(length=5),
                 widget.TaskList(
                     title_width_method="uniform",
+                    rounded=False,
                     borderwidth=2,
                     txt_minimized="* ",
                     border=foreground_color,
