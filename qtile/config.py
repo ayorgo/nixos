@@ -212,7 +212,7 @@ screens = [
                     charge_char="󰢝",
                     discharge_char="󰁾",
                     update_interval=1,
-                    format="<span size='large'>{char}</span>{percent: >4.0%}",
+                    format="<span size='large'>{char}</span>{percent: >5.0%}",
                     foreground=foreground_color,
                     background=background_color,
                     padding=10,
