@@ -42,7 +42,7 @@ keys = [
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
     Key([mod], "Tab", lazy.layout.next(), desc="Move window focus to other window"),
 
-    # Move windows between left/right columns or move up/down in current stack.
+    # Move windows betweencleft/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
     Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
@@ -133,13 +133,15 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="RobotoMono Nerd Font Mono",
+    font="RobotoMono Nerd Font",
     fontsize=20,
     padding=3,
-    foreground="#E8EAF6"
+    foreground="#E8EAF6",
 )
 extension_defaults = widget_defaults.copy()
 
+background_color = "#292c3c"
+foreground_color = widget_defaults["foreground"]
 screens = [
     Screen(
         wallpaper="/home/ayorgo/wallpapers/archtv.png",
@@ -153,12 +155,12 @@ screens = [
                     this_screen_border="#1793d1",
                     this_current_screen_border="#1793d1",
                     padding=5,
-                    background="#292c3c",
+                    background=background_color,
                 ),
                 widget.Spacer(length=5),
                 widget.Systray(
                     icon_size=32,
-                    background="#292c3c",
+                    background=background_color,
                 ),
                 widget.Prompt(),
                 widget.Spacer(length=5),
@@ -169,58 +171,56 @@ screens = [
                     margin=0,
                     txt_minimized="* ",
                     border="#1793d1",
-                    background="#292c3c",
+                    background=background_color,
                     padding=6,
                 ),
                 widget.Spacer(),
                 widget.Backlight(
                     backlight_name="intel_backlight",
-                    fmt="Backlight {:>4}",
-                    # fmt="🔆 {:>4}",
-                    background="#292c3c",
+                    fmt="<span size='large'>󰛩 </span>{:>4}",
+                    foreground=foreground_color,
+                    background=background_color,
                     padding=10,
                 ),
                 widget.Spacer(length=5),
                 widget.Volume(
-                    fmt="Volume {:>4}",
-                    # fmt="🔊 {:>4}",
-                    background="#292c3c",
+                    fmt="<span size='large'> </span>{:>4}",
+                    foreground=foreground_color,
+                    background=background_color,
                     padding=10,
                 ),
                 widget.Spacer(length=5),
                 widget.CPU(
-                    format="CPU {load_percent: 3.0f}%",
-                    background="#292c3c",
+                    format="<span size='large'></span>{load_percent: >4.0f}%",
+                    foreground=foreground_color,
+                    background=background_color,
                     padding=10,
                 ),
                 widget.Spacer(length=5),
                 widget.Memory(
                     measure_mem="G",
-                    fmt="{:>10}",
-                    format="RAM {MemUsed: .1f}{mm}",
-                    background="#292c3c",
+                    format="<span size='large'></span>{MemUsed: >4.0f}{mm}",
+                    foreground=foreground_color,
+                    background=background_color,
                     padding=10,
                 ),
                 widget.Spacer(length=5),
                 widget.Battery(
                     show_short_text=False,
-                    # full_char="🔋",
-                    # charge_char="🔌",
-                    # discharge_char="🔻",
-                    full_char = "plugged",
-                    charge_char="charging",
-                    discharge_char="draining",
+                    full_char = "󰂅",
+                    charge_char="󰢜",
+                    discharge_char="󰁾",
                     update_interval=1,
-                    fmt="{:<20}",
-                    format="Battery {percent:1.0%} {char}",
-                    background="#292c3c",
+                    format="<span size='large'>{char}</span>{percent: >4.0%}",
+                    foreground=foreground_color,
+                    background=background_color,
                     padding=10,
                 ),
                 widget.Spacer(length=5),
                 widget.Clock(
-                    fmt="{:<19}",
-                    format="%a %-d %b %-H:%M:%S",
-                    background="#292c3c",
+                    format="<span size='large'>󰃰</span> %a %-d %b %-H:%M",
+                    foreground=foreground_color,
+                    background=background_color,
                     padding=10,
                 ),
             ],
