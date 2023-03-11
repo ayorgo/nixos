@@ -222,6 +222,16 @@ screens = [
                     background=background_color,
                     padding=10,
                 ),
+                widget.Spacer(length=5),
+                widget.KeyboardLayout(
+                    configured_keyboards=["us", "us dvorak", "ru"],
+                    display_map={
+                        "us": "<span size='large'></span> US",
+                        "us dvorak": "<span size='large'></span> DV",
+                        "ru": "<span size='large'></span> RU"},
+                    background=background_color,
+                    padding=10,
+                ),
             ],
             33,
             # background="#292929",
