@@ -38,10 +38,14 @@ function vpn() {
 }
 
 # WiFi connection
-function connect() {
+function wifi_connect() {
     WIFI_SSID="$1"
     WIFI_PASSWORD="$(pass show wifi/$WIFI_SSID)"
     sudo nmcli dev wifi con $WIFI_SSID password $WIFI_PASSWORD
+}
+
+function wifi_show() {
+    nmcli dev wifi
 }
 
 # Fonts
