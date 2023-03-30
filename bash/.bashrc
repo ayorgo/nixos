@@ -62,7 +62,15 @@ shopt -s checkwinsize
 #     fi
 # fi
 
-PS1='[\t]\u:\w$ '
+# PS1='[\t]\u:\w$ '
+
+if [ "$HOSTNAME" != "tuxedo" ]; then
+  PS1="\[$(tput bold)\]\[\033[38;5;166m\]\u\[$(tput sgr0)\]@\[$(tput bold)\]\[\033[38;5;85m\]\h\[$(tput sgr0)\]\[$(tput bold)\]:\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;39m\]\w\[$(tput sgr0)\] \[$(tput bold)\]>\[$(tput sgr0)\] "
+else
+  PS1="\[$(tput bold)\]\[\033[38;5;166m\]\u\[$(tput sgr0)\]\[$(tput bold)\]:\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;39m\]\w\[$(tput sgr0)\] \[$(tput bold)\]>\[$(tput sgr0)\] "
+fi
+
+
 
 # unset color_prompt force_color_prompt
 
@@ -112,9 +120,3 @@ ssh-add ~/.ssh/id_ed25519_ayorgo > /dev/null 2>&1
 
 # Vim keybindings
 set -o vi
-
-# powerline prompt
-powerline-daemon -q
-POWERLINE_BASH_CONTINUATION=1
-POWERLINE_BASH_SELECT=1
-. /usr/share/powerline/bindings/bash/powerline.sh
