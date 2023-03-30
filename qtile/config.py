@@ -175,7 +175,17 @@ screens = [
                     background=background_color,
                     padding=4,
                 ),
-                widget.Spacer(),
+                widget.Spacer(length=5),
+                widget.Mpris2(
+                    width = 200,
+                    playing_text = " ",
+                    stop_pause_text=" ",
+                    objname="org.mpris.MediaPlayer2.spotify",
+                    foreground=foreground_color,
+                    background=background_color,
+                    padding=10,
+                ),
+                widget.Spacer(length=5),
                 widget.Backlight(
                     backlight_name="intel_backlight",
                     fmt="<span size='large'>󰛩 </span>{:>4}",
