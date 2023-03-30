@@ -136,11 +136,11 @@ widget_defaults = dict(
     font="RobotoMono Nerd Font",
     fontsize=20,
     padding=3,
-    foreground="#E8EAF6",
+    foreground="#E8EAF6"
 )
 extension_defaults = widget_defaults.copy()
 
-background_color = "#292c3c"
+background_color = "#292C3c"
 foreground_color = widget_defaults["foreground"]
 screens = [
     Screen(
