@@ -15,6 +15,9 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Spotify scaling
 alias spotify='spotify --force-device-scale-factor=1.25'
 
+# Steam scaling
+alias steam='GDK_SCALE=2 steam'
+
 # Add some colors
 if [ -x /usr/bin/dircolors ]; then
    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
