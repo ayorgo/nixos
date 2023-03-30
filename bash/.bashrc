@@ -8,6 +8,10 @@
 #       *) return;;
 # esac
 
+# FZF config
+export FZF_DEFAULT_OPTS='--height 40% --border'
+export FZF_DEFAULT_COMMAND='find'
+
 # Colors for bash
 # export TERM="xterm-256color"                      # getting proper colors
 # export HISTCONTROL=ignoredups:erasedups           # no duplicate entries
