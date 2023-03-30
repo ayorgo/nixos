@@ -149,7 +149,7 @@ screens = [
         top=bar.Bar(
             [
                 widget.CurrentLayoutIcon(),
-                widget.Spacer(length=20),
+                widget.Spacer(length=5),
                 widget.GroupBox(
                     rounded=False,
                     disable_drag=True,
