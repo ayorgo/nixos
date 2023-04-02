@@ -177,8 +177,8 @@ screens = [
                 ),
                 widget.Spacer(length=5),
                 widget.Mpris2(
-                    stop_pause_text=" ",
-                    playing_text=" ",
+                    stop_pause_text="  ",
+                    playing_text="  ",
                     objname="org.mpris.MediaPlayer2.spotify",
                     foreground=foreground_color,
                     background=background_color,
