@@ -1,3 +1,5 @@
+#!/bin/bash
+
 alias clone=/home/ayorgo/lyst/clone.sh
 
 function task() { /usr/bin/task "$@" | less ; }
