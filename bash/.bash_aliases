@@ -29,8 +29,30 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+function free_port() {
+    for port in $(seq $1 $2); do
+        ss -atun | grep -q ":$port " || break
+    done
+
+    echo $port
+}
+
 function dockerize() {
-    (set -x; docker run -it -p 8888:8888 -v $(pwd):/home/ayorgo/code -v ~/.aws:/home/ayorgo/.aws -v ~/.aws/credentials:/home/ayorgo/.aws/credentials -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --env IPYTHONDIR=/home/ayorgo/code/.ipython --env HISTFILE=/home/ayorgo/code/.bash_history "$@")
+    COMMAND=echo $@ | sed "s/jupyter notebook/jupyter notebook -y --ip 0.0.0.0 --no-browser/g"
+    PORT=$(free_port 8880 8889)
+    (
+        set -x;
+        docker run -it -p \
+        $PORT:8888 \
+        -v $(pwd):/home/ayorgo/code \
+        -v ~/.aws:/home/ayorgo/.aws \
+        -v ~/.aws/credentials:/home/ayorgo/.aws/credentials \
+        -e DISPLAY \
+        -v /tmp/.X11-unix:/tmp/.X11-unix \
+        --env IPYTHONDIR=/home/ayorgo/code/.ipython \
+        --env HISTFILE=/home/ayorgo/code/.bash_history \
+        $COMMAND
+    ) | sed "s/8888/$PORT/g"
 }
 
 # Implies multiline pass output: username\npassword
