@@ -188,7 +188,6 @@ screens = [
                 widget.Backlight(
                     backlight_name="intel_backlight",
                     fmt="<span size='large'>󰛩 </span>{:>4}",
-                    update_interval=0,
                     foreground=foreground_color,
                     background=background_color,
                     padding=10,
