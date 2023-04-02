@@ -40,12 +40,12 @@ function free_port() {
 }
 
 function dockerize() {
-    COMMAND=echo $@ | sed "s/jupyter notebook/jupyter notebook -y --ip 0.0.0.0 --no-browser/g"
     PORT=$(free_port 8880 8889)
+    COMMAND=$(echo $@ | sed "s/jupyter notebook/jupyter notebook -y --ip 0.0.0.0 --port $PORT --no-browser/g")
     (
         set -x;
         docker run -it -p \
-        $PORT:8888 \
+        $PORT:$PORT \
         -v $(pwd):/home/ayorgo/code \
         -v ~/.aws:/home/ayorgo/.aws \
         -v ~/.aws/credentials:/home/ayorgo/.aws/credentials \
@@ -54,7 +54,7 @@ function dockerize() {
         --env IPYTHONDIR=/home/ayorgo/code/.ipython \
         --env HISTFILE=/home/ayorgo/code/.bash_history \
         $COMMAND
-    ) | sed "s/8888/$PORT/g"
+    )
 }
 
 # Implies multiline pass output: username\npassword
