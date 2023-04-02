@@ -83,8 +83,8 @@ keys = [
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer set Master 5%+ unmute")),
     Key([], "XF86AudioMute", lazy.spawn("amixer set Master togglemute")),
     Key([], "XF86AudioMicMute", lazy.spawn("amixer set Capture togglemute")),
-    Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -5")),
-    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight +5")),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -10")),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight +10")),
 
     # Screen lock
     Key(["mod4"], "z", lazy.spawn("xsecurelock")),
@@ -188,6 +188,7 @@ screens = [
                 widget.Backlight(
                     backlight_name="intel_backlight",
                     fmt="<span size='large'>󰛩 </span>{:>4}",
+                    update_interval=0,
                     foreground=foreground_color,
                     background=background_color,
                     padding=10,
