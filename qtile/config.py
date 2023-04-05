@@ -24,11 +24,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from libqtile import bar, layout, widget
+from libqtile import bar, layout, widget, hook, extension, qtile
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
-from libqtile import extension
 
 mod = "mod1"
 terminal = guess_terminal()
@@ -40,6 +39,23 @@ widget_defaults = dict(
     foreground="#E8EAF6"
 )
 extension_defaults = widget_defaults.copy()
+
+script_list_gui_commands = (
+    # Find all the executable commands from available .desktop files
+    'find /usr/share/applications ~/.local/share/applications/ -name "*.desktop" -exec awk -F "=" "/Exec/ {print $2}" {} + '
+    # Filter out those compgen outputs that cannot be found among the above executables
+    '| grep -woEf <(compgen -c '
+        # Remove commands that contain special characters
+        '| tr -dc "[:alnum:]-\n" '
+        # Replace newline with pipe to conform to grep's multiple search criteria syntax
+        '| tr "\n" "|") '
+    # Remove those that are shorter than 3 characters
+    '| sed "/.../!d" '
+    # Sort in ascending order
+    '| sort'
+    # Remove adjacent duplicates
+    '| uniq'
+)
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -85,11 +101,14 @@ keys = [
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.run_extension(extension.DmenuRun(
-        dmenu_font=extension_defaults["font"] + "-10",
-        dmenu_lines=5,
-        dmenu_ignorecase=True,
-    ))),
+    Key([mod], "r",
+        lazy.spawn(
+            # Launch a stand-alone kitty instance
+            "kitty -e --title fzf-launcher "
+            # Get available applications, select through FZF and run detached
+            f"sh -c 'nohup $({script_list_gui_commands} | fzf --reverse --border sharp --margin 0% --padding 0%)'"
+        )
+    ),
 
     # Volume and Backlight keys
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer set Master 5%- unmute")),
@@ -257,6 +276,31 @@ screens = [
     ),
 ]
 
+# Hooks
+@hook.subscribe.client_new
+def center_floating_win(window):
+    """ Put the FZF launcher window to the center and resize
+    """
+    wm_name = window.cmd_inspect()["name"]
+    if wm_name == "fzf-launcher":
+        window.floating = True
+        window.cmd_set_size_floating(800, 600)
+        window.cmd_center()
+
+@hook.subscribe.focus_change
+def close_fzf_launcher_on_lost_focus():
+    """ Cloze FZF launcher on lost focus
+    """
+    window = qtile.current_window
+    wm_name = window.cmd_inspect()["name"]
+    if wm_name == "fzf-launcher":
+        return
+    for screen in qtile.screens:
+        for window in screen.group.windows:
+            wm_name = window.cmd_inspect()["name"]
+            if wm_name == "fzf-launcher":
+                window.kill()
+
 # Drag floating layouts.
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
@@ -270,6 +314,7 @@ follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(
+    border_width=0,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
@@ -290,6 +335,7 @@ floating_layout = layout.Floating(
         Match(wm_class='makebranch'),
         Match(wm_class='maketag'),
         Match(wm_class='zoom '),
+        # Match(title='fzf-launcher'),
     ]
 )
 auto_fullscreen = True
