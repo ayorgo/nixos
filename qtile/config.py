@@ -28,9 +28,18 @@ from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from libqtile import extension
 
 mod = "mod1"
 terminal = guess_terminal()
+
+widget_defaults = dict(
+    font="RobotoMono Nerd Font",
+    fontsize=20,
+    padding=3,
+    foreground="#E8EAF6"
+)
+extension_defaults = widget_defaults.copy()
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -76,7 +85,11 @@ keys = [
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([mod], "r", lazy.run_extension(extension.DmenuRun(
+        dmenu_font=extension_defaults["font"] + "-10",
+        dmenu_lines=5,
+        dmenu_ignorecase=True,
+    ))),
 
     # Volume and Backlight keys
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer set Master 5%- unmute")),
@@ -132,14 +145,6 @@ layouts = [
     layout.Columns(border_focus_stack=["#ff0f0f", "#8f3d3d"], border_width=4),
 ]
 
-widget_defaults = dict(
-    font="RobotoMono Nerd Font",
-    fontsize=20,
-    padding=3,
-    foreground="#E8EAF6"
-)
-extension_defaults = widget_defaults.copy()
-
 background_color = "#292C3c"
 foreground_color = widget_defaults["foreground"]
 screens = [
@@ -164,7 +169,6 @@ screens = [
                     icon_size=32,
                     background=background_color,
                 ),
-                widget.Prompt(),
                 widget.Spacer(length=5),
                 widget.TaskList(
                     title_width_method="uniform",
