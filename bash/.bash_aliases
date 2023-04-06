@@ -79,3 +79,32 @@ function wifi_show() {
 function fonts() {
     fc-list | grep -ioE ": [^:]*$1[^:]+:" | sed -E 's/(^: |:)//g' | tr , \\n | sort | uniq
 }
+
+# Available GUI applications
+function apps-gui() {
+
+    # Find all the executable commands from available .desktop files
+    # Filter out those compgen outputs that cannot be found among the above executables
+    # Remove commands that contain special characters
+    # Replace newline with pipe to conform to grep's multiple search criteria syntax
+    # Sort in ascending order
+    # Remove adjacent duplicates
+    commands="$(
+        find /usr/share/applications ~/.local/share/applications/ -name '*.desktop' \
+        | xargs grep -sl 'Terminal=false' \
+        | xargs grep -h '^Exec' \
+        | awk -F '=' '{print $2}' \
+        | grep -woEf <(compgen -c \
+            | tr -dc '[:alnum:]-\n' \
+            | tr '\n' '|') \
+        | sort \
+        | uniq \
+    )"
+    for command in $commands
+    do
+    type="$(type -t $command)"
+    if [[ $type == "file" ]] || [[ $type == "alias" ]]; then
+        echo $command
+    fi
+    done
+}

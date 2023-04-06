@@ -40,23 +40,6 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
-script_list_gui_commands = (
-    # Find all the executable commands from available .desktop files
-    'find /usr/share/applications ~/.local/share/applications/ -name "*.desktop" -exec awk -F "=" "/Exec/ {print $2}" {} + '
-    # Filter out those compgen outputs that cannot be found among the above executables
-    '| grep -woEf <(compgen -c '
-        # Remove commands that contain special characters
-        '| tr -dc "[:alnum:]-\n" '
-        # Replace newline with pipe to conform to grep's multiple search criteria syntax
-        '| tr "\n" "|") '
-    # Remove those that are shorter than 3 characters
-    '| sed "/.../!d" '
-    # Sort in ascending order
-    '| sort'
-    # Remove adjacent duplicates
-    '| uniq'
-)
-
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
@@ -106,7 +89,7 @@ keys = [
             # Launch a stand-alone kitty instance
             "kitty -e --title fzf-launcher "
             # Get available applications, select through FZF and run detached
-            f"sh -c 'nohup $({script_list_gui_commands} | fzf --reverse --border sharp --margin 0% --padding 0%)'"
+            "bash -c 'nohup $(source ~/.bash_aliases && apps-gui | fzf --reverse --border sharp --margin 0% --padding 0% --bind=enter:replace-query+print-query)'"
         )
     ),
 
