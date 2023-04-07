@@ -126,3 +126,6 @@ ssh-add ~/.ssh/id_ed25519_ayorgo > /dev/null 2>&1
 
 # Vim keybindings
 set -o vi
+
+# FZF keybindings
+source /usr/share/fzf/key-bindings.bash
