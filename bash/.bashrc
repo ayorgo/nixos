@@ -28,8 +28,10 @@ export FZF_DEFAULT_COMMAND='find'
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+export HISTFILESIZE=
+export HISTSIZE=
+export HISTFILE=~/.bash_eternal_history
+export HISTCONTROL=ignoreboth:erasedups           # no duplicate entries
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
