@@ -41,12 +41,12 @@ function free_port() {
 
 function dockerize() {
     PORT=$(free_port 8880 8889)
-    COMMAND=$(echo $@ | sed "s/jupyter notebook/jupyter notebook -y --ip 0.0.0.0 --port $PORT --no-browser/g")
+    COMMAND=$(echo "$@" | sed "s/jupyter notebook/jupyter notebook -y --ip 0.0.0.0 --port $PORT --no-browser/g")
     (
         set -x;
         docker run -it -p \
-        $PORT:$PORT \
-        -v $(pwd):/home/ayorgo/code \
+        "$PORT":"$PORT" \
+        -v "$(pwd)":/home/ayorgo/code \
         -v ~/.aws:/home/ayorgo/.aws \
         -v ~/.aws/credentials:/home/ayorgo/.aws/credentials \
         -e DISPLAY \
