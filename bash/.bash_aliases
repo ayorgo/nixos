@@ -108,3 +108,8 @@ function apps-gui() {
     fi
     done
 }
+
+function disk_usage() {
+    depth="${1:-2}"
+    du -ha -d "$depth" . 2>/dev/null | sort -hr | awk -F"/" "NF==$((depth+1))" | less
+}
