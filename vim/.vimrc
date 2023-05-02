@@ -59,8 +59,8 @@ highlight clear SignColumn
 Plug 'lilydjwg/colorizer'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" A dark Vim/Neovim color scheme for the GUI and 16/256/true-color terminals.
-Plug 'joshdick/onedark.vim'
+" Light and dark vim colorscheme, shamelessly stolen from atom.
+Plug 'rakr/vim-one'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim port of FZF
@@ -127,7 +127,9 @@ filetype on
 let g:python_highlight_all = 1
 
 " Colorscheme
-colorscheme onedark
+colorscheme one
+" set background=dark " for the dark version
+set background=light " for the light version
 
 " Indentation
 let g:indentLine_char = '▏'

@@ -89,7 +89,8 @@ keys = [
             # Launch a stand-alone kitty instance
             "kitty -e --title fzf-launcher "
             # Get available applications, select through FZF and run detached
-            "bash -c 'nohup $(source ~/.bash_aliases && apps-gui | fzf --reverse --border sharp --margin 0% --padding 0% --bind=enter:replace-query+print-query)'"
+            "bash -c 'nohup $(source ~/.bash_aliases && apps-gui "
+            "| fzf --reverse --color light,gutter:-1 --border sharp --margin 0% --padding 0% --history ~/fzf-history.txt --bind=enter:replace-query+print-query)'"
         )
     ),
 
@@ -98,8 +99,8 @@ keys = [
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer set Master 5%+ unmute")),
     Key([], "XF86AudioMute", lazy.spawn("amixer set Master togglemute")),
     Key([], "XF86AudioMicMute", lazy.spawn("amixer set Capture togglemute")),
-    Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -10")),
-    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight +10")),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -5")),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight +5")),
 
     # Screen lock
     Key(["mod4"], "z", lazy.spawn("xsecurelock")),
@@ -194,6 +195,7 @@ screens = [
                 widget.Backlight(
                     backlight_name="intel_backlight",
                     fmt="<span size='large'>󰛩 </span>{:>4}",
+                    step=5,
                     foreground=foreground_color,
                     background=background_color,
                     padding=10,
