@@ -180,7 +180,7 @@ screens = [
                     txt_minimized="* ",
                     border=foreground_color,
                     background=background_color,
-                    padding=4,
+                    padding=5,
                 ),
                 widget.Spacer(length=5),
                 widget.Mpris2(
@@ -198,7 +198,7 @@ screens = [
                     step=5,
                     foreground=foreground_color,
                     background=background_color,
-                    padding=10,
+                    padding=7,
                 ),
                 widget.Spacer(length=5),
                 widget.Volume(
@@ -252,7 +252,7 @@ screens = [
                     padding=10,
                 ),
             ],
-            33,
+            41,
             # background="#292929",
             margin=[0, 0, 5, 0],
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
