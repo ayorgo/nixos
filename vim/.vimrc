@@ -159,3 +159,6 @@ set undodir=~/.vim/undo/
 
 " Vertical separator
 :set fillchars+=vert:│
+
+" Run python scripts
+autocmd FileType python nnoremap <buffer> <C-enter> :!clear;docker run -v %:p:/tmp/script.py python:3.10-ayorgo python /tmp/script.py<CR>
