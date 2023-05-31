@@ -83,6 +83,8 @@ nnoremap <C-tab>   :bnext<CR>
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_section_z=''
 
+set noshowmode
+
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
