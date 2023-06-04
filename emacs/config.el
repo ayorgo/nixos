@@ -48,6 +48,9 @@
 ;; https://emacs.stackexchange.com/a/3685/36755
 (global-centered-cursor-mode 1)
 
+;; RETURN will follow links in org-mode files
+(setq org-return-follows-link  t)
+
 ;; Tree sitter global mode for all supported languages
 (global-tree-sitter-mode)
 (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
@@ -62,10 +65,32 @@
     ;; make evil-search-word look for symbol rather than word boundaries
     (setq-default evil-symbol-word-search t))
 
-;; Org-roam
+;; Org-mode
 (after! org
         (setq org-roam-directory "~/org/roam/")
-        (setq org-roam-index-file "~/org/roam/index.org"))
+        (setq org-roam-index-file "~/org/roam/index.org")
+        (setq org-agenda-files '("~/org/agenda.org" "~/org/todo.org")))
+
+(setq org-agenda-custom-commands
+    '(("v" "Agenda view"
+       ((tags "PRIORITY=\"A\""
+              ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+               (org-agenda-overriding-header "High-priority tasks:")))
+        (tags "PRIORITY=\"B\""
+              ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+               (org-agenda-overriding-header "Medium-priority tasks:")))
+        (tags "PRIORITY=\"C\""
+              ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+               (org-agenda-overriding-header "Low-priority tasks:")))
+        (agenda "")
+        (tags "PRIORITY=\"D\""
+              ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+               (org-agenda-overriding-header "No-priority tasks:")))))))
+
+(setq
+   org-fancy-priorities-list '("🟥" "🟧" "🟨" "🟦")
+   org-default-priority ?D
+   org-lowest-priority ?D)
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -94,6 +119,12 @@
 (setq doom-font (font-spec :size 28))
 (setq calendar-week-start-day 1)
 
+;; Inline LaTex rendering
+(add-hook 'org-mode-hook 'org-fragtog-mode)
+
+;; Inline images display toggle
+(setq org-startup-with-inline-images t)
+
 ;; (after! doom-theme
 ;;         (setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
 ;;               doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13)))
@@ -107,9 +138,12 @@
 (setq org-directory "~/org/")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 
-;; Set bold and italic markers off in org mode
 (after! org
-    (setq org-hide-emphasis-markers t))
+    ;; Set bold and italic markers off in org mode
+    (setq org-hide-emphasis-markers t)
+
+    ;; Make LaTex inline formulas larger
+    (plist-put org-format-latex-options :scale 3.0)
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
