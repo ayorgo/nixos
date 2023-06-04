@@ -78,7 +78,8 @@ if !exists('g:airline_symbols')
 endif
 let g:airline_symbols.space = "\ua0"
 
-nnoremap <C-tab>   :bnext<CR>
+nnoremap <C-n>   :bnext<CR>
+nnoremap <C-s>   :bp\|bd #<CR>
 
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_section_z=''
