@@ -154,7 +154,7 @@ map <C-Left> :bprev<CR>
 
 " Ruler
 set colorcolumn=80
-highlight ColorColumn ctermbg=8
+highlight ColorColumn ctermbg=7
 
 " Offline edit history
 set undofile
