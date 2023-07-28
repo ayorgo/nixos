@@ -41,7 +41,9 @@ function free_port() {
 
 function dockerize() {
     PORT=$(free_port 8880 8889)
-    COMMAND=$(echo "$@" | sed "s/jupyter notebook/jupyter notebook -y --ip 0.0.0.0 --port $PORT --no-browser/g")
+    COMMAND="$*"
+    COMMAND="${COMMAND//jupyter notebook/jupyter notebook -y --ip 0.0.0.0 --port $PORT --no-browser}"
+    COMMAND="${COMMAND//jupyter lab/jupyter lab -y --ip 0.0.0.0 --port $PORT --no-browser}"
     (
         set -x;
         docker run -it -p \
