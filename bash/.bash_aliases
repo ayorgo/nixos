@@ -53,7 +53,7 @@ function dockerize() {
         -v ~/.aws/credentials:/home/ayorgo/.aws/credentials \
         -e DISPLAY \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
-        --env IPYTHONDIR=/home/ayorgo/code/.ipython \
+        --env IPYTHONDIR=/home/ayorgo/.ipython \
         --env HISTFILE=/home/ayorgo/code/.bash_history \
         $COMMAND
     )
