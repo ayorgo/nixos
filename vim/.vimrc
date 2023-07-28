@@ -161,8 +161,8 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " Buffer navigation
-map <C-Right> :bnext<CR>
-map <C-Left> :bprev<CR>
+map <Right> :bnext<CR>
+map <Left> :bprev<CR>
 
 " Ruler
 set colorcolumn=80
@@ -185,6 +185,6 @@ function! BlackFormat()
     call setpos('.', save_pos) " set cursor back to saved position
 endfunction
 
-autocmd FileType python nnoremap <buffer> <C-k> :call BlackFormat()<CR>
+autocmd FileType python nnoremap <buffer> <C-Space> :call BlackFormat()<CR>
 " autocmd FileType python nnoremap <buffer> <C-f> :%!black - -q<CR>
 " autocmd BufWritePre *.py %!black - -q
