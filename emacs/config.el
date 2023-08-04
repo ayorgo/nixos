@@ -69,28 +69,30 @@
 (after! org
         (setq org-roam-directory "~/org/roam/")
         (setq org-roam-index-file "~/org/roam/index.org")
-        (setq org-agenda-files '("~/org/agenda.org" "~/org/todo.org")))
+        (setq org-agenda-files (directory-files-recursively "~/org/" "\\.org$"))
+        (setq org-agenda-span 10
+                org-agenda-start-on-weekday nil
+                org-agenda-start-day "-0d")
+        (setq org-agenda-custom-commands
+        '(("v" "Agenda view"
+                ((tags-todo "PRIORITY={A}"
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                (org-agenda-overriding-header "High:")))
+                (tags-todo "PRIORITY={B}"
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                (org-agenda-overriding-header "Medium:")))
+                (tags-todo "PRIORITY={C}"
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                (org-agenda-overriding-header "Low:")))
+                (agenda "")
+                (tags-todo "PRIORITY={D}"
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done 'nottodo '("TODO")))
+                (org-agenda-overriding-header "No-priority:")))))))
 
-(setq org-agenda-custom-commands
-    '(("v" "Agenda view"
-       ((tags "PRIORITY=\"A\""
-              ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-               (org-agenda-overriding-header "High-priority tasks:")))
-        (tags "PRIORITY=\"B\""
-              ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-               (org-agenda-overriding-header "Medium-priority tasks:")))
-        (tags "PRIORITY=\"C\""
-              ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-               (org-agenda-overriding-header "Low-priority tasks:")))
-        (agenda "")
-        (tags "PRIORITY=\"D\""
-              ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-               (org-agenda-overriding-header "No-priority tasks:")))))))
-
-(setq
-   org-fancy-priorities-list '("🟥" "🟧" "🟨" "🟦")
-   org-default-priority ?D
-   org-lowest-priority ?D)
+        (setq
+        org-fancy-priorities-list '("🟥" "🟧" "🟨" "🟦")
+        org-default-priority ?D
+        org-lowest-priority ?D))
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
