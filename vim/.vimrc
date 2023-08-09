@@ -169,8 +169,8 @@ map <Right> :bnext<CR>
 map <Left> :bprev<CR>
 
 " Ruler
-set colorcolumn=80
-highlight ColorColumn ctermbg=7
+" set colorcolumn=80
+" highlight ColorColumn ctermbg=7
 
 " Offline edit history
 set undofile
