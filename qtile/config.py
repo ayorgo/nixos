@@ -157,7 +157,9 @@ screens = [
         wallpaper_mode="stretch",
         top=bar.Bar(
             [
-                widget.CurrentLayoutIcon(),
+                widget.CurrentLayoutIcon(
+                    background=background_color,
+                ),
                 widget.Spacer(length=5),
                 widget.GroupBox(
                     rounded=False,
@@ -275,7 +277,7 @@ screens = [
                 ),
             ],
             38,
-            # background="#292929",
+            background="#00000000", # added 2 zeros at the end for full transparency
             margin=[0, 0, 5, 0],
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
