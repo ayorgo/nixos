@@ -45,16 +45,18 @@ function dockerize() {
     COMMAND="${COMMAND//jupyter notebook/jupyter notebook -y --ip 0.0.0.0 --port $PORT --no-browser}"
     COMMAND="${COMMAND//jupyter lab/jupyter lab -y --ip 0.0.0.0 --port $PORT --no-browser}"
     (
+        touch /tmp/.bash_history;
+        touch /tmp/history.sqlite;
         set -x;
         docker run -it -p \
         "$PORT":"$PORT" \
         -v "$(pwd)":/home/ayorgo/code \
+        -v /tmp/.bash_history:/home/ayorgo/.bash_history \
+        -v /tmp/history.sqlite:/home/ayorgo/.ipython/profile_default/history.sqlite \
         -v ~/.aws:/home/ayorgo/.aws \
         -v ~/.aws/credentials:/home/ayorgo/.aws/credentials \
         -e DISPLAY \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
-        --env IPYTHONDIR=/home/ayorgo/.ipython \
-        --env HISTFILE=/home/ayorgo/code/.bash_history \
         $COMMAND
     )
 }
