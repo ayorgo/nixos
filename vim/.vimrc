@@ -183,12 +183,13 @@ set undodir=~/.vim/undo/
 autocmd FileType python nnoremap <buffer> <C-enter> :!clear;docker run -v %:p:h:/home/ayorgo/code/ python:3.11-ayorgo python %:t<CR>
 
 " Run python black formatter
-function! BlackFormat()
+function! PythonFormat()
     let save_pos = getpos(".") " save cursor position
-    %!black - -q
+    silent %!isort - -q
+    silent %!black - -q
     call setpos('.', save_pos) " set cursor back to saved position
 endfunction
 
-autocmd FileType python nnoremap <buffer> <C-Space> :call BlackFormat()<CR>
+autocmd FileType python nnoremap <buffer> <C-Space> :call PythonFormat()<CR>
 " autocmd FileType python nnoremap <buffer> <C-f> :%!black - -q<CR>
 " autocmd BufWritePre *.py %!black - -q
