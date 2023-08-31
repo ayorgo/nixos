@@ -84,15 +84,7 @@ keys = [
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r",
-        lazy.spawn(
-            # Launch a stand-alone kitty instance
-            "kitty -e --title fzf-launcher "
-            # Get available applications, select through FZF and run detached
-            "bash -c 'nohup $(source ~/.bash_aliases && apps-gui "
-            "| fzf --reverse --color light,gutter:-1 --border sharp --margin 0% --padding 0% --history ~/fzf-history.txt --bind=enter:replace-query+print-query)'"
-        )
-    ),
+    Key([mod], "r", lazy.spawn("rofi -show drun"), desc="Rofi launch menu"),
 
     # Volume and Backlight keys
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer set Master 5%- unmute")),
@@ -284,31 +276,6 @@ screens = [
         ),
     ),
 ]
-
-# Hooks
-@hook.subscribe.client_new
-def center_floating_win(window):
-    """ Put the FZF launcher window to the center and resize
-    """
-    wm_name = window.cmd_inspect()["name"]
-    if wm_name == "fzf-launcher":
-        window.floating = True
-        window.cmd_set_size_floating(800, 600)
-        window.cmd_center()
-
-@hook.subscribe.focus_change
-def close_fzf_launcher_on_lost_focus():
-    """ Cloze FZF launcher on lost focus
-    """
-    window = qtile.current_window
-    wm_name = window.cmd_inspect()["name"]
-    if wm_name == "fzf-launcher":
-        return
-    for screen in qtile.screens:
-        for window in screen.group.windows:
-            wm_name = window.cmd_inspect()["name"]
-            if wm_name == "fzf-launcher":
-                window.kill()
 
 # Drag floating layouts.
 mouse = [
