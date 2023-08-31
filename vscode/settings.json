@@ -1,0 +1,19 @@
+{
+    "workbench.colorTheme": "GitHub Light",
+    "telemetry.telemetryLevel": "off",
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 500,
+    "editor.cursorSurroundingLines": 100,
+    "notebook.lineNumbers": "on",
+    "files.trimTrailingWhitespace": true,
+    "editor.experimentalWhitespaceRendering": "off",
+    "editor.renderWhitespace": "boundary",
+    "files.insertFinalNewline": true,
+    "[python]": {
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": "ms-python.black-formatter",
+    },
+    "window.zoomLevel": 0.8,
+    "terminal.integrated.fontFamily": "Source Code Pro",
+    "editor.fontFamily": "'Source Code Pro', 'monospace', monospace",
+}
