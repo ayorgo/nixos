@@ -47,6 +47,7 @@ function dockerize() {
     COMMAND="$*"
     COMMAND="${COMMAND//jupyter notebook/jupyter notebook -y --ip 0.0.0.0 --port $PORT --no-browser}"
     COMMAND="${COMMAND//jupyter lab/jupyter lab -y --ip 0.0.0.0 --port $PORT --no-browser}"
+    COMMAND="${COMMAND//tensorboard/tensorboard --host 0.0.0.0 --port $PORT}"
     (
         touch /tmp/.bash_history;
         touch /tmp/history.sqlite;
