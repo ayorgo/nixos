@@ -35,11 +35,11 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 function free_port() {
-    for port in $(seq $1 $2); do
+    for port in $(seq "$1" "$2"); do
         ss -atun | grep -q ":$port " || break
     done
 
-    echo $port
+    echo "$port"
 }
 
 function dockerize() {
