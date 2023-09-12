@@ -65,6 +65,30 @@ function dockerize() {
     )
 }
 
+function rockerize() {
+    COMMAND="$*"
+    COMMAND="${COMMAND//rstudio/}"
+
+    bold=$(tput bold)
+    normal=$(tput sgr0)
+    echo ""
+    echo "---------------------------"
+    echo "URL: ${bold}http://localhost:8787${normal}"
+    echo "Username: ${bold}rstudio${normal}"
+    echo "Password: ${bold}hey${normal}"
+    echo "---------------------------"
+    echo ""
+
+    (
+        set -x;
+        docker run --rm -it -p \
+        8787:8787 \
+        -v "$(pwd)":/home/rstudio \
+        -e PASSWORD=hey \
+        $COMMAND
+    )
+}
+
 # Implies multiline pass output: username\npassword
 function vpn() {
     VPN_CONFIG_FILE=~/client.ovpn
