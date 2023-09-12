@@ -20,6 +20,9 @@ alias spotify='spotify --force-device-scale-factor=1.25'
 # Steam scaling
 alias steam='GDK_SCALE=2 steam'
 
+# Kitty image preview
+alias icat="kitty +kitten icat"
+
 # Add some colors
 if [ -x /usr/bin/dircolors ]; then
    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
