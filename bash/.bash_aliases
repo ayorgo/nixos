@@ -51,7 +51,7 @@ function dockerize() {
         touch /tmp/.bash_history;
         touch /tmp/history.sqlite;
         set -x;
-        docker run -it -p \
+        docker run --rm -it -p \
         "$PORT":"$PORT" \
         -v "$(pwd)":/home/ayorgo/code \
         -v /tmp/.bash_history:/home/ayorgo/.bash_history \
