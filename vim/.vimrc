@@ -191,5 +191,11 @@ function! PythonFormat()
 endfunction
 
 autocmd FileType python nnoremap <buffer> <C-Space> :call PythonFormat()<CR>
-" autocmd FileType python nnoremap <buffer> <C-f> :%!black - -q<CR>
-" autocmd BufWritePre *.py %!black - -q
+
+" Spell check
+:hi SpellBad ctermbg=lightred
+
+augroup fileSpell
+    autocmd!
+    autocmd FileType latex,tex,md,markdown setlocal spell
+augroup END
