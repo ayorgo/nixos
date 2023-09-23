@@ -24,6 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import subprocess
 from libqtile import bar, layout, widget, hook, extension, qtile
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
@@ -141,8 +142,8 @@ layouts = [
 ]
 
 background_color = "#292C3c"
-# background_color = "#ff0f0f"
 foreground_color = widget_defaults["foreground"]
+backlight_name = subprocess.getoutput("ls /sys/class/backlight")
 screens = [
     Screen(
         wallpaper="/home/ayorgo/wallpapers/archtv.png",
@@ -195,7 +196,8 @@ screens = [
                 ),
                 widget.Spacer(length=5),
                 widget.Backlight(
-                    backlight_name="intel_backlight",
+                    backlight_name=backlight_name,
+                    brightness_file="actual_brightness",
                     fmt="<span size='large'>󰛩 {:>4}</span>",
                     step=5,
                     foreground=foreground_color,
@@ -238,7 +240,7 @@ screens = [
                     full_char = "󰂅",
                     charge_char="󰢝",
                     discharge_char="󰁾",
-                    update_interval=1,
+                    update_interval=5,
                     format="<span size='large'>{char}{percent: >5.0%}</span>",
                     foreground=foreground_color,
                     background=background_color,
