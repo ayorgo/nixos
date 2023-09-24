@@ -180,7 +180,7 @@ set undodir=~/.vim/undo/
 :set fillchars+=vert:│
 
 " Run python scripts
-autocmd FileType python nnoremap <buffer> <C-enter> :!clear;docker run -v %:p:h:/home/ayorgo/code/ python:3.11-ayorgo python %:t<CR>
+autocmd FileType python nnoremap <buffer> <C-enter> :!clear;docker run --gpus all -v %:p:h:/home/ayorgo/code/ python:3.10-pytorch-cuda-ayorgo python %:t<CR>
 
 " Run python black formatter
 function! PythonFormat()
