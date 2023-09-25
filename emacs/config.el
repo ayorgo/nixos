@@ -67,34 +67,48 @@
 
 ;; Org-mode, org-roam, org-roam-ui
 (after! org
-        (setq org-roam-directory "~/org/roam/")
-        (setq org-roam-index-file "~/org/roam/index.org")
-        (setq org-agenda-files (directory-files-recursively "~/org/" "\\.org$"))
-        (setq org-agenda-span 10
-                org-agenda-start-on-weekday nil
-                org-agenda-start-day "-0d")
-        (setq org-agenda-custom-commands
+        (plist-put org-format-latex-options :scale 3.0)
+
+        ;; Inline LaTex rendering
+        (add-hook 'org-mode-hook 'org-fragtog-mode)
+        (setq
+        org-directory "~/org/"
+        org-default-notes-file (concat org-directory "/notes.org")
+        org-startup-with-inline-images t
+        org-hide-emphasis-markers t
+        org-notebook-drawing-program "xournalpp"
+        org-roam-directory "~/org/roam/"
+        org-roam-index-file "~/org/roam/index.org"
+        org-agenda-files (directory-files-recursively "~/org/" "\\.org$")
+        org-agenda-span 10
+        org-agenda-start-on-weekday nil
+        org-agenda-start-day "-0d"
+        org-agenda-custom-commands
         '(("v" "Agenda view"
                 ((tags-todo "PRIORITY={A}"
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "WAIT")))
                 (org-agenda-overriding-header "High:")))
                 (tags-todo "PRIORITY={B}"
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "WAIT")))
                 (org-agenda-overriding-header "Medium:")))
                 (tags-todo "PRIORITY={C}"
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "WAIT")))
                 (org-agenda-overriding-header "Low:")))
                 (agenda "")
                 (tags-todo "PRIORITY={D}"
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done 'nottodo '("TODO")))
-                (org-agenda-overriding-header "No-priority:")))))))
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "WAIT")))
+                (org-agenda-overriding-header "No-priority:"))))))))
 
+(after! org-fancy-priorities
         (setq
-        org-fancy-priorities-list '("🟥" "🟧" "🟨" "🟦")
-        org-default-priority ?D
-        org-lowest-priority ?D))
-
-
+        org-fancy-priorities-list '("🅐" "🅑" "🅒" "🅓")
+        org-priority-lowest ?D
+        org-priority-highest ?A
+        org-priority-default ?D
+        org-priority-faces '((?A . (:foreground "red"))
+                             (?B . (:foreground "orange"))
+                             (?C . (:foreground "light green"))
+                             (?D . (:foreground "light blue")))))
 
 ;; Org-ref
 (use-package ivy-bibtex
@@ -173,11 +187,6 @@
 (setq doom-font (font-spec :size 28))
 (setq calendar-week-start-day 1)
 
-;; Inline LaTex rendering
-(add-hook 'org-mode-hook 'org-fragtog-mode)
-
-;; Inline images display toggle
-(setq org-startup-with-inline-images t)
 
 ;; (after! doom-theme
 ;;         (setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
@@ -187,17 +196,6 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
-(setq org-default-notes-file (concat org-directory "/notes.org"))
-
-(after! org
-    ;; Set bold and italic markers off in org mode
-    (setq org-hide-emphasis-markers t)
-
-    ;; Make LaTex inline formulas larger
-    (plist-put org-format-latex-options :scale 3.0)
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
