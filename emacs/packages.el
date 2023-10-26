@@ -17,6 +17,8 @@
 
 (unpin! org-roam)
 (package! org-roam-ui)
+(package! org-fragtog)
+(package! org-fancy-priorities)
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:

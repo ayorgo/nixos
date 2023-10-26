@@ -9,17 +9,14 @@
 (setq user-full-name "John Doe"
       user-mail-address "john@doe.com")
 
-;; Disable the deletion of trailing whitespaces on save
-(ws-butler-mode -1)
 
 ;; Autosave
-(setq auto-save-visited-interval 0.1) ;; in seconds
+(setq auto-save-visited-interval 0.4) ;; in seconds; a lower value results in status bar flickering
 (auto-save-visited-mode t)
 
 ;; Enable whitespaces
 ;; (setq whitespace-space-regexp "\\(^ +\\|  +\\| +$\\)") ; visualize only leading and/or trailing SPACEs.
 ;; (setq whitespace-space-regexp "\\(?<=\\S\\)\\s\\(?=\\S\\)") ; visualize only leading and/or trailing SPACEs.
-(setq whitespace-style '(face spaces space-mark))
 
 ;; (setq space-face (make-face 'space-face))
 ;; (set-face-foreground 'space-face "#282c34")
@@ -31,7 +28,6 @@
 ;; (setq whitespace-indentation 'space-face-leading)
        ;; (set-face-foreground 'space-face (face-attribute 'default :background))
 
-(global-whitespace-mode 1)
 
 ;; (set-face-attribute 'whitespace-space nil
 ;;     :background "#282c34"
@@ -65,50 +61,54 @@
     ;; make evil-search-word look for symbol rather than word boundaries
     (setq-default evil-symbol-word-search t))
 
+(require 'org-src)
+(add-to-list 'org-src-block-faces '("latex" (:inherit default :extend t)))
+
 ;; Org-mode, org-roam, org-roam-ui
 (after! org
-        (plist-put org-format-latex-options :scale 3.0)
+  (plist-put org-format-latex-options :scale 2.5)
 
-        ;; Inline LaTex rendering
-        (add-hook 'org-mode-hook 'org-fragtog-mode)
-        (setq
-        org-directory "~/org/"
-        org-default-notes-file (concat org-directory "/notes.org")
-        org-startup-with-inline-images t
-        org-hide-emphasis-markers t
-        org-notebook-drawing-program "xournalpp"
-        org-roam-directory "~/org/roam/"
-        org-roam-index-file "~/org/roam/index.org"
-        org-agenda-files (directory-files-recursively "~/org/" "\\.org$")
-        org-agenda-span 10
-        org-agenda-start-on-weekday nil
-        org-agenda-start-day "-0d"
-        org-agenda-custom-commands
-        '(("v" "Agenda view"
-                ((tags-todo "PRIORITY={A}"
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "WAIT")))
-                (org-agenda-overriding-header "High:")))
-                (tags-todo "PRIORITY={B}"
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "WAIT")))
-                (org-agenda-overriding-header "Medium:")))
-                (tags-todo "PRIORITY={C}"
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "WAIT")))
-                (org-agenda-overriding-header "Low:")))
-                (agenda "")
-                (tags-todo "PRIORITY={D}"
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "WAIT")))
-                (org-agenda-overriding-header "No-priority:"))))))))
+  ;; Inline LaTex rendering
+  (add-hook 'org-mode-hook 'org-fragtog-mode)
+  (setq
+   org-directory "~/org/"
+   org-default-notes-file (concat org-directory "/notes.org")
+   org-startup-with-inline-images t
+   org-hide-emphasis-markers t
+   ;; org-notebook-drawing-program "xournalpp"
+   org-roam-directory "~/org/roam/"
+   org-roam-index-file "~/org/roam/index.org"
+   org-agenda-files (directory-files-recursively "~/org/" "\\.org$")
+   ;; org-agenda-span 10
+   ;; org-agenda-start-on-weekday t
+   ;; org-agenda-start-day "-0d"
+   org-agenda-custom-commands
+   '(("v" "Agenda view"
+      ((agenda "")
+       (tags-todo "PRIORITY={A}"
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "WAIT")))
+                   (org-agenda-overriding-header "High:")))
+       (tags-todo "PRIORITY={B}"
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "WAIT")))
+                   (org-agenda-overriding-header "Medium:")))
+       (tags-todo "PRIORITY={C}"
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "WAIT")))
+                   (org-agenda-overriding-header "Low:")))
+       (tags-todo "PRIORITY={D}"
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "WAIT")))
+                   (org-agenda-overriding-header "No-priority:"))))))))
 
+(use-package org-fancy-priorities)
 (after! org-fancy-priorities
-        (setq
-        org-fancy-priorities-list '("🅐" "🅑" "🅒" "🅓")
-        org-priority-lowest ?D
-        org-priority-highest ?A
-        org-priority-default ?D
-        org-priority-faces '((?A . (:foreground "red"))
-                             (?B . (:foreground "orange"))
-                             (?C . (:foreground "light green"))
-                             (?D . (:foreground "light blue")))))
+  (setq
+   org-fancy-priorities-list '("🅐" "🅑" "🅒" "🅓")
+   org-priority-lowest ?D
+   org-priority-highest ?A
+   org-priority-default ?D
+   org-priority-faces '((?A . (:foreground "red"))
+                        (?B . (:foreground "orange"))
+                        (?C . (:foreground "light green"))
+                        (?D . (:foreground "light blue")))))
 
 ;; Org-ref
 (use-package ivy-bibtex
