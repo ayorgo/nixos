@@ -1,0 +1,9 @@
+[Unit]
+Description=toggle work timer
+
+[Timer]
+OnCalendar=Mon..Sat 8:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

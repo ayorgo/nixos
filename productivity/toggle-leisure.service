@@ -1,0 +1,5 @@
+[Unit]
+Description=toggle leisure service
+
+[Service]
+ExecStart=$HOME/pet/dotfiles/productivity/toggle-leisure.sh

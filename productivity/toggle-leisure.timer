@@ -1,0 +1,9 @@
+[Unit]
+Description=toggle leisure timer
+
+[Timer]
+OnCalendar=Mon..Sat 17:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
