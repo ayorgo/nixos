@@ -2,7 +2,7 @@
 Description=toggle leisure timer
 
 [Timer]
-OnCalendar=Mon..Sat 17:00
+OnCalendar=Mon..Sat 14:30
 Persistent=true
 
 [Install]

@@ -1,2 +1,3 @@
 #!/usr/bin/env sh
-ln -sf $HOME/pet/dotfiles/productivity/hosts-leisure /etc/hosts
+rm /etc/hosts
+ln -s /home/ayorgo/pet/dotfiles/productivity/hosts-leisure /etc/hosts

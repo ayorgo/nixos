@@ -3,4 +3,5 @@
 127.0.0.1 localhost
 ::1       localhost
 127.0.1.1 ayorgo-tuxedo.localdomain ayorgo-tuxedo
-127.0.0.1 www.reddit.com reddit.com
+127.0.0.1 reddit.com
+127.0.0.1 www.reddit.com

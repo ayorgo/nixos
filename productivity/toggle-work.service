@@ -2,4 +2,4 @@
 Description=toggle work service
 
 [Service]
-ExecStart=$HOME/pet/dotfiles/productivity/toggle-work.sh
+ExecStart=/home/ayorgo/pet/dotfiles/productivity/toggle-work.sh
