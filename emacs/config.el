@@ -196,6 +196,12 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
+;; ------
+;; ispell
+;; ------
+(setq ispell-program-name "hunspell")
+(setq ispell-dictionary "en_GB")
+(add-hook 'org-mode-hook 'turn-on-flyspell)
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
