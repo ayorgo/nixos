@@ -203,6 +203,15 @@
 (setq ispell-dictionary "en_GB")
 (add-hook 'org-mode-hook 'turn-on-flyspell)
 
+;; ----------------
+;; mermaid diagrams
+;; ----------------
+(org-babel-do-load-languages
+    'org-babel-load-languages
+    '((mermaid . t)))
+(setq ob-mermaid-cli-path "/home/ayorgo/org/projects/mmdc")
+(load! "lisp/ob-mermaid")
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
