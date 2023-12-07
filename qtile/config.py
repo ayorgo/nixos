@@ -183,6 +183,8 @@ screens = [
                     font=widget_defaults["font"],
                     fontsize=22,
                     icon_size=28,
+                    theme_mode="fallback",
+                    theme_path="/usr/share/icons/Papirus-Dark",
                 ),
                 widget.Spacer(length=5),
                 widget.Mpris2(
