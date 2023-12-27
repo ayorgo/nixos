@@ -102,6 +102,10 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'mechatroner/rainbow_csv'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Catppuccin theme
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -146,9 +150,10 @@ filetype on
 let g:python_highlight_all = 1
 
 " Colorscheme
-colorscheme one
+colorscheme catppuccin_mocha
+" colorscheme one
 " set background=dark " for the dark version
-set background=light " for the light version
+" set background=light " for the light version
 
 " Indentation
 let g:indentLine_char = '▏'
