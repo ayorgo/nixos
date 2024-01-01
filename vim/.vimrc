@@ -184,6 +184,11 @@ set undodir=~/.vim/undo/
 " Vertical separator
 :set fillchars+=vert:│
 
+" TrueColor support
+if (has("termguicolors"))
+    set termguicolors
+endif
+
 " Run python scripts
 autocmd FileType python nnoremap <buffer> <C-enter> :!clear;docker run --gpus all -v %:p:h:/home/ayorgo/code/ python:3.10-pytorch-cuda-ayorgo python %:t<CR>
 
