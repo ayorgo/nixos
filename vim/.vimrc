@@ -59,10 +59,6 @@ highlight clear SignColumn
 Plug 'lilydjwg/colorizer'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Light and dark vim colorscheme, shamelessly stolen from atom.
-Plug 'rakr/vim-one'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim port of FZF
 Plug 'junegunn/fzf.vim'
 
@@ -151,9 +147,6 @@ let g:python_highlight_all = 1
 
 " Colorscheme
 colorscheme catppuccin_mocha
-" colorscheme one
-" set background=dark " for the dark version
-" set background=light " for the light version
 
 " Indentation
 let g:indentLine_char = '▏'
