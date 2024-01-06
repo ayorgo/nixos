@@ -204,4 +204,15 @@ augroup fileSpell
 augroup END
 
 " Delete buffer gracefully
-nnoremap <C-q> :bp<cr>:bd #<cr>:AirlineRefresh<cr>
+function! DeleteBuffer()
+    let total_buffers = len(getbufinfo({'buflisted':1}))
+    echo total_buffers
+    if total_buffers == 1
+        :bd
+    else
+        :bp
+        :bd#
+        :AirlineRefresh
+    endif
+endfunction
+nnoremap <C-q> :call DeleteBuffer()<CR>
