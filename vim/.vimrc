@@ -202,3 +202,6 @@ augroup fileSpell
     autocmd!
     autocmd FileType latex,tex,md,markdown setlocal spell
 augroup END
+
+" Delete buffer gracefully
+nnoremap <C-q> :bp<cr>:bd #<cr>:AirlineRefresh<cr>
