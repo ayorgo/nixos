@@ -160,8 +160,7 @@ map <Right> :bnext<CR>
 map <Left> :bprev<CR>
 
 " Ruler
-" set colorcolumn=80
-" highlight ColorColumn ctermbg=7
+let &colorcolumn=join(range(81,999), ',')
 
 " Offline edit history
 set undofile
