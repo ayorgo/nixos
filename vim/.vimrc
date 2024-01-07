@@ -78,7 +78,7 @@ nnoremap <C-n>   :bnext<CR>
 nnoremap <C-s>   :bp\|bd #<CR>
 
 let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_section_z=''
+let g:airline_section_z='%l:%c'
 
 set noshowmode
 
