@@ -86,13 +86,6 @@ set noshowmode
 " GitHub Copilot.
 Plug 'github/copilot.vim'
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vim port of emacs-which-key.
-Plug 'liuchengxu/vim-which-key'
-
-"nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CSV highlighting
 Plug 'mechatroner/rainbow_csv'
