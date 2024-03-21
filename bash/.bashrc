@@ -130,4 +130,7 @@ ssh-add ~/.ssh/id_ed25519_ayorgo > /dev/null 2>&1
 set -o vi
 
 # FZF keybindings
-source /usr/share/fzf/key-bindings.bash
+if command -v fzf-share >/dev/null; then
+  source "$(fzf-share)/key-bindings.bash"
+  source "$(fzf-share)/completion.bash"
+fi
