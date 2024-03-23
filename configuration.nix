@@ -59,8 +59,10 @@ in
     xkbVariant = ",dvorak,";
     xkbOptions = "grp:ctrl_space_toggle";
   };
-services.xserver = {
-};
+
+  # Copy configuration.nix file to /run/current-system/configuration.nix
+  system.copySystemConfiguration = true;
+
   services.gnome.games.enable = true;
 
   environment.gnome.excludePackages = with pkgs.gnome; [
