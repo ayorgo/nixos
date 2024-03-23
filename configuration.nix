@@ -50,15 +50,17 @@ in
     LC_TIME = "en_GB.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
   # Ensure GNOME and GDM are enabled
   services.xserver = {
+    enable = true;
     desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
+    layout = "us,us,ru";
+    xkbVariant = ",dvorak,";
+    xkbOptions = "grp:ctrl_space_toggle";
   };
-
+services.xserver = {
+};
   services.gnome.games.enable = true;
 
   environment.gnome.excludePackages = with pkgs.gnome; [
@@ -79,12 +81,6 @@ in
     gnome-calculator gnome-calendar gnome-characters gnome-clocks gnome-contacts gnome-font-viewer gnome-logs
     gnome-maps gnome-music gnome-system-monitor gnome-weather gnome-disk-utility pkgs.gnome-connections
   ];
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
