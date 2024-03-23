@@ -175,7 +175,6 @@ services.xserver = {
         enable-hot-corners = false;
         color-scheme = "prefer-dark";
         show-battery-percentage = true;
-        scaling-factor = "1.75";
       };
       "org/gnome/desktop/peripherals/touchpad" = {
         tap-to-click = true;
@@ -192,6 +191,12 @@ services.xserver = {
         night-light-schedule-from = 0.0;
         night-light-schedule-to = 0.0;
         night-light-temperature = lib.hm.gvariant.mkUint32 4200;
+      };
+      "org/gnome/mutter" = {
+        dynamic-workspaces = true;
+      };
+      "org/gnome/shell/app-switcher" = {
+        current-workspace-only = true;
       };
       "org/gnome/settings-daemon/plugins/media-keys" = {
         search = [ "<Alt>r" ];
