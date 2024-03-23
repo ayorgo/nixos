@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   dotfiles = builtins.fetchGit {
@@ -53,9 +53,32 @@ in
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # Ensure GNOME and GDM are enabled
+  services.xserver = {
+    desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = true;
+  };
+
+  services.gnome.games.enable = true;
+
+  environment.gnome.excludePackages = with pkgs.gnome; [
+    baobab      # disk usage analyzer
+    cheese      # photo booth
+    eog         # image viewer
+    epiphany    # web browser
+    gedit       # text editor
+    simple-scan # document scanner
+    totem       # video player
+    yelp        # help viewer
+    evince      # document viewer
+    file-roller # archive manager
+    geary       # email client
+    seahorse    # password manager
+
+    # these should be self explanatory
+    gnome-calculator gnome-calendar gnome-characters gnome-clocks gnome-contacts gnome-font-viewer gnome-logs
+    gnome-maps gnome-music gnome-system-monitor gnome-weather gnome-disk-utility pkgs.gnome-connections
+  ];
 
   # Configure keymap in X11
   services.xserver = {
@@ -141,14 +164,59 @@ in
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
 
-  home-manager.users.ayorgo = {
+  home-manager.users.ayorgo = { lib, ... }: {
     home.stateVersion = "23.11";
 
     home.packages = with pkgs; [
       spotify
       thunderbird
       freetube
+      gnome.dconf-editor
     ];
+
+    dconf.settings = {
+      "org/gnome/desktop/interface" = {
+        enable-hot-corners = false;
+        color-scheme = "prefer-dark";
+        show-battery-percentage = true;
+        scaling-factor = "1.75";
+      };
+      "org/gnome/desktop/peripherals/touchpad" = {
+        tap-to-click = true;
+        natural-scroll = false;
+      };
+      "org/gnome/mutter" = {
+        edge-tiling = true;
+        attach-modal-dialogs = true;
+        experimental-features = [ "scale-monitor-framebuffer" ];
+      };
+      "org/gnome/settings-daemon/plugins/color" = {
+        night-light-enabled = true;
+        night-light-schedule-automatic = false;
+        night-light-schedule-from = 0.0;
+        night-light-schedule-to = 0.0;
+        night-light-temperature = lib.hm.gvariant.mkUint32 4200;
+      };
+      "org/gnome/settings-daemon/plugins/media-keys" = {
+        search = [ "<Alt>r" ];
+      };
+      "org/gnome/desktop/wm/keybindings" = {
+        # switch-to-workspace-left = [ "<Super>a" ];
+        # switch-to-workspace-right = [ "<Super>d" ];
+        # move-to-workspace-left = [ "<Shift><Super>a" ];
+        # move-to-workspace-right = [ "<Shift><Super>d" ];
+        # switch-to-workspace-1 = [ "<Super>1" ];
+        # switch-to-workspace-2 = [ "<Super>2" ];
+        # switch-to-workspace-3 = [ "<Super>3" ];
+        # switch-to-workspace-4 = [ "<Super>4" ];
+        # switch-input-source = [ "<Shift><Alt>" ];
+        # switch-input-source-backward = mkEmptyArray type.string;
+        # activate-window-menu = [ "Menu" ];
+        close = [ "<Alt>w" ];
+        maximize = [ "<Alt>m" ];
+        # toggle-fullscreen = [ "<Shift><Super>f" ];
+      };
+    };
 
     programs.git = {
       enable = true;
