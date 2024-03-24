@@ -202,6 +202,7 @@ in
       };
       "org/gnome/settings-daemon/plugins/media-keys" = {
         search = [ "<Alt>r" ];
+        screensaver = [ "<Super>s" ];
       };
       "org/gnome/desktop/wm/keybindings" = {
         # switch-to-workspace-left = [ "<Super>a" ];
