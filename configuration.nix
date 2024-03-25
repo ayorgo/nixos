@@ -209,7 +209,7 @@ in
         show-favorites = false;
         show-apps-icon-side-padding = 0;
         appicon-margin = 0;
-        appicon-padding = 2;
+        appicon-padding = 4;
 
         group-apps = false;
         group-apps-underline-unfocused = false;
