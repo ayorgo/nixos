@@ -79,7 +79,7 @@ else
 fi
 
 # So Kitty displays a good title
-PROMPT_COMMAND='echo -n "$(basename ${PWD})"'
+PROMPT_COMMAND='echo -ne "$(basename ${PWD})"'
 
 # unset color_prompt force_color_prompt
 
