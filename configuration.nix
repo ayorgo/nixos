@@ -172,6 +172,8 @@ in
       gnomeExtensions.dash-to-panel
       gnomeExtensions.launch-new-instance
       fastfetch
+      cowsay
+      fortune
     ];
 
     dconf.settings = {
