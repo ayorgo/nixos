@@ -182,6 +182,13 @@ in
         "dash-to-panel@jderose9.github.com"
         "launch-new-instance@gnome-shell-extensions.gcampax.github.com"
       ];
+      "org/gnome/settings-daemon/plugins/power" = {
+        idle-dim = false;
+        sleep-inactive-ac-type = "nothing";
+        sleep-inactive-battery-type = "nothing";
+        sleep-inactive-ac-timeout = 0;
+        sleep-inactive-battery-timeout = 0;
+      };
       "org/gnome/shell/extensions/dash-to-panel" = {
         panel-lengths = builtins.toJSON { "0" = 100; };
         panel-anchors = builtins.toJSON { "0" = "MIDDLE"; };
