@@ -60,9 +60,6 @@ in
     xkbOptions = "grp:ctrl_space_toggle";
   };
 
-  # Copy configuration.nix file to /run/current-system/configuration.nix
-  system.copySystemConfiguration = true;
-
   services.gnome.games.enable = true;
 
   environment.gnome.excludePackages = with pkgs.gnome; [
@@ -170,9 +167,17 @@ in
       thunderbird
       freetube
       gnome.dconf-editor
+      fastfetch
     ];
 
     dconf.settings = {
+      "org/gnome/shell".enabled-extensions = [
+        "blur-my-shell@aunetx"
+        "burn-my-windows@schneegans.github.com"
+        "dash-to-panel@jderose9.github.com"
+        "date-menu-formatter@marcinjakubowski.github.com"
+        "desktop-cube@schneegans.github.com"
+      ];
       "org/gnome/desktop/interface" = {
         enable-hot-corners = false;
         color-scheme = "prefer-dark";
