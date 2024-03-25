@@ -205,8 +205,8 @@ in
         group-apps = false;
         group-apps-underline-unfocused = false;
         group-apps-use-fixed-width = false;
-        show-desktop-hover = true;
-        show-desktop-delay = 500;
+        show-window-previews = false;
+        show-tooltip = false;
         scroll-icon-action = "NOTHING";
         scroll-panel-action = "NOTHING";
         scroll-panel-show-ws-popup = false;
@@ -215,7 +215,7 @@ in
         hide-overview-on-startup = true;
       };
       "org/gnome/shell/extensions/vitals" = {
-        fixed-widths = true;
+        fixed-widths = false;
         hot-sensors = [
           "_processor_usage_"
           "_memory_allocated_"
