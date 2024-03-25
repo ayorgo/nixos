@@ -79,7 +79,7 @@ else
 fi
 
 # So Kitty displays a good title
-PROMPT_COMMAND='echo -ne "$(basename ${PWD})"'
+PROMPT_COMMAND='echo -ne "\033]0;$(basename $(dirname ${PWD}))/$(basename ${PWD})\007"'
 
 # unset color_prompt force_color_prompt
 
