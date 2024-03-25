@@ -62,7 +62,7 @@ in
 
   services.gnome.games.enable = true;
 
-  environment.gnome.excludePackages = with pkgs.gnome; [
+  environment.gnome.excludePackages = (with pkgs.gnome; [
     baobab      # disk usage analyzer
     cheese      # photo booth
     eog         # image viewer
@@ -79,7 +79,9 @@ in
     # these should be self explanatory
     gnome-calculator gnome-calendar gnome-characters gnome-clocks gnome-contacts gnome-font-viewer gnome-logs
     gnome-maps gnome-music gnome-system-monitor gnome-weather gnome-disk-utility pkgs.gnome-connections
-  ];
+  ]) ++ (with pkgs; [
+    gnome-tour
+  ]);
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -167,17 +169,62 @@ in
       thunderbird
       freetube
       gnome.dconf-editor
+      gnomeExtensions.vitals
+      gnomeExtensions.dash-to-panel
+      gnomeExtensions.launch-new-instance
       fastfetch
     ];
 
     dconf.settings = {
       "org/gnome/shell".enabled-extensions = [
-        "blur-my-shell@aunetx"
-        "burn-my-windows@schneegans.github.com"
+        "Vitals@CoreCoding.com"
         "dash-to-panel@jderose9.github.com"
-        "date-menu-formatter@marcinjakubowski.github.com"
-        "desktop-cube@schneegans.github.com"
+        "launch-new-instance@gnome-shell-extensions.gcampax.github.com"
       ];
+      "org/gnome/shell/extensions/dash-to-panel" = {
+        panel-lengths = builtins.toJSON { "0" = 100; };
+        panel-anchors = builtins.toJSON { "0" = "MIDDLE"; };
+        panel-positions = builtins.toJSON { "0" = "TOP"; };
+        panel-sizes = builtins.toJSON { "0" = 32; };
+        panel-element-positions = builtins.toJSON {
+          "0" = [
+            { element = "activitiesButton"; position = "stackedTL"; visible = true; }
+            { element = "taskbar"; position = "stackedTL"; visible = true; }
+            { element = "dateMenu"; position = "centerMonitor"; visible = true; }
+            { element = "centerBox"; position = "stackedBR"; visible = true; }
+            { element = "systemMenu"; position = "stackedBR"; visible = true; }
+            { element = "rightBox"; position = "stackedBR"; visible = true; }
+          ];
+        };
+        trans-panel-opacity = 0.60;
+
+        show-favorites = false;
+        show-apps-icon-side-padding = 0;
+        appicon-margin = 0;
+        appicon-padding = 2;
+
+        group-apps = false;
+        group-apps-underline-unfocused = false;
+        group-apps-use-fixed-width = false;
+        show-desktop-hover = true;
+        show-desktop-delay = 500;
+        scroll-icon-action = "NOTHING";
+        scroll-panel-action = "NOTHING";
+        scroll-panel-show-ws-popup = false;
+
+        isolate-workspaces = true;
+        hide-overview-on-startup = true;
+      };
+      "org/gnome/shell/extensions/vitals" = {
+        fixed-widths = true;
+        hot-sensors = [
+          "_processor_usage_"
+          "_memory_allocated_"
+          "_storage_free_"
+        ];
+        menu-centered = false;
+        position-in-panel = 1;  # 0: left box, 1: center box, 2: right box
+      };
       "org/gnome/desktop/interface" = {
         enable-hot-corners = false;
         color-scheme = "prefer-dark";
