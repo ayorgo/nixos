@@ -118,7 +118,7 @@ fi
 
 # PATH="$HOME/.local/bin:$PATH"
 
-if [ -x /usr/games/cowsay -a -x /usr/games/fortune ]; then
+if command -v cowsay > /dev/null && command -v fortune > /dev/null; then
     fortune | cowsay
 fi
 
