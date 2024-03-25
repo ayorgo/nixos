@@ -57,7 +57,6 @@ in
     displayManager.gdm.enable = true;
     layout = "us,us,ru";
     xkbVariant = ",dvorak,";
-    xkbOptions = "grp:ctrl_space_toggle";
   };
 
   services.gnome.games.enable = true;
@@ -254,7 +253,7 @@ in
       };
       "org/gnome/settings-daemon/plugins/media-keys" = {
         search = [ "<Alt>r" ];
-        screensaver = [ "<Super>s" ];
+        screensaver = [ "<Super>z" ];
       };
       "org/gnome/desktop/wm/keybindings" = {
         # switch-to-workspace-left = [ "<Super>a" ];
@@ -272,8 +271,15 @@ in
         maximize = [ "<Alt>m" ];
         # toggle-fullscreen = [ "<Shift><Super>f" ];
       };
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+        binding = "<Alt>Return";
+        command = "kitty";
+        name = "Terminal";
+      };
+      "org/gnome/settings-daemon/plugins/media-keys".custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+      ];
     };
-
     programs.git = {
       enable = true;
       userName = "Georgios Adzhygai";
