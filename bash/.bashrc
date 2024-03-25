@@ -78,7 +78,8 @@ else
   PS1="\[$(tput bold)\]\[\033[38;5;166m\]\u\[$(tput sgr0)\]\[$(tput bold)\]:\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;39m\]\w\[$(tput sgr0)\] \[$(tput bold)\]>\[$(tput sgr0)\] "
 fi
 
-PROMPT_COMMAND='echo -ne "$(basename ${PWD})"'
+# So Kitty displays a good title
+PROMPT_COMMAND='echo -n "$(basename ${PWD})"'
 
 # unset color_prompt force_color_prompt
 
