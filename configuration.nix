@@ -189,6 +189,9 @@ in
         sleep-inactive-ac-timeout = 0;
         sleep-inactive-battery-timeout = 0;
       };
+      "org/gnome/desktop/screensaver" = {
+        lock-enabled = false;
+      };
       "org/gnome/shell/extensions/dash-to-panel" = {
         panel-lengths = builtins.toJSON { "0" = 100; };
         panel-anchors = builtins.toJSON { "0" = "MIDDLE"; };
