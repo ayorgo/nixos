@@ -143,7 +143,7 @@ filetype on
 let g:python_highlight_all = 1
 
 " Colorscheme
-" colorscheme catppuccin_mocha
+colorscheme catppuccin_mocha
 
 " Indentation
 let g:indentLine_char = '▏'
