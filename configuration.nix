@@ -281,6 +281,8 @@ in
         # activate-window-menu = [ "Menu" ];
         close = [ "<Alt>w" ];
         maximize = [ "<Alt>m" ];
+        switch-windows = [ "<Alt>Tab" ];
+        switch-applications = [];
         # toggle-fullscreen = [ "<Shift><Super>f" ];
       };
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
