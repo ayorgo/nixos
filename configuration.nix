@@ -173,8 +173,6 @@ in
       gnomeExtensions.top-bar-organizer
       gnomeExtensions.launch-new-instance
       fastfetch
-      cowsay
-      fortune
     ];
 
     dconf.settings = {
