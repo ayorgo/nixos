@@ -170,6 +170,7 @@ in
       gnome.dconf-editor
       gnomeExtensions.vitals
       gnomeExtensions.dash-to-panel
+      gnomeExtensions.top-bar-organizer
       gnomeExtensions.launch-new-instance
       fastfetch
       cowsay
@@ -180,6 +181,7 @@ in
       "org/gnome/shell".enabled-extensions = [
         "Vitals@CoreCoding.com"
         "dash-to-panel@jderose9.github.com"
+        "top-bar-organizer@julian.gse.jsts.xyz"
         "launch-new-instance@gnome-shell-extensions.gcampax.github.com"
       ];
       "org/gnome/settings-daemon/plugins/power" = {
@@ -192,39 +194,49 @@ in
       "org/gnome/desktop/screensaver" = {
         lock-enabled = false;
       };
+      "org/gnome/shell/extensions/top-bar-organizer" = {
+        left-box-order = [
+          "activities"
+        ];
+        center-box-order = [
+          "dateMenu"
+        ];
+        right-box-order = [
+          "vitalsMenu"
+          "quickSettings"
+          "keyboard"
+        ];
+      };
       "org/gnome/shell/extensions/dash-to-panel" = {
         panel-lengths = builtins.toJSON { "0" = 100; };
         panel-anchors = builtins.toJSON { "0" = "MIDDLE"; };
-        panel-positions = builtins.toJSON { "0" = "TOP"; };
+        panel-positions = builtins.toJSON { "0" = "RIGHT"; };
         panel-sizes = builtins.toJSON { "0" = 32; };
         panel-element-positions = builtins.toJSON {
           "0" = [
-            { element = "activitiesButton"; position = "stackedTL"; visible = true; }
             { element = "taskbar"; position = "stackedTL"; visible = true; }
-            { element = "dateMenu"; position = "centerMonitor"; visible = true; }
-            { element = "centerBox"; position = "stackedBR"; visible = true; }
-            { element = "systemMenu"; position = "stackedBR"; visible = true; }
-            { element = "rightBox"; position = "stackedBR"; visible = true; }
           ];
         };
-        trans-panel-opacity = 0.60;
-
-        show-favorites = false;
-        show-apps-icon-side-padding = 0;
-        appicon-margin = 0;
+        appicon-margin = 4;
         appicon-padding = 4;
-
-        group-apps = false;
+        dot-size = 0;
+        group-apps = true;
         group-apps-underline-unfocused = false;
         group-apps-use-fixed-width = false;
-        show-window-previews = false;
-        show-tooltip = false;
+        hide-overview-on-startup = true;
+        intellihide = true;
+        intellihide-use-pressure = true;
+        isolate-workspaces = true;
         scroll-icon-action = "NOTHING";
         scroll-panel-action = "NOTHING";
         scroll-panel-show-ws-popup = false;
-
-        isolate-workspaces = true;
-        hide-overview-on-startup = true;
+        show-favorites = false;
+        show-apps-icon-side-padding = 0;
+        show-window-previews = true;
+        show-tooltip = false;
+        stockgs-keep-top-panel = true;
+        stockgs-keep-dash = false;
+        trans-panel-opacity = 0.60;
       };
       "org/gnome/shell/extensions/vitals" = {
         fixed-widths = false;
@@ -234,7 +246,7 @@ in
           "_storage_free_"
         ];
         menu-centered = false;
-        position-in-panel = 1;  # 0: left box, 1: center box, 2: right box
+        position-in-panel = 2;  # 0: left box, 1: center box, 2: right box
       };
       "org/gnome/desktop/interface" = {
         enable-hot-corners = false;
@@ -268,22 +280,10 @@ in
         screensaver = [ "<Super>z" ];
       };
       "org/gnome/desktop/wm/keybindings" = {
-        # switch-to-workspace-left = [ "<Super>a" ];
-        # switch-to-workspace-right = [ "<Super>d" ];
-        # move-to-workspace-left = [ "<Shift><Super>a" ];
-        # move-to-workspace-right = [ "<Shift><Super>d" ];
-        # switch-to-workspace-1 = [ "<Super>1" ];
-        # switch-to-workspace-2 = [ "<Super>2" ];
-        # switch-to-workspace-3 = [ "<Super>3" ];
-        # switch-to-workspace-4 = [ "<Super>4" ];
-        # switch-input-source = [ "<Shift><Alt>" ];
-        # switch-input-source-backward = mkEmptyArray type.string;
-        # activate-window-menu = [ "Menu" ];
         close = [ "<Alt>w" ];
         maximize = [ "<Alt>m" ];
         switch-windows = [ "<Alt>Tab" ];
         switch-applications = [];
-        # toggle-fullscreen = [ "<Shift><Super>f" ];
       };
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
         binding = "<Alt>Return";
