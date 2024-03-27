@@ -9,6 +9,10 @@ let
     url = "https://github.com/ayorgo/dotfiles";
     ref = "master";
   };
+  OAuth2Settings = id: {
+    "mail.smtpserver.smtp_${id}.authMethod" = 10;
+    "mail.server.server_${id}.authMethod" = 10;
+  };
 in
 {
   imports =
@@ -165,7 +169,6 @@ in
 
     home.packages = with pkgs; [
       spotify
-      thunderbird
       freetube
       gnome.dconf-editor
       gnomeExtensions.vitals
@@ -302,6 +305,45 @@ in
       userName = "Georgios Adzhygai";
       userEmail = "ayorgo@users.noreply.github.com";
       package = pkgs.gitFull;
+    };
+
+
+    programs.thunderbird = {
+      enable = true;
+      profiles.default = {
+        isDefault = true;
+        settings = { };
+      };
+    };
+
+    accounts.email.accounts = {
+      gmail = {
+        primary = true;
+        flavor = "gmail.com";
+        address = "george.adzhygai@gmail.com";
+        realName = "Georgios Adzhygai";
+        smtp.tls.useStartTls = true;
+        thunderbird = {
+          enable = true;
+          settings = OAuth2Settings;
+        };
+      };
+    };
+
+    programs.neovim = {
+      enable = true;
+      plugins = [
+        {
+          plugin = pkgs.vimPlugins.nvim-tree-lua;
+          config = ''
+            packadd! nvim-tree.lua
+            lua << END
+require("nvim-tree").setup()
+END
+          '';
+        }
+        pkgs.vimPlugins.vim-commentary
+      ];
     };
 
     programs.fzf.enable = true;
