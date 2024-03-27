@@ -184,6 +184,11 @@ in
         "top-bar-organizer@julian.gse.jsts.xyz"
         "launch-new-instance@gnome-shell-extensions.gcampax.github.com"
       ];
+      "org/gnome/desktop/peripherals/keyboard" = {
+        delay = lib.hm.gvariant.mkUint32 175;
+        repeat-interval = lib.hm.gvariant.mkUint32 18;
+        repeat = true;
+      };
       "org/gnome/settings-daemon/plugins/power" = {
         idle-dim = false;
         sleep-inactive-ac-type = "nothing";
