@@ -299,22 +299,6 @@ in
       };
     };
 
-    programs.neovim = {
-      enable = true;
-      plugins = [
-        {
-          plugin = pkgs.vimPlugins.nvim-tree-lua;
-          config = ''
-            packadd! nvim-tree.lua
-            lua << END
-require("nvim-tree").setup()
-END
-          '';
-        }
-        pkgs.vimPlugins.vim-commentary
-      ];
-    };
-
     programs.fzf.enable = true;
 
     programs.firefox = {
