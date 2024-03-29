@@ -144,6 +144,7 @@ let g:python_highlight_all = 1
 
 " Colorscheme
 colorscheme catppuccin_mocha
+hi Normal guibg=NONE ctermbg=NONE
 
 " Indentation
 let g:indentLine_char = '▏'
