@@ -172,16 +172,16 @@ in
       freetube
       gnome.dconf-editor
       gnomeExtensions.vitals
-      gnomeExtensions.dash-to-panel
       gnomeExtensions.top-bar-organizer
       gnomeExtensions.launch-new-instance
+      gnomeExtensions.hide-the-dock-in-overview
       fastfetch
     ];
 
     dconf.settings = {
       "org/gnome/shell".enabled-extensions = [
         "Vitals@CoreCoding.com"
-        "dash-to-panel@jderose9.github.com"
+        "hide-dock-in-overview@roslax"
         "top-bar-organizer@julian.gse.jsts.xyz"
         "launch-new-instance@gnome-shell-extensions.gcampax.github.com"
       ];
@@ -212,37 +212,6 @@ in
           "quickSettings"
           "keyboard"
         ];
-      };
-      "org/gnome/shell/extensions/dash-to-panel" = {
-        panel-lengths = builtins.toJSON { "0" = 100; };
-        panel-anchors = builtins.toJSON { "0" = "MIDDLE"; };
-        panel-positions = builtins.toJSON { "0" = "RIGHT"; };
-        panel-sizes = builtins.toJSON { "0" = 32; };
-        panel-element-positions = builtins.toJSON {
-          "0" = [
-            { element = "taskbar"; position = "stackedTL"; visible = true; }
-          ];
-        };
-        appicon-margin = 4;
-        appicon-padding = 4;
-        dot-size = 0;
-        group-apps = true;
-        group-apps-underline-unfocused = false;
-        group-apps-use-fixed-width = false;
-        hide-overview-on-startup = true;
-        intellihide = true;
-        intellihide-use-pressure = true;
-        isolate-workspaces = true;
-        scroll-icon-action = "NOTHING";
-        scroll-panel-action = "NOTHING";
-        scroll-panel-show-ws-popup = false;
-        show-favorites = false;
-        show-apps-icon-side-padding = 0;
-        show-window-previews = true;
-        show-tooltip = false;
-        stockgs-keep-top-panel = true;
-        stockgs-keep-dash = false;
-        trans-panel-opacity = 0.60;
       };
       "org/gnome/shell/extensions/vitals" = {
         fixed-widths = false;
