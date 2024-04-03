@@ -5,10 +5,6 @@
 { pkgs, lib, ... }:
 
 let
-  dotfiles = builtins.fetchGit {
-    url = "https://github.com/ayorgo/dotfiles";
-    ref = "master";
-  };
   OAuth2Settings = id: {
     "mail.smtpserver.smtp_${id}.authMethod" = 10;
     "mail.server.server_${id}.authMethod" = 10;
@@ -366,19 +362,19 @@ in
 
     home.file = {
       ".bashrc" = {
-        source = "${dotfiles}/bash/.bashrc";
+        source = ../../dotfiles/bash/.bashrc;
       };
       ".bash_aliases" = {
-        source = "${dotfiles}/bash/.bash_aliases";
+        source = ../../dotfiles/bash/.bash_aliases;
       };
       ".vimrc" = {
-        source = "${dotfiles}/vim/.vimrc";
+        source = ../../dotfiles/vim/.vimrc;
       };
       ".config/kitty/kitty.conf" = {
-        source = "${dotfiles}/kitty/kitty.conf";
+        source = ../../dotfiles/kitty/kitty.conf;
       };
       ".config/kitty/current-theme.conf" = {
-        source = "${dotfiles}/kitty/current-theme.conf";
+        source = ../../dotfiles/kitty/current-theme.conf;
       };
     };
   };
