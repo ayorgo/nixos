@@ -5,6 +5,10 @@
 { pkgs, lib, ... }:
 
 let
+  hm = builtins.fetchTarball {
+    url = "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
+    sha256 = "0g51f2hz13dk953i501fmc6935difhz60741nypaqwz127hy5ldk";
+  };
   OAuth2Settings = id: {
     "mail.smtpserver.smtp_${id}.authMethod" = 10;
     "mail.server.server_${id}.authMethod" = 10;
@@ -14,7 +18,7 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      (import "${builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz}/nixos")
+      (import "${hm}/nixos")
     ];
 
   # Bootloader.
