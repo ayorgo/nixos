@@ -126,6 +126,7 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wl-clipboard
     kitty
     gitFull
     btop
@@ -271,6 +272,7 @@ in
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
       ];
     };
+
     programs.git = {
       enable = true;
       userName = "Georgios Adzhygai";
@@ -278,6 +280,12 @@ in
       package = pkgs.gitFull;
     };
 
+    programs.neovim = {
+      enable = true;
+      plugins = [
+        pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+      ];
+    };
 
     programs.thunderbird = {
       enable = true;
@@ -373,6 +381,9 @@ in
       };
       ".vimrc" = {
         source = ../../dotfiles/vim/.vimrc;
+      };
+      ".config/nvim/init.lua" = {
+        source = ../../dotfiles/vim/init.lua;
       };
       ".config/kitty/kitty.conf" = {
         source = ../../dotfiles/kitty/kitty.conf;
