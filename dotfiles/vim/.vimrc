@@ -124,14 +124,6 @@ set mouse=a
 " Convenient copy/paste. Requires +clipboard option in viw --version
 " set clipboard=unnamedplus
 
-" Copy to clipboard in normal and visual mode
-nnoremap <leader>y :call system('wl-copy', @")<CR>
-vnoremap <leader>y :call system('wl-copy', @")<CR>
-
-" Paste from clipboard
-nnoremap <leader>p :call setreg('"', system('wl-paste'), 'c')<CR>p
-
-
 " UTF-8 encoding everywhere
 set encoding=UTF-8
 

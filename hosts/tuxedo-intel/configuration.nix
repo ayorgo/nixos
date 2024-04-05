@@ -125,9 +125,7 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wl-clipboard
-    kitty
     gitFull
     btop
     killall
@@ -135,7 +133,7 @@ in
   ];
 
   environment.variables = {
-    EDITOR = "vim";
+    EDITOR = "nvim";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -283,7 +281,16 @@ in
     programs.neovim = {
       enable = true;
       plugins = [
-        pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+        pkgs.vimPlugins.nerdtree
+        pkgs.vimPlugins.indentLine
+        pkgs.vimPlugins.vim-commentary
+        pkgs.vimPlugins.fzf-vim
+        pkgs.vimPlugins.colorizer
+        pkgs.vimPlugins.vim-airline
+        pkgs.vimPlugins.copilot-vim
+        pkgs.vimPlugins.catppuccin-nvim
+        pkgs.vimPlugins.vim-nix
+        pkgs.vimPlugins.auto-save-nvim
       ];
     };
 
@@ -311,7 +318,7 @@ in
 
     programs.fzf.enable = true;
 
-    programs.nnn.enable = true;
+    programs.ripgrep.enable = true;
 
     programs.firefox = {
       enable = true;
@@ -380,9 +387,6 @@ in
       };
       ".bash_aliases" = {
         source = ../../dotfiles/bash/.bash_aliases;
-      };
-      ".vimrc" = {
-        source = ../../dotfiles/vim/.vimrc;
       };
       ".config/nvim/init.lua" = {
         source = ../../dotfiles/vim/init.lua;

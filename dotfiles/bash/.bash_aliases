@@ -2,6 +2,8 @@
 
 alias clone=/home/ayorgo/lyst/clone.sh
 
+alias vim=nvim
+
 function task() { /usr/bin/task "$@" | less ; }
 
 # some more ls aliases
