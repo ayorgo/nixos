@@ -311,6 +311,8 @@ in
 
     programs.fzf.enable = true;
 
+    programs.nnn.enable = true;
+
     programs.firefox = {
       enable = true;
       policies = {

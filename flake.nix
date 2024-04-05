@@ -5,10 +5,10 @@
 
   outputs = { self, nixpkgs, ... }@inputs: {
     nixosConfigurations = {
-      tuxedo = nixpkgs.lib.nixosSystem {
+      tuxedo-intel = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/tuxedo/configuration.nix
+          ./hosts/tuxedo-intel/configuration.nix
         ];
       };
     };
