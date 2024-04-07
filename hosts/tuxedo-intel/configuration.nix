@@ -163,8 +163,48 @@ in
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
 
+  security.sudo.extraRules = [
+    {
+      users = [ "ayorgo" ];
+      commands = [ { command = "/etc/switch-specialisation"; options = [ "NOPASSWD" ]; } ];
+    }
+  ];
+
+  environment.etc = {
+    switch-specialisation = {
+      text = ''
+      #!/usr/bin/env bash
+      nixos-rebuild switch --flake /home/ayorgo/pet/nixos#tuxedo-intel --fast --specialisation $1
+      '';
+      mode = "0555"; # Executable but not writable
+    };
+  };
+
   home-manager.users.ayorgo = { lib, ... }: {
     home.stateVersion = "23.11";
+
+    systemd.user.services.watch-gnome-theme = {
+      Unit = {
+        Description = "Watch GNOME Theme Changes";
+      };
+      Install = {
+        WantedBy = [ "default.target" ];
+      };
+      Service = {
+        Restart = "always";
+        ExecStart = "${pkgs.writeShellScript "watch-gnome-theme" ''
+          #!/run/current-system/sw/bin/bash
+          dconf watch "/org/gnome/desktop/interface/color-scheme" | while read value; do
+            if [[ "$value" == "'prefer-dark'" ]]; then
+              sudo /etc/switch-specialisation dark && nvr -c 'AirlineTheme dark' --nostart -s && nvr -c 'set background=dark' --nostart -s
+            fi
+            if [[ "$value" == "'default'" ]]; then
+              sudo /etc/switch-specialisation light && nvr -c 'AirlineTheme sol' --nostart -s && nvr -c 'set background=light' --nostart -s
+            fi
+          done
+        ''}";
+      };
+    };
 
     home.packages = with pkgs; [
       spotify
@@ -176,6 +216,7 @@ in
       gnomeExtensions.hide-the-dock-in-overview
       gnomeExtensions.pip-on-top
       fastfetch
+      neovim-remote
     ];
 
     dconf.settings = {
@@ -226,8 +267,13 @@ in
       };
       "org/gnome/desktop/interface" = {
         enable-hot-corners = false;
-        color-scheme = "prefer-dark";
+        color-scheme = lib.mkDefault "prefer-dark";
         show-battery-percentage = true;
+      };
+      "org/gnome/desktop/background" = {
+        color-shading-type = "solid";
+        picture-options = "zoom";
+        picture-uri = lib.mkDefault ("file://" + ../../wallpapers/nix-wallpaper-binary-black.png);
       };
       "org/gnome/desktop/peripherals/touchpad" = {
         tap-to-click = true;
@@ -321,11 +367,13 @@ in
         pkgs.vimPlugins.fzf-vim
         pkgs.vimPlugins.colorizer
         pkgs.vimPlugins.vim-airline
+        pkgs.vimPlugins.vim-airline-themes
         pkgs.vimPlugins.copilot-vim
         pkgs.vimPlugins.catppuccin-nvim
         pkgs.vimPlugins.vim-nix
         pkgs.vimPlugins.auto-save-nvim
       ];
+      extraLuaConfig = lib.mkDefault (builtins.readFile ../../dotfiles/vim/init.lua + "\n" + "vim.cmd([[set background=dark | let g:airline_theme='dark']])");
     };
 
     programs.thunderbird = {
@@ -422,8 +470,39 @@ in
       ".bash_aliases" = {
         source = ../../dotfiles/bash/.bash_aliases;
       };
-      ".config/nvim/init.lua" = {
-        source = ../../dotfiles/vim/init.lua;
+    };
+  };
+
+  specialisation = {
+    dark.configuration = {
+      system.nixos.tags = [ "dark" ];
+      home-manager.users.ayorgo = {
+        programs.kitty.theme = "Adwaita darker";
+        programs.neovim.extraLuaConfig = (builtins.readFile ../../dotfiles/vim/init.lua + "\n" + "vim.cmd([[set background=dark | let g:airline_theme='dark']])");
+        dconf.settings = {
+          "org/gnome/desktop/interface" = {
+            color-scheme = "prefer-dark";
+          };
+          "org/gnome/desktop/background" = {
+            picture-uri = "file://" + ../../wallpapers/nix-wallpaper-binary-black.png;
+          };
+        };
+      };
+    };
+    light.configuration = {
+      system.nixos.tags = [ "light" ];
+      home-manager.users.ayorgo = {
+        programs.kitty.theme = "Adwaita light";
+        programs.neovim.extraLuaConfig = (builtins.readFile ../../dotfiles/vim/init.lua + "\n" + "vim.cmd([[set background=light | let g:airline_theme='sol']])");
+        dconf.settings = {
+          "org/gnome/desktop/interface" = {
+            color-scheme = "default";
+          };
+          "org/gnome/desktop/background" = {
+            picture-uri = "file://" + ../../wallpapers/nix-wallpaper-binary-white.png;
+          };
+        };
+        home.file.".config/nvim/bg".text = "light";
       };
     };
   };

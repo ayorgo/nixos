@@ -2,7 +2,7 @@
 
 alias clone=/home/ayorgo/lyst/clone.sh
 
-alias vim=nvim
+alias vim='nvim --listen /tmp/nvimsocket'
 
 function task() { /usr/bin/task "$@" | less ; }
 

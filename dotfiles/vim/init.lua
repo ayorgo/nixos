@@ -33,6 +33,9 @@ vim.cmd([[set ignorecase]])
 vim.cmd([[set smartcase]])
 
 -- Colorscheme
+require("catppuccin").setup({
+    transparent_background = true
+})
 vim.cmd.colorscheme "catppuccin"
 
 -- Indentation
@@ -56,7 +59,7 @@ vim.cmd([[map <Right> :bnext<CR>]])
 vim.cmd([[map <Left> :bprev<CR>]])
 
 -- Ruler
-vim.cmd([[let &colorcolumn=join(range(81,999), ',')]])
+-- vim.cmd([[let &colorcolumn=join(range(81,999), ',')]])
 
 -- Offline edit history
 vim.cmd([[set undofile]])
