@@ -278,6 +278,40 @@ in
       package = pkgs.gitFull;
     };
 
+    programs.kitty = {
+      enable = true;
+      theme = lib.mkDefault "Adwaita darker";
+      settings = {
+        # Tabs
+        tab_bar_edge = "top";
+        tab_bar_style = "powerline";
+        tab_powerline_style = "round";
+
+        # Clicking on URLs
+        mouse_map = "ctrl+left release grabbed,ungrabbed mouse_handle_click link";
+
+        # Background opacity
+        # background_opacity = 1.0;
+
+        # Sound bell
+        enable_audio_bell = "no";
+
+        # Font
+        font_family = "Source Code Pro Medium";
+        bold_font = "Source Code Pro Bold";
+        font_size = 12;
+
+        # Remote control
+        allow_remote_control = "yes";
+
+        # Don't ask to close window
+        confirm_os_window_close = 0;
+
+        # Hide the title bar and window borders
+        hide_window_decorations = "yes";
+      };
+    };
+
     programs.neovim = {
       enable = true;
       plugins = [
@@ -390,12 +424,6 @@ in
       };
       ".config/nvim/init.lua" = {
         source = ../../dotfiles/vim/init.lua;
-      };
-      ".config/kitty/kitty.conf" = {
-        source = ../../dotfiles/kitty/kitty.conf;
-      };
-      ".config/kitty/current-theme.conf" = {
-        source = ../../dotfiles/kitty/current-theme.conf;
       };
     };
   };
