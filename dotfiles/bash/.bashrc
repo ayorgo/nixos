@@ -73,9 +73,9 @@ shopt -s checkwinsize
 # PS1='[\t]\u:\w$ '
 
 if [ "$HOSTNAME" != "tuxedo" ]; then
-  PS1="\[$(tput bold)\]\[\033[38;5;166m\]\u\[$(tput sgr0)\]@\[$(tput bold)\]\[\033[38;5;85m\]\h\[$(tput sgr0)\]\[$(tput bold)\]:\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;39m\]\w\[$(tput sgr0)\] \[$(tput bold)\]>\[$(tput sgr0)\] "
+  PS1="\n\[$(tput bold)\]\[\033[38;5;166m\]\u\[$(tput sgr0)\]@\[$(tput bold)\]\[\033[38;5;85m\]\h\[$(tput sgr0)\]\[$(tput bold)\]:\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;39m\]\w\[$(tput sgr0)\] \n\[$(tput bold)\]\[\033[38;5;197m\]❯❯❯\[$(tput sgr0)\] "
 else
-  PS1="\[$(tput bold)\]\[\033[38;5;166m\]\u\[$(tput sgr0)\]\[$(tput bold)\]:\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;39m\]\w\[$(tput sgr0)\] \[$(tput bold)\]>\[$(tput sgr0)\] "
+  PS1="\n\[$(tput bold)\]\[\033[38;5;166m\]\u\[$(tput sgr0)\]\[$(tput bold)\]:\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;39m\]\w\[$(tput sgr0)\] \n\[$(tput bold)\]\[\033[38;5;197m\]❯❯❯\[$(tput sgr0)\] "
 fi
 
 # So Kitty displays a good title
