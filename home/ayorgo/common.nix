@@ -7,6 +7,9 @@ let
   };
 in
 {
+  home.username = "ayorgo";
+  home.homeDirectory = "/home/ayorgo";
+
   home.stateVersion = "23.11";
 
   systemd.user.services.watch-gnome-theme = {
@@ -22,10 +25,10 @@ in
         #!/run/current-system/sw/bin/bash
         dconf watch "/org/gnome/desktop/interface/color-scheme" | while read value; do
           if [[ "$value" == "'prefer-dark'" ]]; then
-            sudo /etc/switch-specialisation dark && nvr -c 'AirlineTheme dark' --nostart -s && nvr -c 'set background=dark' --nostart -s
+            home-manager switch --flake ~/pet/nixos/home/ayorgo/dark && nvr -c 'AirlineTheme dark' --nostart -s && nvr -c 'set background=dark' --nostart -s
           fi
           if [[ "$value" == "'default'" ]]; then
-            sudo /etc/switch-specialisation light && nvr -c 'AirlineTheme sol' --nostart -s && nvr -c 'set background=light' --nostart -s
+            home-manager switch --flake ~/pet/nixos/home/ayorgo/light && nvr -c 'AirlineTheme sol' --nostart -s && nvr -c 'set background=light' --nostart -s
           fi
         done
       ''}";
@@ -99,7 +102,7 @@ in
     "org/gnome/desktop/background" = {
       color-shading-type = "solid";
       picture-options = "zoom";
-      picture-uri = lib.mkDefault ("file://" + ../../wallpapers/nix-wallpaper-binary-black.png);
+      picture-uri = lib.mkDefault ("file://" + ../../../wallpapers/nix-wallpaper-binary-black.png);
     };
     "org/gnome/desktop/peripherals/touchpad" = {
       tap-to-click = true;

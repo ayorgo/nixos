@@ -118,6 +118,7 @@
     gitFull
     btop
     killall
+    home-manager
   #  wget
   ];
 
@@ -151,55 +152,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-
-  security.sudo.extraRules = [
-    {
-      users = [ "ayorgo" ];
-      commands = [ { command = "/etc/switch-specialisation"; options = [ "NOPASSWD" ]; } ];
-    }
-  ];
-
-  environment.etc = {
-    switch-specialisation = {
-      text = ''
-      #!/usr/bin/env bash
-      nixos-rebuild switch --flake /home/ayorgo/pet/nixos#tuxedo-intel --fast --specialisation $1
-      '';
-      mode = "0555"; # Executable but not writable
-    };
-  };
-
-  specialisation = {
-    dark.configuration = {
-      system.nixos.tags = [ "dark" ];
-      home-manager.users.ayorgo = {
-        programs.kitty.theme = "Adwaita darker";
-        programs.neovim.extraLuaConfig = (builtins.readFile ../../users/ayorgo/dotfiles/vim/init.lua + "\n" + "vim.cmd([[set background=dark | let g:airline_theme='dark']])");
-        dconf.settings = {
-          "org/gnome/desktop/interface" = {
-            color-scheme = "prefer-dark";
-          };
-          "org/gnome/desktop/background" = {
-            picture-uri = "file://" + ../../wallpapers/nix-wallpaper-binary-black.png;
-          };
-        };
-      };
-    };
-    light.configuration = {
-      system.nixos.tags = [ "light" ];
-      home-manager.users.ayorgo = {
-        programs.kitty.theme = "Adwaita light";
-        programs.neovim.extraLuaConfig = (builtins.readFile ../../users/ayorgo/dotfiles/vim/init.lua + "\n" + "vim.cmd([[set background=light | let g:airline_theme='sol']])");
-        dconf.settings = {
-          "org/gnome/desktop/interface" = {
-            color-scheme = "default";
-          };
-          "org/gnome/desktop/background" = {
-            picture-uri = "file://" + ../../wallpapers/nix-wallpaper-binary-white.png;
-          };
-        };
-        home.file.".config/nvim/bg".text = "light";
-      };
-    };
-  };
 }
