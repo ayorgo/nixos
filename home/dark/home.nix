@@ -10,7 +10,7 @@
       color-scheme = "prefer-dark";
     };
     "org/gnome/desktop/background" = {
-      picture-uri = "file://" + ../../../wallpapers/nix-wallpaper-binary-black.png;
+      picture-uri = "file://" + ../../wallpapers/nix-wallpaper-binary-black.png;
     };
   };
 }

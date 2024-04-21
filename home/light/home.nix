@@ -10,7 +10,7 @@
       color-scheme = "default";
     };
     "org/gnome/desktop/background" = {
-      picture-uri = "file://" + ../../../wallpapers/nix-wallpaper-binary-white.png;
+      picture-uri = "file://" + ../../wallpapers/nix-wallpaper-binary-white.png;
     };
   };
   home.file.".config/nvim/bg".text = "light";

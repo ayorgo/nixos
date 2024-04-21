@@ -11,7 +11,7 @@
 # esac
 
 # FZF config
-export FZF_DEFAULT_OPTS='--height 40% --border'
+export FZF_DEFAULT_OPTS='--height 40% --border --color=gutter:-1'
 export FZF_DEFAULT_COMMAND='find'
 
 # Colors for bash
