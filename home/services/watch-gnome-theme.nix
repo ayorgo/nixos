@@ -11,7 +11,6 @@
     Service = {
       Restart = "always";
       ExecStart = "${pkgs.writeShellScript "watch-gnome-theme" ''
-        #!/run/current-system/sw/bin/bash
         dconf watch "/org/gnome/desktop/interface/color-scheme" | while read value; do
           if [[ "$value" == "'prefer-dark'" ]]; then
             home-manager switch --flake ~/pet/nixos/home/flavours/dark && nvr -c 'AirlineTheme dark' --nostart -s && nvr -c 'set background=dark' --nostart -s
