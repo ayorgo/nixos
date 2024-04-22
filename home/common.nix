@@ -8,11 +8,12 @@ let
 in
 {
   imports = [
-    ./firefox.nix
-    ./git.nix
-    ./gnome.nix
-    ./kitty.nix
-    ./neovim.nix
+    ./programs/firefox.nix
+    ./programs/git.nix
+    ./programs/gnome.nix
+    ./programs/kitty.nix
+    ./programs/neovim.nix
+    ./services/watch-gnome-theme.nix
   ];
 
   home.username = "ayorgo";
@@ -47,6 +48,15 @@ in
         enable = true;
         settings = OAuth2Settings;
       };
+    };
+  };
+
+  home.file = {
+    ".bashrc" = {
+      source = ./dotfiles/bash/.bashrc;
+    };
+    ".bash_aliases" = {
+      source = ./dotfiles/bash/.bash_aliases;
     };
   };
 }

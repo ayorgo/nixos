@@ -20,6 +20,6 @@
       pkgs.vimPlugins.vim-nix
       pkgs.vimPlugins.auto-save-nvim
     ];
-    extraLuaConfig = lib.mkDefault (builtins.readFile ./dotfiles/vim/init.lua + "\n" + "vim.cmd([[set background=dark | let g:airline_theme='dark']])");
+    extraLuaConfig = lib.mkDefault (builtins.readFile ../dotfiles/vim/init.lua + "\n" + "vim.cmd([[set background=dark | let g:airline_theme='dark']])");
   };
 }
