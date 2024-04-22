@@ -14,6 +14,7 @@ in
     ./programs/gnome.nix
     ./programs/kitty.nix
     ./programs/neovim.nix
+    ./programs/emacs.nix
     ./services/watch-gnome-theme.nix
   ];
 
@@ -28,6 +29,7 @@ in
     fastfetch
     fzf
     ripgrep
+    fd
   ];
 
   programs.thunderbird = {

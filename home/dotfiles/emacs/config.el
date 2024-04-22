@@ -101,7 +101,7 @@
 (use-package org-fancy-priorities)
 (after! org-fancy-priorities
   (setq
-   org-fancy-priorities-list '("🅐" "🅑" "🅒" "🅓")
+   org-fancy-priorities-list '("🟥" "🟧" "🟩" "🟦")
    org-priority-lowest ?D
    org-priority-highest ?A
    org-priority-default ?D
@@ -183,10 +183,15 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one-light)
-(setq doom-font (font-spec :size 28))
+
+; (setq doom-theme 'doom-one-light) ;; the theme is set by Nix
+(setq doom-font (font-spec :size 16)) ;; 28 to account for high DPI in Arch + picom + qtile
 (setq calendar-week-start-day 1)
 
+;; Window decorations
+(setq default-frame-alist '((undecorated . t))) ;; remove window decorations on NixOS + Gnome + wayland
+(add-to-list 'default-frame-alist '(fullscreen . maximized)) ;; start maximized
+(add-to-list 'default-frame-alist '(vertical-scroll-bars . nil))
 
 ;; (after! doom-theme
 ;;         (setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
@@ -206,11 +211,11 @@
 ;; ----------------
 ;; mermaid diagrams
 ;; ----------------
-(org-babel-do-load-languages
-    'org-babel-load-languages
-    '((mermaid . t)))
-(setq ob-mermaid-cli-path "/home/ayorgo/org/projects/mmdc")
-(load! "lisp/ob-mermaid")
+; (org-babel-do-load-languages
+;     'org-babel-load-languages
+;     '((mermaid . t)))
+; (setq ob-mermaid-cli-path "/home/ayorgo/org/projects/mmdc")
+; (load! "lisp/ob-mermaid")
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
