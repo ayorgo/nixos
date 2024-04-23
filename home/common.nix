@@ -8,6 +8,7 @@ let
 in
 {
   imports = [
+    ./programs/bash.nix
     ./programs/firefox.nix
     ./programs/git.nix
     ./programs/gnome.nix
@@ -48,15 +49,6 @@ in
         enable = true;
         settings = OAuth2Settings;
       };
-    };
-  };
-
-  home.file = {
-    ".bashrc" = {
-      source = ./dotfiles/bash/.bashrc;
-    };
-    ".bash_aliases" = {
-      source = ./dotfiles/bash/.bash_aliases;
     };
   };
 }
