@@ -9,12 +9,12 @@ in
 {
   imports = [
     ./programs/bash.nix
+    ./programs/emacs.nix
     ./programs/firefox.nix
     ./programs/git.nix
     ./programs/gnome.nix
     ./programs/kitty.nix
     ./programs/neovim.nix
-    ./programs/emacs.nix
     ./services/watch-gnome-theme.nix
   ];
 
