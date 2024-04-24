@@ -66,7 +66,7 @@
 
 ;; Org-mode, org-roam, org-roam-ui
 (after! org
-  (plist-put org-format-latex-options :scale 2.5)
+  (plist-put org-format-latex-options :scale 0.75) ; 2.5x for high DPI screens in Arch + picom + qtile
 
   ;; Inline LaTex rendering
   (add-hook 'org-mode-hook 'org-fragtog-mode)

@@ -30,6 +30,7 @@ in
     fzf
     ripgrep
     fd
+    texlive.combined.scheme-full
   ];
 
   programs.thunderbird = {
