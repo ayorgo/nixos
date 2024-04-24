@@ -185,6 +185,7 @@
 ;; `load-theme' function. This is the default:
 
 ; (setq doom-theme 'doom-one-light) ;; the theme is set by Nix
+(custom-theme-set-faces! 'doom-one '(default :background "#000000"))
 (setq doom-font (font-spec :size 16)) ;; 28 to account for high DPI in Arch + picom + qtile
 (setq calendar-week-start-day 1)
 
