@@ -8,6 +8,7 @@ let
 in
 {
   imports = [
+    ./programs/anki.nix
     ./programs/bash.nix
     ./programs/emacs.nix
     ./programs/firefox.nix
