@@ -218,6 +218,18 @@
 ; (setq ob-mermaid-cli-path "/home/ayorgo/org/projects/mmdc")
 ; (load! "lisp/ob-mermaid")
 
+;; ------------
+;; org-pomodoro
+;; ------------
+(setq org-pomodoro-length 30
+      org-pomodoro-short-break-length 0
+      org-pomodoro-long-break-length 0
+      org-pomodoro-long-break-frequency 4
+      ; org-pomodoro-start-sound "~/.doom.d/sounds/pomodoro-start.wav"
+      ; org-pomodoro-finished-sound "~/.doom.d/sounds/pomodoro-finished.wav"
+      ; org-pomodoro-killed-sound "~/.doom.d/sounds/pomodoro-killed.wav")
+)
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
