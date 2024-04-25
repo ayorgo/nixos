@@ -8,6 +8,7 @@
     gnomeExtensions.launch-new-instance
     gnomeExtensions.hide-the-dock-in-overview
     gnomeExtensions.pip-on-top
+    gnomeExtensions.appindicator
   ];
 
   dconf.settings = {
@@ -17,7 +18,11 @@
       "pip-on-top@rafostar.github.com"
       "top-bar-organizer@julian.gse.jsts.xyz"
       "launch-new-instance@gnome-shell-extensions.gcampax.github.com"
+      "appindicatorsupport@rgcjonas.gmail.com"
     ];
+    "org/gnome/shell/extensions/appindicator" = {
+      icon-size = 22;
+    };
     "org/gnome/desktop/peripherals/keyboard" = {
       delay = lib.hm.gvariant.mkUint32 175;
       repeat-interval = lib.hm.gvariant.mkUint32 20;
