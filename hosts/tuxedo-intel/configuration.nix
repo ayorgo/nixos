@@ -50,6 +50,7 @@
     displayManager.gdm.enable = true;
     layout = "us,us,ru";
     xkbVariant = ",dvorak,";
+    wacom.enable = true;
   };
 
   services.gnome.games.enable = true;
