@@ -31,6 +31,7 @@ in
     ripgrep
     fd
     texlive.combined.scheme-full
+    rnote # sketching and handwritten note taking
   ];
 
   programs.thunderbird = {
