@@ -1,7 +1,7 @@
 # nixos
 ## System configuration
 ```sh
-sudo nixos-rebuild switch --flake ~/pet/nixos/hosts#tuxedo
+sudo nixos-rebuild switch --flake ~/pet/nixos/hosts#tuxedo-intel
 ```
 
 ## Home configuration
