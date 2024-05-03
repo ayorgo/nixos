@@ -14,6 +14,9 @@
 (setq auto-save-visited-interval 0.4) ;; in seconds; a lower value results in status bar flickering
 (auto-save-visited-mode t)
 
+;; Disable the deletion of trailing whitespaces on save
+(remove-hook 'doom-first-buffer-hook #'ws-butler-global-mode)
+
 ;; Enable whitespaces
 ;; (setq whitespace-space-regexp "\\(^ +\\|  +\\| +$\\)") ; visualize only leading and/or trailing SPACEs.
 ;; (setq whitespace-space-regexp "\\(?<=\\S\\)\\s\\(?=\\S\\)") ; visualize only leading and/or trailing SPACEs.
