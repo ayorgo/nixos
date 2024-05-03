@@ -1,10 +1,6 @@
 { lib, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    neovim-remote
-  ];
-
   programs.neovim = {
     enable = true;
     plugins = [

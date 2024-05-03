@@ -13,10 +13,18 @@
       ExecStart = "${pkgs.writeShellScript "watch-gnome-theme" ''
         dconf watch "/org/gnome/desktop/interface/color-scheme" | while read value; do
           if [[ "$value" == "'prefer-dark'" ]]; then
-            home-manager switch --flake ~/pet/nixos/home/flavours/dark & nvr -c 'AirlineTheme dark' --nostart -s & nvr -c 'set background=dark' --nostart -s & emacsclient -e "(load-theme 'doom-one t)"
+            emacsclient -e "(load-theme 'doom-one t)"
+            home-manager switch --flake ~/pet/nixos/home/flavours/dark
+            for filename in ~/.cache/nvim/server-*; do
+              nvim --server ''${filename} --remote-send ':set background=dark | AirlineTheme dark<CR>'
+            done
           fi
           if [[ "$value" == "'default'" ]]; then
-            home-manager switch --flake ~/pet/nixos/home/flavours/light & nvr -c 'AirlineTheme sol' --nostart -s & nvr -c 'set background=light' --nostart -s & emacsclient -e "(load-theme 'doom-one-light t)"
+            emacsclient -e "(load-theme 'doom-one-light t)"
+            home-manager switch --flake ~/pet/nixos/home/flavours/light
+            for filename in ~/.cache/nvim/server-*; do
+              nvim --server ''${filename} --remote-send ':set background=light | AirlineTheme sol<CR>'
+            done
           fi
         done
       ''}";
