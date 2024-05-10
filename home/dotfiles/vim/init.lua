@@ -48,6 +48,9 @@ let g:indentLine_fileTypeExclude = ['json']
 
 vim.cmd([[let g:vim_json_syntax_conceal = 0]])
 
+-- Line numbers
+vim.cmd([[set number]])
+
 -- Pane navigation
 vim.cmd([[nnoremap <C-h> <C-w>h]])
 vim.cmd([[nnoremap <C-j> <C-w>j]])
