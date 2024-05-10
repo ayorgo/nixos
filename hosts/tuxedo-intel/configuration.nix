@@ -103,7 +103,7 @@
   users.users.ayorgo = {
     isNormalUser = true;
     description = "ayorgo";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
 
   # Allow unfree packages
@@ -120,7 +120,7 @@
     btop
     killall
     home-manager
-  #  wget
+    gnumake
   ];
 
   environment.variables = {
@@ -147,6 +147,16 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
+
+  # Docker
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+    daemon.settings.data-root = "/home/ayorgo/docker-cache";
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
