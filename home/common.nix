@@ -36,14 +36,6 @@ in
     httpie
   ];
 
-  programs.thunderbird = {
-    enable = true;
-    profiles.default = {
-      isDefault = true;
-      settings = { };
-    };
-  };
-
   accounts.email.accounts = {
     gmail = {
       primary = true;
