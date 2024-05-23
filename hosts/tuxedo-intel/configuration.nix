@@ -70,7 +70,7 @@
     seahorse    # password manager
 
     # these should be self explanatory
-    gnome-calculator gnome-calendar gnome-characters gnome-clocks gnome-contacts gnome-font-viewer gnome-logs
+    gnome-calculator gnome-characters gnome-clocks gnome-contacts gnome-font-viewer gnome-logs
     gnome-maps gnome-music gnome-system-monitor gnome-weather gnome-disk-utility pkgs.gnome-connections
   ]) ++ (with pkgs; [
     gnome-tour
