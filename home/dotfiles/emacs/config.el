@@ -45,7 +45,7 @@
 
 ;; Centered cursor mode
 ;; https://emacs.stackexchange.com/a/3685/36755
-(global-centered-cursor-mode 1)
+; (global-centered-cursor-mode 1)
 
 ;; RETURN will follow links in org-mode files
 (setq org-return-follows-link  t)
