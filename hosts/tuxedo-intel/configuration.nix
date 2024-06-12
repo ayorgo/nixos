@@ -48,8 +48,8 @@
     enable = true;
     desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
-    layout = "us,us,ru";
-    xkbVariant = ",dvorak,";
+    xkb.layout = "us,us,ru";
+    xkb.variant = ",dvorak,";
     wacom.enable = true;
   };
 
@@ -60,7 +60,6 @@
     cheese      # photo booth
     eog         # image viewer
     epiphany    # web browser
-    gedit       # text editor
     simple-scan # document scanner
     totem       # video player
     yelp        # help viewer
@@ -73,6 +72,7 @@
     gnome-calculator gnome-characters gnome-clocks gnome-contacts gnome-font-viewer gnome-logs
     gnome-maps gnome-music gnome-system-monitor gnome-weather gnome-disk-utility pkgs.gnome-connections
   ]) ++ (with pkgs; [
+    gedit       # text editor
     gnome-tour
   ]);
 
@@ -164,7 +164,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 
   nix.gc = {
     automatic = true;
