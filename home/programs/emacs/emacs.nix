@@ -46,13 +46,13 @@
         ''}";
       };
       "${config.home.sessionVariables.DOOMDIR}/config.el" = lib.mkDefault {
-        source = ../dotfiles/emacs/config.el;
+        source = ./config.el;
       };
       "${config.home.sessionVariables.DOOMDIR}/init.el" = {
-        source = ../dotfiles/emacs/init.el;
+        source = ./init.el;
       };
       "${config.home.sessionVariables.DOOMDIR}/packages.el" = {
-        source = ../dotfiles/emacs/packages.el;
+        source = ./packages.el;
       };
     };
   };

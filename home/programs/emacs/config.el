@@ -47,8 +47,8 @@
 ;; https://emacs.stackexchange.com/a/3685/36755
 ; (global-centered-cursor-mode 1)
 
-;; RETURN will follow links in org-mode files
-(setq org-return-follows-link  t)
+;; Enable scroll precision mode so scrolling with inline images isn't jumpy
+(pixel-scroll-precision-mode 1)
 
 ;; Tree sitter global mode for all supported languages
 (global-tree-sitter-mode)
@@ -74,6 +74,8 @@
   ;; Inline LaTex rendering
   (add-hook 'org-mode-hook 'org-fragtog-mode)
   (setq
+   ; org-image-actual-width 300
+   org-return-follows-link  t  ; RETURN will follow links in org-mode files
    org-directory "~/org/"
    org-default-notes-file (concat org-directory "/notes.org")
    org-startup-with-inline-images t

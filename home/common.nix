@@ -10,7 +10,7 @@ in
   imports = [
     ./programs/anki.nix
     ./programs/bash.nix
-    ./programs/emacs.nix
+    ./programs/emacs/emacs.nix
     ./programs/firefox.nix
     ./programs/git.nix
     ./programs/gnome.nix
