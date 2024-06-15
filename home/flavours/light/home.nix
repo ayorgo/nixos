@@ -4,7 +4,7 @@
   imports = [ ../../common.nix ];
 
   programs.kitty.theme = "Adwaita light";
-  programs.neovim.extraLuaConfig = (builtins.readFile ../../dotfiles/vim/init.lua + "\n" + "vim.cmd([[set background=light | let g:airline_theme='sol']])");
+  programs.neovim.extraLuaConfig = (builtins.readFile ../../programs/neovim/init.lua + "\n" + "vim.cmd([[set background=light | let g:airline_theme='sol']])");
   home.file."/home/ayorgo/.doom.d/config.el" = {
     text = (builtins.readFile ../../dotfiles/emacs/config.el) + "\n" + "(setq doom-theme 'doom-one-light)";
   };

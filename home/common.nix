@@ -15,7 +15,7 @@ in
     ./programs/git.nix
     ./programs/gnome.nix
     ./programs/kitty.nix
-    ./programs/neovim.nix
+    ./programs/neovim/neovim.nix
     ./services/watch-gnome-theme.nix
   ];
 
@@ -34,6 +34,7 @@ in
     texlive.combined.scheme-full
     rnote # sketching and handwritten note taking
     httpie
+    awscli2
   ];
 
   accounts.email.accounts = {

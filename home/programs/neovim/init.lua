@@ -12,6 +12,11 @@ vim.cmd([[set re=1]])
 -- Have the cursor at the center of the screen at all times
 vim.cmd([[set so=999]])
 
+-- Auto save
+vim.cmd([[set autowriteall]])
+vim.cmd([[set nobackup]]) -- no backup files
+vim.cmd([[set noswapfile]]) -- no swap files
+
 -- No swap files
 vim.cmd([[set noswapfile]])
 
