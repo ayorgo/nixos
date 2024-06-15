@@ -14,6 +14,7 @@
       pkgs.vimPlugins.copilot-vim
       pkgs.vimPlugins.catppuccin-nvim
       pkgs.vimPlugins.vim-nix
+      pkgs.vimPlugins.auto-save-nvim
     ];
     extraLuaConfig = lib.mkDefault (builtins.readFile ./init.lua + "\n" + "vim.cmd([[set background=dark | let g:airline_theme='dark']])");
   };

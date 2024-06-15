@@ -12,10 +12,13 @@ vim.cmd([[set re=1]])
 -- Have the cursor at the center of the screen at all times
 vim.cmd([[set so=999]])
 
--- Auto save
-vim.cmd([[set autowriteall]])
-vim.cmd([[set nobackup]]) -- no backup files
-vim.cmd([[set noswapfile]]) -- no swap files
+-- Autosave
+-- Configure auto-save-nvim plugin so it works
+-- which it stopped after the update to NixOS 24.05
+require('auto-save').setup({
+    enable = true,
+    debounce_delay = 10,
+})
 
 -- No swap files
 vim.cmd([[set noswapfile]])
