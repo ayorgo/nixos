@@ -36,6 +36,11 @@
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/vimium-ff/latest.xpi";
           installation_mode = "force_installed";
         };
+        # Simple Translate
+        "simple-translate@sienori" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/simple-translate/latest.xpi";
+          installation_mode = "force_installed";
+        };
       };
     };
     profiles.default = {
