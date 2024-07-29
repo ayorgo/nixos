@@ -151,7 +151,7 @@
   users.users.ayorgo = {
     isNormalUser = true;
     description = "ayorgo";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" ];
   };
 
   # Allow unfree packages
@@ -198,7 +198,6 @@
 
   # Docker
   virtualisation.docker = {
-    enable = true;
     rootless = {
       enable = true;
       setSocketVariable = true;
