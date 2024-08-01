@@ -45,6 +45,10 @@ function free_port() {
 }
 
 function dockerize() {
+    # `--user root` is necessary for rootless docker so that the user can access the mounted volumes
+    # from within the container but it also defeats the purpose of rootless docker in case the host
+    # user has sudo rights. A better alternative is to use podman as it supports `--userns=keep-id`.
+    # see https://github.com/mamba-org/micromamba-docker/issues/407#issuecomment-2088523507
     PORT=$(free_port 8880 8889)
     COMMAND="$*"
     COMMAND="${COMMAND//jupyter notebook/jupyter notebook -y --ip 0.0.0.0 --port $PORT --no-browser}"
@@ -56,6 +60,7 @@ function dockerize() {
         set -x;
         docker run --rm -it -p \
         "$PORT":"$PORT" \
+        --user root \
         -v "$(pwd)":/home/ayorgo/code \
         -v /tmp/.bash_history:/home/ayorgo/.bash_history \
         -v /tmp/history.sqlite:/home/ayorgo/.ipython/profile_default/history.sqlite \
