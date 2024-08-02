@@ -85,6 +85,17 @@
     openFirewall = true;
   };
 
+  # Disable wakeup triggers for all PCIe devices to fix the immediate wakeups due to NVMe devices.
+  # https://nixos.wiki/wiki/Power_Management
+  # Error:
+  # nixos kernel: nvme 0000:01:00.0: PM: failed to suspend async: error -16
+  # nixos kernel: nvme 0000:01:00.0: PM: dpm_run_callback(): pci_pm_suspend+0x0/0x160 returns -16
+  # nixos kernel: nvme 0000:01:00.0: PM: pci_pm_suspend(): nvme_suspend+0x0/0x170 [nvme] returns -16
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="pci", DRIVER=="pcieport", ATTR{power/wakeup}="disabled"
+    ACTION=="add" SUBSYSTEM=="pci" ATTR{vendor}=="0x144d" ATTR{device}=="0xa80a" ATTR{power/wakeup}="disabled"
+  '';
+
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
