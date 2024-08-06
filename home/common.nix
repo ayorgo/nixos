@@ -35,6 +35,8 @@ in
     rnote # sketching and handwritten note taking
     httpie
     awscli2
+    unzip
+    docker-compose
   ];
 
   accounts.email.accounts = {
