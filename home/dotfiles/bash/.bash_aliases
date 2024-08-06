@@ -152,3 +152,14 @@ function disk_usage() {
     depth="${1:-2}"
     du -ha -d "$depth" . 2>/dev/null | sort -hr | awk -F"/" "NF==$((depth+1))" | less
 }
+
+function update() {
+    (sudo nix-channel --update) &&
+    (cd /home/ayorgo/nixos && nix flake update) &&
+    (sudo nixos-rebuild switch --flake '/home/ayorgo/pet/nixos/hosts#tuxedo-intel') &&
+    (cd /home/ayorgo/nixos/home/flavours/light && nix flake update) &&
+    (cd /home/ayorgo/nixos/home/flavours/dark && nix flake update) &&
+    (home-manager switch --flake /home/ayorgo/pet/nixos/home/flavours/light)
+    (home-manager switch --flake /home/ayorgo/pet/nixos/home/flavours/dark)
+
+}
