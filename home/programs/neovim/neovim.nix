@@ -11,7 +11,6 @@
       pkgs.vimPlugins.colorizer
       pkgs.vimPlugins.vim-airline
       pkgs.vimPlugins.vim-airline-themes
-      pkgs.vimPlugins.copilot-vim
       pkgs.vimPlugins.catppuccin-nvim
       pkgs.vimPlugins.vim-nix
       pkgs.vimPlugins.auto-save-nvim
