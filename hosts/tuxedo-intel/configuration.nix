@@ -85,6 +85,7 @@
     openFirewall = true;
   };
 
+  services.logind.lidSwitch = "hibernate";
 
   # Enable sound with pipewire.
   sound.enable = true;
