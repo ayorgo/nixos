@@ -30,12 +30,12 @@
     [ { device = "/dev/disk/by-uuid/d7dcb416-b4da-4d05-bdab-39cfce1aade5"; }
     ];
 
-  boot.initrd.luks.devices."arch_linux".device = "/dev/disk/by-uuid/d03baa4e-c594-48ae-9c86-6a9d97bfd671";
+  # boot.initrd.luks.devices."arch_linux".device = "/dev/disk/by-uuid/d03baa4e-c594-48ae-9c86-6a9d97bfd671";
 
-  fileSystems."/media/another_ssd" =
-    { device = "/dev/disk/by-uuid/8b64463d-9a97-433a-a3a7-11d00de7b09a";
-      fsType = "ext4";
-    };
+  # fileSystems."/media/another_ssd" =
+  #   { device = "/dev/disk/by-uuid/8b64463d-9a97-433a-a3a7-11d00de7b09a";
+  #     fsType = "ext4";
+  #   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
