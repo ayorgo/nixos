@@ -87,6 +87,8 @@
 
   services.logind.lidSwitch = "hibernate";
 
+  services.fwupd.enable = true;
+
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
