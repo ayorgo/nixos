@@ -5,6 +5,10 @@
     enable = true;
     theme = lib.mkDefault "Adwaita darker";
     settings = {
+
+      # Don't phone home
+      update_check_interval = 0;
+
       # Tabs
       tab_bar_edge = "top";
       tab_bar_style = "powerline";
