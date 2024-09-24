@@ -37,6 +37,7 @@ in
     awscli2
     unzip
     docker-compose
+    vlc
   ];
 
   accounts.email.accounts = {
