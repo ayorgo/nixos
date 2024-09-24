@@ -154,12 +154,12 @@ function disk_usage() {
 }
 
 function update() {
-    (sudo nix-channel --update) &&
-    (cd /home/ayorgo/nixos && nix flake update) &&
-    (sudo nixos-rebuild switch --flake '/home/ayorgo/pet/nixos/hosts#tuxedo-intel') &&
-    (cd /home/ayorgo/nixos/home/flavours/light && nix flake update) &&
-    (cd /home/ayorgo/nixos/home/flavours/dark && nix flake update) &&
-    (home-manager switch --flake /home/ayorgo/pet/nixos/home/flavours/light)
+    (sudo nix-channel --update) && \
+    (cd /home/ayorgo/pet/nixos && nix flake update) && \
+    (sudo nixos-rebuild switch --flake '/home/ayorgo/pet/nixos/hosts#tuxedo-intel') && \
+    (cd /home/ayorgo/pet/nixos/home/flavours/light && nix flake update) && \
+    (cd /home/ayorgo/pet/nixos/home/flavours/dark && nix flake update) && \
+    (home-manager switch --flake /home/ayorgo/pet/nixos/home/flavours/light) && \
     (home-manager switch --flake /home/ayorgo/pet/nixos/home/flavours/dark)
 
 }
