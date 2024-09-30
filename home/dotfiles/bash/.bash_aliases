@@ -20,7 +20,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias spotify='spotify --force-device-scale-factor=1.25'
 
 # Steam scaling
-alias steam='GDK_SCALE=2 steam'
+# alias steam='GDK_SCALE=2 steam'
 
 # Kitty image preview
 alias icat="kitty +kitten icat"
@@ -162,4 +162,12 @@ function update() {
     (home-manager switch --flake /home/ayorgo/pet/nixos/home/flavours/light) && \
     (home-manager switch --flake /home/ayorgo/pet/nixos/home/flavours/dark)
 
+}
+
+function nvidia-offload() {
+    export __NV_PRIME_RENDER_OFFLOAD=1
+    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export __VK_LAYER_NV_optimus=NVIDIA_only
+    exec "$@"
 }

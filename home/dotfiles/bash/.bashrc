@@ -135,3 +135,6 @@ if command -v fzf-share >/dev/null; then
   source "$(fzf-share)/key-bindings.bash"
   source "$(fzf-share)/completion.bash"
 fi
+
+# Offload Steam to NVidia GPU
+export XDG_DATA_HOME="$HOME/.local/share"
