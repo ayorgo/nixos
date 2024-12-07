@@ -38,6 +38,7 @@ in
     unzip
     docker-compose
     vlc
+    evolution
   ];
 
   accounts.email.accounts = {
