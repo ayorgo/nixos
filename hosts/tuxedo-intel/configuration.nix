@@ -29,7 +29,7 @@
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  time.timeZone = "Europe/Berlin";
+  time.timeZone = "GB";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
