@@ -28,8 +28,13 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
-  time.timeZone = "GB";
+  # Automatically set timezone based on IP geolocation
+  time.timeZone = lib.mkForce null;
+  services.automatic-timezoned.enable = true;
+  services.geoclue2.enableDemoAgent = lib.mkForce true;
+  # Since Mozilla geolocation service has been discontinued
+  # https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/2959
+  services.geoclue2.geoProviderUrl = "https://beacondb.net/v1/geolocate";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
