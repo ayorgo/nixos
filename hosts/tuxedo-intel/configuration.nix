@@ -28,16 +28,16 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  ##### Battery life optimisations #####
+  ##### Battery life optimisations START #####
+  powerManagement.enable = true;
+  services.tlp.enable = true;
+
   # Disable Ethernet
   networking.interfaces.enp45s0.useDHCP = false;
 
   # Disable Gnome's power profiles daemon
   services.power-profiles-daemon.enable = false;
-
-  # Enable tlp
-  services.tlp.enable = true;
-  ##### Battery life optimisations #####
+  ##### Battery life optimisations END #####
 
   # Automatically set timezone based on IP geolocation
   time.timeZone = lib.mkForce null;
