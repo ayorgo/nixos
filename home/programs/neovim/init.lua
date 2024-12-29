@@ -137,3 +137,7 @@ let g:airline_section_z='%l:%c'
 
 set noshowmode
 ]])
+
+-- FZF and RG
+vim.cmd([[nnoremap <C-x><C-f> :FZF<CR>]])
+vim.cmd([[nnoremap <C-x><C-r> :RG<CR>]])
