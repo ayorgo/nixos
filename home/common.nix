@@ -22,7 +22,7 @@ in
   home.username = "ayorgo";
   home.homeDirectory = "/home/ayorgo";
 
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
 
   home.packages = with pkgs; [
     spotify

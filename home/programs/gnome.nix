@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    gnome.dconf-editor
+    dconf-editor
     gnomeExtensions.vitals
     gnomeExtensions.top-bar-organizer
     gnomeExtensions.launch-new-instance

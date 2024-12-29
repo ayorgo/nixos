@@ -73,9 +73,7 @@
   };
 
   # Enable OpenGL
-  hardware.opengl = {
-    enable = true;
-  };
+  hardware.graphics.enable = true;
 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
@@ -124,7 +122,7 @@
   };
   services.gnome.games.enable = true;
 
-  environment.gnome.excludePackages = (with pkgs.gnome; [
+  environment.gnome.excludePackages = (with pkgs; [
     baobab      # disk usage analyzer
     cheese      # photo booth
     eog         # image viewer
@@ -159,7 +157,6 @@
   services.fwupd.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -300,7 +297,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 
   nix.gc = {
     automatic = true;

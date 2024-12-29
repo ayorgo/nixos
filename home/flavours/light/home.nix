@@ -3,7 +3,7 @@
 {
   imports = [ ../../common.nix ];
 
-  programs.kitty.theme = "Adwaita light";
+  programs.kitty.themeFile = "adwaita_light";
   programs.neovim.extraLuaConfig = (builtins.readFile ../../programs/neovim/init.lua + "\n" + "vim.cmd([[set background=light | let g:airline_theme='sol']])");
   home.file."/home/ayorgo/.doom.d/config.el" = {
     text = (builtins.readFile ../../programs/emacs/config.el) + "\n" + "(setq doom-theme 'doom-one-light)";

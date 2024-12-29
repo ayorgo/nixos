@@ -3,7 +3,7 @@
 {
   programs.kitty = {
     enable = true;
-    theme = lib.mkDefault "Adwaita darker";
+    themeFile = lib.mkDefault "adwaita_darker";
     settings = {
 
       # Don't phone home
