@@ -28,6 +28,17 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  ##### Battery life optimisations #####
+  # Disable Ethernet
+  networking.interfaces.enp45s0.useDHCP = false;
+
+  # Disable Gnome's power profiles daemon
+  services.power-profiles-daemon.enable = false;
+
+  # Enable tlp
+  services.tlp.enable = true;
+  ##### Battery life optimisations #####
+
   # Automatically set timezone based on IP geolocation
   time.timeZone = lib.mkForce null;
   services.automatic-timezoned.enable = true;
@@ -157,53 +168,63 @@
     alsa.support32Bit = true;
     pulse.enable = true;
 
-    # https://wiki.archlinux.org/title/PipeWire#Noticeable_audio_delay_or_audible_pop/crack_when_starting_playback
-    wireplumber.configPackages = [
-      (pkgs.writeTextDir
-        "share/wireplumber/wireplumber.conf.d/51-disable-suspension.conf" ''
-          monitor.alsa.rules = [
-            {
-              matches = [
-                {
-                  # Matches all sources
-                  node.name = "~alsa_input.*"
-                },
-                {
-                  # Matches all sinks
-                  node.name = "~alsa_output.*"
-                }
-              ]
-              actions = {
-                update-props = {
-                  session.suspend-timeout-seconds = 0
-                }
-              }
-            }
-          ]
-          # bluetooth devices
-          monitor.bluez.rules = [
-            {
-              matches = [
-                {
-                  # Matches all sources
-                  node.name = "~bluez_input.*"
-                },
-                {
-                  # Matches all sinks
-                  node.name = "~bluez_output.*"
-                }
-              ]
-              actions = {
-                update-props = {
-                  session.suspend-timeout-seconds = 0
-                  dither.method = "wannamaker3",
-                  dither.noise = 2,
+    wireplumber = {
+      enable = true;
+      extraConfig = {
+        "10-disable-camera" = {
+          "wireplumber.profiles" = {
+            main."monitor.libcamera" = "disabled";
+          };
+        };
+      };
+      # https://wiki.archlinux.org/title/PipeWire#Noticeable_audio_delay_or_audible_pop/crack_when_starting_playback
+      configPackages = [
+        (pkgs.writeTextDir
+          "share/wireplumber/wireplumber.conf.d/51-disable-suspension.conf" ''
+            monitor.alsa.rules = [
+              {
+                matches = [
+                  {
+                    # Matches all sources
+                    node.name = "~alsa_input.*"
+                  },
+                  {
+                    # Matches all sinks
+                    node.name = "~alsa_output.*"
+                  }
+                ]
+                actions = {
+                  update-props = {
+                    session.suspend-timeout-seconds = 0
+                  }
                 }
               }
-            }
-          ]
+            ]
+            # bluetooth devices
+            monitor.bluez.rules = [
+              {
+                matches = [
+                  {
+                    # Matches all sources
+                    node.name = "~bluez_input.*"
+                  },
+                  {
+                    # Matches all sinks
+                    node.name = "~bluez_output.*"
+                  }
+                ]
+                actions = {
+                  update-props = {
+                    session.suspend-timeout-seconds = 0
+                    dither.method = "wannamaker3",
+                    dither.noise = 2,
+                  }
+                }
+              }
+            ]
         '')
-    ];
+      ];
+    };
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
 

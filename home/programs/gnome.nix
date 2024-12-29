@@ -54,10 +54,12 @@
     };
     "org/gnome/shell/extensions/vitals" = {
       fixed-widths = false;
+      show-battery = true;
       hot-sensors = [
         "_processor_usage_"
         "_memory_allocated_"
         "_storage_free_"
+        "_battery_rate_"
       ];
       menu-centered = false;
       position-in-panel = 2;  # 0: left box, 1: center box, 2: right box

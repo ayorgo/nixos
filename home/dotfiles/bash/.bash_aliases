@@ -171,3 +171,11 @@ function nvidia-offload() {
     export __VK_LAYER_NV_optimus=NVIDIA_only
     exec "$@"
 }
+
+function power-now() {
+echo - | awk "{printf \"%.1f\", \
+$(( \
+  $(cat /sys/class/power_supply/BAT0/current_now) * \
+  $(cat /sys/class/power_supply/BAT0/voltage_now) \
+)) / 10^12 }" ; echo " W "
+}
