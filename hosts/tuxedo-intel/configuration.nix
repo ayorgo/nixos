@@ -30,13 +30,19 @@
 
   ##### Battery life optimisations START #####
   powerManagement.enable = true;
-  services.tlp.enable = true;
 
   # Disable Ethernet
   networking.interfaces.enp45s0.useDHCP = false;
 
   # Disable Gnome's power profiles daemon
   services.power-profiles-daemon.enable = false;
+
+  # Enable tuxedo-rs and tuxedo-drivers.
+  hardware.tuxedo-drivers.enable = true;
+  hardware.tuxedo-rs = {
+    enable = true;
+    tailor-gui.enable = true;
+  };
   ##### Battery life optimisations END #####
 
   # Automatically set timezone based on IP geolocation
