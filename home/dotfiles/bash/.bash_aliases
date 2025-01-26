@@ -7,10 +7,7 @@ alias vim="nvim --listen /home/ayorgo/.cache/nvim/server-$(uuidgen)"
 function task() { /usr/bin/task "$@" | less ; }
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias lh='ls -lah'
-alias l='ls -CF'
+alias ls='lsd -lah --group-directories-first'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
