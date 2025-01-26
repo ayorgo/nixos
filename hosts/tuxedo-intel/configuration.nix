@@ -39,10 +39,10 @@
 
   # Enable tuxedo-rs and tuxedo-drivers.
   hardware.tuxedo-drivers.enable = true;
-  hardware.tuxedo-rs = {
-    enable = true;
-    tailor-gui.enable = true;
-  };
+  # hardware.tuxedo-rs = {
+  #   enable = true;
+  #   tailor-gui.enable = true;
+  # };
   ##### Battery life optimisations END #####
 
   # Automatically set timezone based on IP geolocation
@@ -73,8 +73,8 @@
     enable = true;
     desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
-    xkb.layout = "us,us,ru";
-    xkb.variant = ",dvorak,";
+    xkb.layout = "us,us,ua,ru";
+    xkb.variant = ",dvorak,,";
     wacom.enable = true;
   };
 
@@ -243,7 +243,7 @@
   users.users.ayorgo = {
     isNormalUser = true;
     description = "ayorgo";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker"];
   };
 
   # Allow unfree packages
@@ -289,13 +289,14 @@
   networking.firewall.enable = true;
 
   # Docker
-  virtualisation.docker = {
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
-    daemon.settings.data-root = "/home/ayorgo/docker-cache";
-  };
+  # virtualisation.docker = {
+  #   rootless = {
+  #     enable = true;
+  #     setSocketVariable = true;
+  #   };
+  #   daemon.settings.data-root = "/home/ayorgo/docker-cache";
+  # };
+  virtualisation.docker.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
