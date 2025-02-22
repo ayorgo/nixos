@@ -28,22 +28,12 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  ##### Battery life optimisations START #####
-  powerManagement.enable = true;
-
-  # Disable Ethernet
-  networking.interfaces.enp45s0.useDHCP = false;
-
-  # Enable Gnome's power profiles daemon
-  services.power-profiles-daemon.enable = true;
-
   # Enable tuxedo-rs and tuxedo-drivers.
   hardware.tuxedo-drivers.enable = true;
-  # hardware.tuxedo-rs = {
-  #   enable = true;
-  #   tailor-gui.enable = true;
-  # };
-  ##### Battery life optimisations END #####
+  hardware.tuxedo-rs = {
+    enable = true;
+    tailor-gui.enable = true;
+  };
 
   # Automatically set timezone based on IP geolocation
   time.timeZone = lib.mkForce null;
@@ -120,7 +110,7 @@
     open = false;
 
     # Enable the Nvidia settings menu,
-	# accessible via `nvidia-settings`.
+    # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
