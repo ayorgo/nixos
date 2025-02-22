@@ -38,7 +38,11 @@ in
     unzip
     docker-compose
     vlc
+    masterpdfeditor4
     evolution
+    gdu  # disk usage analyser
+    lsd  # better ls
+    superTuxKart  # a fun FOSS racing game
   ];
 
   accounts.email.accounts = {
