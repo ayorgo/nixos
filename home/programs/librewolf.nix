@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 
 {
-  programs.firefox = {
+  programs.librewolf = {
     enable = true;
     policies = {
       OfferToSaveLogins = false;
@@ -68,6 +68,16 @@
         "browser.newtabpage.activity-stream.showSponsored" = false;
         "browser.newtabpage.activity-stream.system.showSponsored" = false;
         "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+        "browser.startup.page" = "3";
+        "privacy.clearOnShutdown.cookies" = false;
+        "privacy.clearOnShutdown.history" = false;
+        "privacy.clearOnShutdown.downloads" = false;
+        "privacy.clearOnShutdown.siteSettings" = false;
+        "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
+        "privacy.clearOnShutdown_v2.historyFormDataAndDownloads" = false;
+        "privacy.clearOnShutdown_v2.siteSettings" = false;
+        "privacy.resistFingerprinting" = false;
+        "privacy.sanitize.sanitizeOnShutdown" = false;
       };
     };
   };
