@@ -44,6 +44,19 @@
       };
     };
     profiles.default = {
+      isDefault = true;
+      search = {
+        default = "Ecosia";
+        privateDefault = "Ecosia";
+        force = true; # allows this setting to work
+        engines = {
+          "Ecosia" = {
+            urls = [{template = "https://www.ecosia.org/search?q={searchTerms}";}];
+            iconUpdateURL = "https://www.ecosia.org/static/icons/favicon.ico";
+            definedAliases = ["@e"];
+          };
+        };
+      };
       settings = {
         "extensions.pocket.enabled" = false;
         "apz.kinetic_scroll.enabled" = false;
