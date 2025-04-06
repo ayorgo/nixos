@@ -5,7 +5,7 @@
   services.emacs.enable = true;
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs29-pgtk;  # works best with wayland
+    package = pkgs.emacs-pgtk;  # works best with wayland
   };
   home = {
     packages = with pkgs; [
@@ -25,7 +25,7 @@
         source = builtins.fetchGit {
           url = "https://github.com/doomemacs/doomemacs";
           ref = "master";
-          rev = "9620bb45ac4cd7b0274c497b2d9d93c4ad9364ee";
+          rev = "5020d592dafc666cee259c8463f2e304826858d1";
           shallow = true;
         };
         onChange = "${pkgs.writeShellScript "doom-change" ''
