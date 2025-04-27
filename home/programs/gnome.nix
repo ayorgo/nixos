@@ -12,13 +12,14 @@
   ];
 
   dconf.settings = {
-    "org/gnome/shell".enabled-extensions = [
-      "Vitals@CoreCoding.com"
-      "hide-dock-in-overview@roslax"
-      "pip-on-top@rafostar.github.com"
-      "top-bar-organizer@julian.gse.jsts.xyz"
-      "launch-new-instance@gnome-shell-extensions.gcampax.github.com"
-      "appindicatorsupport@rgcjonas.gmail.com"
+    "org/gnome/shell".enabled-extensions = with pkgs.gnomeExtensions; [
+      vitals.extensionUuid
+      top-bar-organizer.extensionUuid
+      launch-new-instance.extensionUuid
+      hide-the-dock-in-overview.extensionUuid
+      pip-on-top.extensionUuid
+      appindicator.extensionUuid
+      battery-health-charging.extensionUuid
     ];
     "org/gnome/shell/extensions/appindicator" = {
       icon-size = 22;
