@@ -9,6 +9,9 @@
     gnomeExtensions.hide-the-dock-in-overview
     gnomeExtensions.pip-on-top
     gnomeExtensions.appindicator
+    gnomeExtensions.battery-health-charging
+    polkit
+    polkit_gnome
   ];
 
   dconf.settings = {
@@ -21,6 +24,25 @@
       appindicator.extensionUuid
       battery-health-charging.extensionUuid
     ];
+    "org/gnome/shell/extensions/Battery-Health-Charging" = {
+      amend-power-indicator = true;
+      charging-mode = "bal";
+      ctl-path = "/usr/local/bin/batteryhealthchargingctl-ayorgo";
+      default-threshold = true;
+      device-type = 1;
+      dummy-apply-threshold = true;
+      dummy-default-threshold = true;
+      icon-style-type = 1;
+      indicator-position-max = 2;
+      install-service = 0;
+      polkit-installation-changed = true;
+      polkit-status = "installed";
+      root-mode = true;
+      show-battery-panel2 = false;
+      show-notifications = true;
+      show-preferences = true;
+      show-system-indicator = true;
+    };
     "org/gnome/shell/extensions/appindicator" = {
       icon-size = 22;
     };

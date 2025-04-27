@@ -152,6 +152,23 @@
 
   services.fwupd.enable = true;
 
+  # Polkit stuff to enable setting battery threshholds via Battery-Health-Charging gnome extention
+  # (allows using pkexec to modify /sys/devices/platform/tuxedo_keyboard/charging_profile/charging_profile without asking for auth)
+  # Courtesy of https://github.com/only1thor/framework-nix/blob/88879f7f2c6f5617de44ea0eb4984609f14b4eea/configuration.nix#L241-L256
+  security.polkit.enable = true;
+  security.polkit.debug = true;
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      polkit.log("user " +  subject.user + " is attempting action " + action.id + " from PID " + subject.pid);
+      if (action.id === "org.freedesktop.policykit.exec" &&
+          action.lookup("program") === "/usr/local/bin/batteryhealthchargingctl-ayorgo"
+      )
+      {
+        return polkit.Result.YES;
+      }
+    })
+  '';
+
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
