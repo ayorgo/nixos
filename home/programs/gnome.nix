@@ -15,6 +15,10 @@
   ];
 
   dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      clock-format = "24h";
+      clock-show-weekday = true;
+    };
     "org/gnome/shell".enabled-extensions = with pkgs.gnomeExtensions; [
       vitals.extensionUuid
       top-bar-organizer.extensionUuid
