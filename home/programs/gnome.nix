@@ -68,7 +68,6 @@
     "org/gnome/shell/extensions/top-bar-organizer" = {
       left-box-order = [
         "activities"
-        "steam"
       ];
       center-box-order = [
         "dateMenu"
