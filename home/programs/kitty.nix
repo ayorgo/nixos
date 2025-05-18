@@ -42,6 +42,7 @@
       "ctrl+j" = "scroll_line_down";
       "ctrl+b" = "scroll_page_up";
       "ctrl+f" = "scroll_page_down";
+      "shift+tab" = "next_window";
     };
   };
 }
