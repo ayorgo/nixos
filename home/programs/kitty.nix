@@ -24,8 +24,7 @@
       enable_audio_bell = "no";
 
       # Font
-      font_family = "Source Code Pro Medium";
-      bold_font = "Source Code Pro Bold";
+      font_family = "SauceCodePro Nerd Font";
       font_size = 12;
 
       # Remote control
