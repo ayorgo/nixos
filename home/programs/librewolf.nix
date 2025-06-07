@@ -46,11 +46,11 @@
     profiles.default = {
       isDefault = true;
       search = {
-        default = "Ecosia";
-        privateDefault = "Ecosia";
+        default = "ecosia";
+        privateDefault = "ecosia";
         force = true; # allows this setting to work
         engines = {
-          "Ecosia" = {
+          "ecosia" = {
             urls = [{template = "https://www.ecosia.org/search?q={searchTerms}";}];
             iconUpdateURL = "https://www.ecosia.org/static/icons/favicon.ico";
             definedAliases = ["@e"];
