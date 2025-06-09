@@ -32,7 +32,6 @@ fi
 
 # Point ssh to a running instance of ssh-agent
 eval $(ssh-agent) > /dev/null 2>&1
-ssh-add ~/.ssh/id_ed25519_lyst > /dev/null 2>&1
 ssh-add ~/.ssh/id_ed25519_ayorgo > /dev/null 2>&1
 
 # Vim keybindings
