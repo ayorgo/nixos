@@ -52,7 +52,7 @@
         engines = {
           "ecosia" = {
             urls = [{template = "https://www.ecosia.org/search?q={searchTerms}";}];
-            iconUpdateURL = "https://www.ecosia.org/static/icons/favicon.ico";
+            icon = "https://www.ecosia.org/static/icons/favicon.ico";
             definedAliases = ["@e"];
           };
         };
