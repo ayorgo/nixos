@@ -5,8 +5,8 @@
 
   programs.kitty.themeFile = "adwaita_darker";
   programs.neovim.extraLuaConfig = (builtins.readFile ../../programs/neovim/init.lua + "\n" + "vim.cmd([[set background=dark | let g:airline_theme='dark']])");
-  home.file."/home/ayorgo/.doom.d/config.el" = {
-    text = (builtins.readFile ../../programs/emacs/config.el) + "\n" + "(setq doom-theme 'doom-one)";
+  home.file."/home/ayorgo/.emacs.d/init.el" = {
+    text = "(setq my-theme-flavour \"dark\")" + "\n" + (builtins.readFile ../../programs/emacs/init.el);
   };
   dconf.settings = {
     "org/gnome/desktop/interface" = {
@@ -17,3 +17,4 @@
     };
   };
 }
+
