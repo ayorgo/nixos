@@ -43,6 +43,7 @@ in
     gdu  # disk usage analyser
     lsd  # better ls
     superTuxKart  # a fun FOSS racing game
+    tor-browser
   ];
 
   accounts.email.accounts = {
