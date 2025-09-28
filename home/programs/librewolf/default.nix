@@ -91,8 +91,12 @@
         "privacy.clearOnShutdown_v2.siteSettings" = false;
         "privacy.resistFingerprinting" = false;
         "privacy.sanitize.sanitizeOnShutdown" = false;
+        "browser.gesture.swipe.left" = "";
+        "browser.gesture.swipe.right" = "";
       };
     };
   };
+  imports = [
+    ./vimium
+  ];
 }
-

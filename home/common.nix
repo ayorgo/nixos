@@ -11,7 +11,7 @@ in
     ./programs/anki.nix
     ./programs/bash.nix
     ./programs/emacs/emacs.nix
-    ./programs/librewolf.nix
+    ./programs/librewolf
     ./programs/git.nix
     ./programs/gnome.nix
     ./programs/kitty.nix
