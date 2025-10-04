@@ -132,11 +132,6 @@
       switch-windows = [ "<Alt>Tab" ];
       switch-applications = [];
     };
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-      binding = "<Alt>Return";
-      command = "kitty";
-      name = "Terminal";
-    };
     "org/gnome/settings-daemon/plugins/media-keys".custom-keybindings = [
       "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
     ];
