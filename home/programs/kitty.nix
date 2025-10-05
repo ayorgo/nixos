@@ -25,8 +25,9 @@
       enable_audio_bell = "no";
 
       # Font
-      font_family = "SauceCodePro NFM SemiBold";
-      font_size = 12;
+      font_family = "SauceCodePro NF SemiBold";
+      bold_font = "SauceCodePro NF Bold";
+      font_size = 11;
 
       # Remote control
       allow_remote_control = "yes";
