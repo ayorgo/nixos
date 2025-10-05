@@ -11,9 +11,9 @@
       colorizer
       vim-airline
       vim-airline-themes
-      catppuccin-nvim
       vim-nix
       auto-save-nvim
+      onedark-nvim
     ];
     extraLuaConfig = lib.mkDefault (builtins.readFile ./init.lua + "\n" + "vim.cmd([[set background=dark | let g:airline_theme='dark']])");
   };

@@ -41,10 +41,10 @@ vim.cmd([[set ignorecase]])
 vim.cmd([[set smartcase]])
 
 -- Colorscheme
-require("catppuccin").setup({
-    transparent_background = true
+require('onedark').setup({
+    transparent = true,
 })
-vim.cmd.colorscheme "catppuccin"
+vim.cmd.colorscheme "onedark"
 
 -- Indentation
 vim.cmd([[let g:indentLine_char = '▏']])
