@@ -9,7 +9,7 @@ in
 {
   imports = [
     ./programs/anki.nix
-    ./programs/bash.nix
+    ./programs/bash
     ./programs/emacs/emacs.nix
     ./programs/librewolf
     ./programs/git.nix
