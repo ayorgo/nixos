@@ -127,7 +127,7 @@
       screensaver = [ "<Super>z" ];
     };
     "org/gnome/desktop/wm/keybindings" = {
-      close = [ "<Alt>w" ];
+      close = [ "<Alt>q" ];
       maximize = [ "<Alt>m" ];
       switch-windows = [ "<Alt>Tab" ];
       switch-applications = [];
