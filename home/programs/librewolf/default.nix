@@ -50,10 +50,41 @@
         privateDefault = "ecosia";
         force = true; # allows this setting to work
         engines = {
-          "ecosia" = {
+          ecosia = {
+            name = "Ecosia";
             urls = [{template = "https://www.ecosia.org/search?q={searchTerms}";}];
             icon = "https://www.ecosia.org/static/icons/favicon.ico";
-            definedAliases = ["@e"];
+            definedAliases = ["@eco"];
+          };
+          github = {
+            name = "GitHub";
+            urls = [ { template = "https://github.com/search?q={searchTerms}&type=code"; } ];
+            iconMapObj."16" = "https://github.com/favicon.ico";
+            definedAliases = [ "@gh" ];
+          };
+          nix-packages = {
+            name = "Nix Packages";
+            urls = [ { template = "https://search.nixos.org/packages?query={searchTerms}"; } ];
+            icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            definedAliases = [ "@nixp" ];
+          };
+          nixos-options = {
+            name = "NixOS Options";
+            urls = [ { template = "https://search.nixos.org/options?query={searchTerms}"; } ];
+            icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            definedAliases = [ "@nixo" ];
+          };
+          stack-overflow = {
+            name = "Stack Overflow";
+            urls = [ { template = "https://stackoverflow.com/search?q={searchTerms}"; } ];
+            iconMapObj."16" = "https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico";
+            definedAliases = [ "@so" ];
+          };
+          wikipedia = {
+            name = "Wikipedia";
+            urls = [ { template = "https://en.wikipedia.org/wiki/{searchTerms}"; } ];
+            iconMapObj."16" = "https://en.wikipedia.org/favicon.ico";
+            definedAliases = [ "@wiki" ];
           };
         };
       };
