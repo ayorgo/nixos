@@ -52,7 +52,7 @@
     };
     "org/gnome/desktop/peripherals/keyboard" = {
       delay = lib.hm.gvariant.mkUint32 175;
-      repeat-interval = lib.hm.gvariant.mkUint32 20;
+      repeat-interval = lib.hm.gvariant.mkUint32 10;
       repeat = true;
     };
     "org/gnome/settings-daemon/plugins/power" = {
