@@ -29,6 +29,9 @@ vim.cmd([[set mouse=a]])
 -- UTF-8 encoding everywhere
 vim.cmd([[set encoding=UTF-8]])
 
+-- Cursor line
+vim.cmd([[set cursorline]])
+
 -- Tabs as spaces
 vim.cmd([[set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab]])
 
@@ -46,15 +49,20 @@ require('onedark').setup({
 })
 vim.cmd.colorscheme "onedark"
 
--- Indentation
-vim.cmd([[let g:indentLine_char = '▏']])
-vim.cmd([[let g:indentLine_leadingSpaceChar='·']])
-vim.cmd([[let g:indentLine_leadingSpaceEnabled='1']])
-vim.cmd([[
-let g:indentLine_fileTypeExclude = ['json']
-]])
 
-vim.cmd([[let g:vim_json_syntax_conceal = 0]])
+-- Indentation
+vim.cmd([[set list]])
+vim.cmd([[set listchars=lead:·,trail:·,tab:->\ ]])
+
+require("ibl").setup {
+    indent = { char = "▏" },
+    scope = { enabled = false },
+}
+local hooks = require "ibl.hooks"
+hooks.register(
+  hooks.type.WHITESPACE,
+  hooks.builtin.hide_first_space_indent_level
+)
 
 -- Line numbers
 vim.cmd([[set number]])
@@ -74,7 +82,7 @@ vim.cmd([[map <Left> :bprev<CR>]])
 
 -- Offline edit history
 vim.cmd([[set undofile]])
-vim.cmd([[set undodir=~/.vim/undo/]])
+vim.cmd([[set undodir=~/.config/nvim/undo/]])
 
 -- Vertical separator
 -- :set fillchars+=vert:│
@@ -94,11 +102,15 @@ augroup fileSpell
 augroup END]])
 
 -- Delete buffer gracefully
+-- If there's a Gitsigns diff buffer anywhere, close it first
 vim.cmd([[
 function! DeleteBuffer()
+    let gitsigns_diff_buffer_name = bufname('gitsigns')
     let total_buffers = len(getbufinfo({'buflisted':1}))
-    echo total_buffers
-    if total_buffers == 1
+    if !empty(gitsigns_diff_buffer_name)
+        let gitsigns_diff_buffer_number = bufnr(gitsigns_diff_buffer_name)
+        execute 'bd ' . gitsigns_diff_buffer_number
+    elseif total_buffers == 1
         :bd
     else
         :bp
@@ -111,13 +123,12 @@ nnoremap <C-q> :call DeleteBuffer()<CR>]])
 -- Set clipboard to use system clipboard
 vim.opt.clipboard = "unnamedplus"
 
--- NERDtree
-vim.cmd([[
-autocmd StdinReadPre * let s:std_in=1
-au VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-let NERDTreeShowHidden=1
-let NERDTreeQuitOnOpen = 0
-]])
+-- TreeSitter
+require 'nvim-treesitter.configs'.setup {
+    highlight = {
+        enable = true, -- enable syntax highlighting
+    }
+}
 
 -- Vim airline
 vim.cmd([[
@@ -129,15 +140,57 @@ if !exists('g:airline_symbols')
 endif
 let g:airline_symbols.space = "\ua0"
 
-nnoremap <C-n>   :bnext<CR>
-nnoremap <C-s>   :bp\|bd #<CR>
-
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_section_z='%l:%c'
 
 set noshowmode
 ]])
 
--- FZF and RG
-vim.cmd([[nnoremap <C-x><C-f> :FZF<CR>]])
-vim.cmd([[nnoremap <C-x><C-r> :RG<CR>]])
+-- FZF shortcuts
+vim.cmd([[
+nnoremap <space> :FZF<CR>
+nnoremap <C-space> :RG<CR>
+]])
+
+-- Gitsigns setup
+require('gitsigns').setup()
+vim.cmd([[
+nnoremap <C-d> :Gitsigns diffthis split=aboveleft vertical=true<CR>
+]])
+
+-- CSVview
+require('csvview').setup()
+
+require('ccc').setup({
+    highlighter = {
+        auto_enable = true,
+        lsp = true,
+    },
+})
+
+require('mini.icons').setup()
+require('mini.files').setup({
+  mappings = {
+    close       = '<ESC>',
+    go_in       = 'l',
+    go_in_plus  = '<CR>',  -- changed from L
+    go_out      = 'h',
+    go_out_plus = 'H',
+    reset       = '<BS>',
+    reveal_cwd  = '@',
+    show_help   = 'g?',
+    synchronize = "'",
+    trim_left   = '<',
+    trim_right  = '>',
+  },
+})
+
+vim.keymap.set("n", "'", function()
+      local buf_name = vim.api.nvim_buf_get_name(0)
+      local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
+      MiniFiles.open(path)
+      MiniFiles.reveal_cwd()
+    end, { desc = "Open Mini Files" })
+
+-- require('hop').setup()
+-- vim.api.nvim_set_keymap('n', '<space>', '<cmd>HopWord<cr>', { noremap = true, silent = true })
