@@ -29,12 +29,6 @@
       evil
       evil-collection
       undo-fu
-      treemacs
-      treemacs-evil
-      treemacs-projectile
-      treemacs-icons-dired
-      treemacs-persp
-      treemacs-tab-bar
       catppuccin-theme
       nix-ts-mode
       dockerfile-mode
