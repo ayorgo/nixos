@@ -50,45 +50,6 @@
   :config
   (load-theme 'doom-one-light t))
 
-(setq whitespace-hspace-regexp "\\(^ +\\| +$\\)")
-
-;;; WHITESPACE HIGHLIGHTING
-;; Enable for programming modes
-(add-hook 'prog-mode-hook #'whitespace-mode)
-
-(setq whitespace-style
-      '(
-        face               ;; Enable visualization using faces
-        tabs               ;; visualize tab chars
-        tab-mark           ;; show a printable tab mark
-        spaces             ;; visualize space chars
-        space-mark         ;; show a printable space mark
-        trailing           ;; visualize trailing whitespace
-        ))
-
-;; Use · (MID DOT) for spaces and default → for tabs
-(setq whitespace-display-mappings
-      '((space-mark ?\ [?·] [?.])))
-
-(with-eval-after-load 'whitespace
-  ;; Make leading whitespace chars follow current theme's comment colouring
-  ;; Using hspace here is dubious but it seems to work
-  (set-face-attribute 'whitespace-hspace nil
-                      :foreground (face-foreground 'font-lock-comment-face nil t)
-                      :background nil)
-  ;; Hide the intermediate whitespaces between words
-  (set-face-attribute 'whitespace-space nil
-                      :foreground (face-background 'default nil t)
-                      :background nil)
-  ;; Don't chanege anything about trailing whitespaces, just leave it here for reference
-  (set-face-attribute 'whitespace-trailing nil
-                      :foreground nil
-                      :background nil)
-  ;; Make leading tab chars follow current theme's comment colouring
-  (set-face-attribute 'whitespace-tab nil
-                      :foreground (face-foreground 'font-lock-comment-face nil t)
-                      :background nil))
-
 ;;; UNDO
 ;; Vim style undo not needed for emacs 28
 (use-package undo-fu)
