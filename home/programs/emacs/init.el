@@ -41,16 +41,14 @@
 (setq ring-bell-function 'ignore)
 
 ;;; THEME
-(use-package catppuccin-theme
+(use-package doom-themes
+  ; :custom
+  ;; Global settings (defaults)
+  ; (doom-themes-enable-bold t)   ; if nil, bold is universally disabled
+  ; (doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  ;; for treemacs users
   :config
-  ; catppuccin-flavor: 'latte, 'frappe, 'macchiato, or 'mocha
-  (cond ((string= my-theme-flavour "dark")
-         (setq catppuccin-flavor 'mocha)
-         (catppuccin-set-color 'base "#000000"))
-        ((string= my-theme-flavour "light")
-         (setq catppuccin-flavor 'latte)
-         (catppuccin-set-color 'base "#fcfcfc")))
-  (load-theme 'catppuccin :no-confirm))
+  (load-theme 'doom-one-light t))
 
 (setq whitespace-hspace-regexp "\\(^ +\\| +$\\)")
 
@@ -226,3 +224,4 @@
 ; (setenv "TERM" "xterm256-color") ;; needed by eat on MacOS
 
 (global-visual-line-mode t)
+(setq org-archive-location "")

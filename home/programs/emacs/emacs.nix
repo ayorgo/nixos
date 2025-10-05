@@ -25,10 +25,10 @@
       evil
       evil-collection
       undo-fu
-      catppuccin-theme
       nix-ts-mode
       dockerfile-mode
       markdown-mode
+      doom-themes
     #   dante
     ]);
   };
