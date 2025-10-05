@@ -281,3 +281,5 @@
   ; :hook ((eshell-load . eat-eshell-mode))
 )
 ; (setenv "TERM" "xterm256-color") ;; needed by eat on MacOS
+
+(global-visual-line-mode t)
