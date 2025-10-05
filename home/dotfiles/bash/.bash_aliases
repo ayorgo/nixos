@@ -111,7 +111,7 @@ function wifi_show() {
 
 # Fonts
 function fonts() {
-    fc-list | grep -ioE ": [^:]*$1[^:]+:" | sed -E 's/(^: |:)//g' | tr , \\n | sort | uniq
+    fc-cache -f && fc-list | grep -ioE ": [^:]*$1[^:]+:" | sed -E 's/(^: |:)//g' | tr , \\n | sort | uniq
 }
 
 # Available GUI applications
