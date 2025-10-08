@@ -43,6 +43,8 @@ in
     lsd  # better ls
     superTuxKart  # a fun FOSS racing game
     tor-browser
+    yazi
+    ffmpeg
   ];
 
   accounts.email.accounts = {
