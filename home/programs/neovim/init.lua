@@ -46,6 +46,7 @@ vim.cmd([[set smartcase]])
 -- Colorscheme
 require('onedark').setup({
     transparent = true,
+    style = 'warm',
 })
 vim.cmd.colorscheme "onedark"
 
