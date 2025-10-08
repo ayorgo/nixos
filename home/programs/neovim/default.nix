@@ -21,6 +21,6 @@
       hop-nvim
       onedark-nvim
     ];
-    extraLuaConfig = lib.mkDefault (builtins.readFile ./init.lua + "\n" + "vim.cmd([[set background=dark | let g:airline_theme='dark']])");
+    extraLuaConfig = lib.mkDefault (builtins.readFile ./init.lua + "\n" + "vim.cmd([[set background=dark | let g:airline_theme='base16_twilight']])");
   };
 }
