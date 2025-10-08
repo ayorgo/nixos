@@ -1,0 +1,22 @@
+format = '''
+╭─$username@$hostname:$directory$git_branch
+╰─[❯❯❯](red) '''
+
+[username]
+show_always = true
+style_user = 'bold bright-yellow'
+style_root = 'bold red'
+format = '[$user]($style)'
+
+[hostname]
+ssh_only = false
+format = '[$ssh_symbol$hostname]($style)'
+style = 'bold green'
+
+
+[directory]
+style = 'bold bright-cyan'
+truncate_to_repo = false
+
+[git_branch]
+symbol = ' '

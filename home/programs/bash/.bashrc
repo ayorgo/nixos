@@ -17,11 +17,11 @@ export HISTCONTROL=ignoreboth:erasedups           # no duplicate entries
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-if [ "$HOSTNAME" != "tuxedo" ]; then
-  PS1="\n╭─\[$(tput bold)\]\[\033[38;5;166m\]\u\[$(tput sgr0)\]@\[$(tput bold)\]\[\033[38;5;85m\]\h\[$(tput sgr0)\]\[$(tput bold)\]:\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;39m\]\w\[$(tput sgr0)\] \n╰─\[$(tput bold)\]\[\033[38;5;197m\]❯❯❯\[$(tput sgr0)\] "
-else
-  PS1="\n╭─\[$(tput bold)\]\[\033[38;5;166m\]\u\[$(tput sgr0)\]\[$(tput bold)\]:\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;39m\]\w\[$(tput sgr0)\] \n╰─\[$(tput bold)\]\[\033[38;5;197m\]❯❯❯\[$(tput sgr0)\] "
-fi
+# if [ "$HOSTNAME" != "tuxedo" ]; then
+#   PS1="\n╭─\[$(tput bold)\]\[\033[38;5;166m\]\u\[$(tput sgr0)\]@\[$(tput bold)\]\[\033[38;5;85m\]\h\[$(tput sgr0)\]\[$(tput bold)\]:\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;39m\]\w\[$(tput sgr0)\] \n╰─\[$(tput bold)\]\[\033[38;5;197m\]❯❯❯\[$(tput sgr0)\] "
+# else
+#   PS1="\n╭─\[$(tput bold)\]\[\033[38;5;166m\]\u\[$(tput sgr0)\]\[$(tput bold)\]:\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;39m\]\w\[$(tput sgr0)\] \n╰─\[$(tput bold)\]\[\033[38;5;197m\]❯❯❯\[$(tput sgr0)\] "
+# fi
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases

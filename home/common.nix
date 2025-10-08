@@ -16,6 +16,7 @@ in
     ./programs/gnome.nix
     ./programs/kitty.nix
     ./programs/neovim
+    ./programs/starship
     ./services/watch-gnome-theme.nix
   ];
 
