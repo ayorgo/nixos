@@ -41,7 +41,9 @@
       # Stacked tab title decorations
       tab_title_template = "{bell_symbol}{activity_symbol}{' ' if layout_name == 'stack' and num_windows > 1 else ''}{fmt.fg.tab}{tab.active_wd.rsplit('/', 1)[-1]}";
 
-      kitty_mod = "ctrl";
+      kitty_mod = "alt";
+
+      text_composition_strategy="legacy";
     };
     keybindings = {
       # Clipboard
@@ -53,28 +55,19 @@
       "kitty_mod+s" = "toggle_layout stack";
       "kitty_mod+up" = "resize_window taller";
       "kitty_mod+down" = "resize_window shorter";
+      "kitty_mod+left" = "resize_window narrower";
+      "kitty_mod+right" = "resize_window wider";
       "shift+tab" = "next_window";
 
       # Tab management
-      "kitty_mod+t" = "new_tab";
-      "kitty_mod+shift+t" = "set_tab_title";
+      "ctrl+t" = "new_tab";
+      "ctrl+shift+t" = "set_tab_title";
 
       # Scrollback buffer
-      "kitty_mod+k" = "scroll_line_up";
-      "kitty_mod+j" = "scroll_line_down";
-      "alt+h" = "launch --type=overlay --stdin-source=@screen_scrollback --cwd=current nvim -u NONE -i NONE -c 'normal G' -c 'colorscheme vim' -c 'map q :q!<CR>' -c 'set clipboard=unnamedplus laststatus=0 nospell nomodifiable syntax=' -";
-      "alt+g" = "launch --type=overlay --stdin-source=@last_cmd_output --cwd=current nvim -u NONE -i NONE -c 'normal G' -c 'colorscheme vim' -c 'map q :q!<CR>' -c 'set clipboard=unnamedplus laststatus=0 nospell nomodifiable syntax=' -";
+      "ctrl+k" = "scroll_line_up";
+      "ctrl+j" = "scroll_line_down";
+      "kitty_mod+h" = "launch --type=overlay --stdin-source=@screen_scrollback --cwd=current nvim -u NONE -i NONE -c 'normal G' -c 'colorscheme vim' -c 'map q :q!<CR>' -c 'set clipboard=unnamedplus laststatus=0 nospell nomodifiable syntax=' -";
+      "kitty_mod+g" = "launch --type=overlay --stdin-source=@last_cmd_output --cwd=current nvim -u NONE -i NONE -c 'normal G' -c 'colorscheme vim' -c 'map q :q!<CR>' -c 'set clipboard=unnamedplus laststatus=0 nospell nomodifiable syntax=' -";
     };
-
-  # Unmap
-  extraConfig = ''
-    # Keep context search working in the terminal
-    map ctrl+r
-    # Don't close Kitty on kitty_mod+q
-    map ctrl+q
-    # Allow for navigation in Vim
-    map ctrl+h
-    map ctrl+l
-  '';
   };
 }
