@@ -10,12 +10,12 @@ in
   imports = [
     ./programs/anki.nix
     ./programs/bash
-    ./programs/emacs/emacs.nix
+    ./programs/emacs
     ./programs/librewolf
     ./programs/git.nix
     ./programs/gnome.nix
     ./programs/kitty.nix
-    ./programs/neovim/neovim.nix
+    ./programs/neovim
     ./services/watch-gnome-theme.nix
   ];
 
