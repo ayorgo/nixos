@@ -56,14 +56,9 @@ vim.cmd([[set list]])
 vim.cmd([[set listchars=lead:·,trail:·,tab:->\ ]])
 
 require("ibl").setup {
-    indent = { char = "▏" },
+    indent = { char = "│" },
     scope = { enabled = false },
 }
-local hooks = require "ibl.hooks"
-hooks.register(
-  hooks.type.WHITESPACE,
-  hooks.builtin.hide_first_space_indent_level
-)
 
 -- Line numbers
 vim.cmd([[set number]])
