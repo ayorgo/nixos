@@ -65,6 +65,9 @@
     "org/gnome/desktop/screensaver" = {
       lock-enabled = false;
     };
+    "org/gnome/desktop/session" = {
+      idle-delay = lib.hm.gvariant.mkUint32 0;  # Disable automatic screen blank or turn off or lock
+    };
     "org/gnome/shell/extensions/top-bar-organizer" = {
       left-box-order = [
         "activities"
