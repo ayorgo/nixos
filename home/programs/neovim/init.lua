@@ -47,8 +47,12 @@ vim.cmd([[set smartcase]])
 require('onedark').setup({
     transparent = true,
     style = 'warm',
+    highlights = {
+        MatchParen = {bg = 'lightblue'},
+    }
 })
 vim.cmd.colorscheme "onedark"
+-- vim.api.nvim_set_hl(0, "MatchParen", {fg = "lightblue", bg = "lightblue", underline = true})
 
 
 -- Indentation
