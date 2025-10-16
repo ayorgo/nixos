@@ -38,6 +38,10 @@
       # Hide the title bar and window borders
       hide_window_decorations = "yes";
 
+      # Fade text in inactive windows
+      inactive_text_alpha = 0.5;
+      active_border_color = "none";
+
       # Stacked tab title decorations
       tab_title_template = "{bell_symbol}{activity_symbol}{' ' if layout_name == 'stack' and num_windows > 1 else ''}{fmt.fg.tab}{tab.active_wd.rsplit('/', 1)[-1]}";
 
