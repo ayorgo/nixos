@@ -15,6 +15,7 @@ in
     ./programs/git.nix
     ./programs/gnome.nix
     ./programs/kitty.nix
+    ./programs/lsd
     ./programs/neovim
     ./programs/starship
     ./services/watch-gnome-theme.nix
@@ -41,7 +42,6 @@ in
     masterpdfeditor4
     evolution
     gdu  # disk usage analyser
-    lsd  # better ls
     superTuxKart  # a fun FOSS racing game
     tor-browser
     yazi
