@@ -23,7 +23,6 @@ symbol = ' '
 
 [nix_shell]
 disabled = false
-symbol = 'Nix'
-impure_msg = 'impure'
-unknown_msg = 'unknown'
-format = 'via [$symbol $state $name]($style)'
+symbol = '❄️'
+style = 'bold'
+format = 'via [$symbol $name]($style)'
