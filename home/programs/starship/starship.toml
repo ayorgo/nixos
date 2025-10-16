@@ -1,5 +1,5 @@
 format = '''
-╭─$username@$hostname:$directory$git_branch
+╭─$username@$hostname:$directory$git_branch$nix_shell
 ╰─[❯❯❯](red) '''
 
 [username]
@@ -20,3 +20,10 @@ truncate_to_repo = false
 
 [git_branch]
 symbol = ' '
+
+[nix_shell]
+disabled = false
+symbol = 'Nix'
+impure_msg = 'impure'
+unknown_msg = 'unknown'
+format = 'via [$symbol $state $name]($style)'
