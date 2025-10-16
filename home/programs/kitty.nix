@@ -48,6 +48,8 @@
       kitty_mod = "alt";
 
       text_composition_strategy="legacy";
+
+      cursor = "#999999";
     };
     keybindings = {
       # Clipboard
