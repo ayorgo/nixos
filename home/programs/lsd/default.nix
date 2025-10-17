@@ -5,14 +5,25 @@
     enable = true;
     enableBashIntegration = true;
 
+    settings = {
+      blocks = ["permission" "user" "size" "date" "name"];
+      total-size = true;
+      date = "+%Y-%m-%d %H:%M:%S %z";
+    };
     # https://github.com/lsd-rs/lsd/tree/v1.0.0#color-theme-file-content
     colors = {
       user = "dark_yellow";
       size = {
-        large = "dark_yellow";
-        small = "dark_yellow";
+        none = "blue";
+        small = "blue";
+        medium = "blue";
+        large = "blue";
+      };
+      date = {
+        hour-old = "green";
+        day-old = "green";
+        older = "green";
       };
     };
   };
 }
-

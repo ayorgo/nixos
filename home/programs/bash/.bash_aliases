@@ -14,6 +14,9 @@ alias spotify='spotify --force-device-scale-factor=1.25'
 # Steam scaling
 # alias steam='GDK_SCALE=2 steam'
 
+# More lsd integration
+alias ld='lsd -laN --group-directories-first'
+
 # Kitty image preview
 alias icat="kitty +kitten icat"
 
