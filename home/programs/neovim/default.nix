@@ -7,8 +7,6 @@
       vim-commentary
       fzf-vim
       ccc-nvim
-      vim-airline
-      vim-airline-themes
       vim-nix
       auto-save-nvim
       nvim-treesitter
@@ -18,6 +16,8 @@
       csvview-nvim
       mini-files
       mini-icons
+      mini-statusline
+      mini-tabline
       hop-nvim
       onedark-nvim
     ];

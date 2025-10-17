@@ -49,11 +49,12 @@ require('onedark').setup({
     style = 'warm',
     highlights = {
         MatchParen = {bg = 'lightblue'},
+        MiniTablineCurrent = {fg='fg', bg='bg0', fmt='bold'},
+        MiniTablineVisible = {fg='grey', bg='bg1'},
+        MiniTablineHidden = {fg='grey', bg='bg1'},
     }
 })
 vim.cmd.colorscheme "onedark"
--- vim.api.nvim_set_hl(0, "MatchParen", {fg = "lightblue", bg = "lightblue", underline = true})
-
 
 -- Indentation
 vim.cmd([[set list]])
@@ -115,7 +116,6 @@ function! DeleteBuffer()
     else
         :bp
         :bd#
-        :AirlineRefresh
     endif
 endfunction
 nnoremap <C-q> :call DeleteBuffer()<CR>]])
@@ -129,22 +129,6 @@ require 'nvim-treesitter.configs'.setup {
         enable = true, -- enable syntax highlighting
     }
 }
-
--- Vim airline
-vim.cmd([[
-" Enable tabline for vim-airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 0
-if !exists('g:airline_symbols')
-      let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
-
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_section_z='%l:%c'
-
-set noshowmode
-]])
 
 -- FZF shortcuts
 vim.cmd([[
@@ -184,6 +168,8 @@ require('mini.files').setup({
     trim_right  = '>',
   },
 })
+require('mini.statusline').setup()
+require('mini.tabline').setup()
 
 vim.keymap.set("n", "'", function()
       local buf_name = vim.api.nvim_buf_get_name(0)
