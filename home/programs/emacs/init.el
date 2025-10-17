@@ -123,7 +123,6 @@
   ;; Optional, enables centered-cursor-mode in all buffers.
   (global-centered-cursor-mode))
 
-;; disable in terminal modes
 ;; http://stackoverflow.com/a/6849467/519736
 ;; also disable in Info mode, because it breaks going back with the backspace key
 ; (define-global-minor-mode my-global-centered-cursor-mode centered-cursor-mode

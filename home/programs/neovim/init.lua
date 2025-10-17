@@ -177,6 +177,3 @@ vim.keymap.set("n", "'", function()
       MiniFiles.open(path)
       MiniFiles.reveal_cwd()
     end, { desc = "Open Mini Files" })
-
--- require('hop').setup()
--- vim.api.nvim_set_keymap('n', '<space>', '<cmd>HopWord<cr>', { noremap = true, silent = true })
