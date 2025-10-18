@@ -9,9 +9,9 @@
       ccc-nvim
       vim-nix
       auto-save-nvim
-      nvim-treesitter
       nvim-treesitter.withAllGrammars
-      gitsigns-nvim
+      vim-fugitive
+      vim-rhubarb
       indent-blankline-nvim
       csvview-nvim
       mini-files
@@ -20,6 +20,8 @@
       mini-tabline
       onedark-nvim
     ];
+    extraLuaPackages = ps: [ ps.magick ];
+    extraPackages = [ pkgs.imagemagick pkgs.gcc ];
     extraLuaConfig = lib.mkDefault (builtins.readFile ./init.lua + "\n" + "vim.cmd([[set background=dark | let g:airline_theme='base16_twilight']])");
   };
 }

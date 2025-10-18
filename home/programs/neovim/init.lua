@@ -103,22 +103,8 @@ augroup fileSpell
 augroup END]])
 
 -- Delete buffer gracefully
--- If there's a Gitsigns diff buffer anywhere, close it first
-vim.cmd([[
-function! DeleteBuffer()
-    let gitsigns_diff_buffer_name = bufname('gitsigns')
-    let total_buffers = len(getbufinfo({'buflisted':1}))
-    if !empty(gitsigns_diff_buffer_name)
-        let gitsigns_diff_buffer_number = bufnr(gitsigns_diff_buffer_name)
-        execute 'bd ' . gitsigns_diff_buffer_number
-    elseif total_buffers == 1
-        :bd
-    else
-        :bp
-        :bd#
-    endif
-endfunction
-nnoremap <C-q> :call DeleteBuffer()<CR>]])
+vim.cmd([[nnoremap <C-q> :bw<CR>]])
+
 
 -- Set clipboard to use system clipboard
 vim.opt.clipboard = "unnamedplus"
@@ -136,11 +122,9 @@ nnoremap <space> :FZF<CR>
 nnoremap <C-space> :RG<CR>
 ]])
 
--- Gitsigns setup
-require('gitsigns').setup()
-vim.cmd([[
-nnoremap <C-d> :Gitsigns diffthis split=aboveleft vertical=true<CR>
-]])
+-- Vim Fugitive setup
+vim.cmd([[nnoremap <C-g> :0G<CR>]])
+vim.cmd([[nnoremap <C-d> :Gdiffsplit<CR>]])
 
 -- CSVview
 require('csvview').setup()
