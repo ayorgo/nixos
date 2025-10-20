@@ -15,7 +15,7 @@ in
     ./programs/git.nix
     ./programs/gnome.nix
     ./programs/kitty.nix
-    ./programs/lsd
+    ./programs/lsd.nix
     ./programs/neovim
     ./programs/starship
     ./services/watch-gnome-theme.nix
