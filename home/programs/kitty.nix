@@ -21,9 +21,6 @@
       mouse_map = "ctrl+left release grabbed,ungrabbed mouse_handle_click link";
       mouse_hide_wait = -1;
 
-      # Background opacity
-      # background_opacity = 1.0;
-
       # Sound bell
       enable_audio_bell = "no";
 
@@ -42,15 +39,13 @@
       hide_window_decorations = "yes";
 
       # Fade text in inactive windows
-      inactive_text_alpha = 0.5;
+      inactive_text_alpha = 0.4;
       active_border_color = "none";
 
       # Stacked tab title decorations
       tab_title_template = "{bell_symbol}{activity_symbol}{' ' if layout_name == 'stack' and num_windows > 1 else ''}{tab.active_wd.rsplit('/', 1)[-1]}";
 
       kitty_mod = "alt";
-
-      text_composition_strategy="legacy";
 
       cursor = "#999999";
     };
