@@ -152,6 +152,10 @@ require('mini.files').setup({
     trim_right  = '>',
   },
 })
+require('mini.sessions').setup({
+    autoread = true,
+    autowrite = true,
+})
 require('mini.statusline').setup()
 require('mini.tabline').setup()
 
