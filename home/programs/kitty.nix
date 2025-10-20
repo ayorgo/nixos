@@ -12,7 +12,10 @@
       # Tabs
       tab_bar_edge = "top";
       tab_bar_style = "powerline";
-      tab_powerline_style = "round";
+      tab_powerline_style = "slanted";
+      active_tab_font_style = "bold";
+      inactive_tab_font_style = "normal";
+      inactive_tab_foreground = "#999999";
 
       # Clicking on URLs
       mouse_map = "ctrl+left release grabbed,ungrabbed mouse_handle_click link";
@@ -43,7 +46,7 @@
       active_border_color = "none";
 
       # Stacked tab title decorations
-      tab_title_template = "{bell_symbol}{activity_symbol}{' ' if layout_name == 'stack' and num_windows > 1 else ''}{fmt.fg.tab}{tab.active_wd.rsplit('/', 1)[-1]}";
+      tab_title_template = "{bell_symbol}{activity_symbol}{' ' if layout_name == 'stack' and num_windows > 1 else ''}{tab.active_wd.rsplit('/', 1)[-1]}";
 
       kitty_mod = "alt";
 
