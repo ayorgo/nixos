@@ -4,7 +4,6 @@
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
-      vim-commentary
       fzf-vim
       ccc-nvim
       vim-nix
