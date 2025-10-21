@@ -24,7 +24,7 @@ in
   home.username = "ayorgo";
   home.homeDirectory = "/home/ayorgo";
 
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 
   home.packages = with pkgs; [
     freetube

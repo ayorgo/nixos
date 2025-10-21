@@ -3,8 +3,10 @@
 {
   programs.git = {
     enable = true;
-    userName = "Georgios Adzhygai";
-    userEmail = "ayorgo@users.noreply.github.com";
     package = pkgs.gitFull;
+    settings.user = {
+      name = "Georgios Adzhygai";
+      email = "ayorgo@users.noreply.github.com";
+    };
   };
 }
