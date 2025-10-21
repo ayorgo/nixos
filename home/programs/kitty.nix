@@ -4,7 +4,9 @@
   programs.kitty = {
     enable = true;
     themeFile = lib.mkDefault "OneHalfDark";
+    shellIntegration.enableBashIntegration = true;
     settings = {
+      shell = "bash";
 
       # Don't phone home
       update_check_interval = 0;
@@ -30,10 +32,12 @@
       font_size = 11;
 
       # Remote control
+      # Needed for smart-splits.nvim to work
       allow_remote_control = "yes";
+      listen_on = "unix:@pussycat";
 
-      # Don't ask to close window
-      confirm_os_window_close = 0;
+      # Always ask to close window
+      confirm_os_window_close = 1;
 
       # Hide the title bar and window borders
       hide_window_decorations = "yes";
@@ -45,33 +49,62 @@
       # Stacked tab title decorations
       tab_title_template = "{bell_symbol}{activity_symbol}{' ' if layout_name == 'stack' and num_windows > 1 else ''}{tab.active_wd.rsplit('/', 1)[-1]}";
 
-      kitty_mod = "alt";
-
       cursor = "#999999";
     };
     keybindings = {
       # Clipboard
-      "kitty_mod+c" = "copy_or_interrupt";
-      "kitty_mod+v" = "paste_from_clipboard";
+      "ctrl+c" = "copy_or_interrupt";
+      "ctrl+v" = "paste_from_clipboard";
 
       # Window management
-      "kitty_mod+enter" = "launch --cwd=current";
-      "kitty_mod+s" = "toggle_layout stack";
-      "kitty_mod+up" = "resize_window taller";
-      "kitty_mod+down" = "resize_window shorter";
-      "kitty_mod+left" = "resize_window narrower";
-      "kitty_mod+right" = "resize_window wider";
+      "alt+enter" = "launch --cwd=current";
+      "alt+s" = "toggle_layout stack";
+      "ctrl+j" = "neighboring_window down";
+      "ctrl+k" = "neighboring_window up";
+      "ctrl+h" = "neighboring_window left";
+      "ctrl+l" = "neighboring_window right";
       "shift+tab" = "next_window";
+
+      "alt+j" = "kitten relative_resize.py down  1";
+      "alt+k" = "kitten relative_resize.py up    1";
+      "alt+h" = "kitten relative_resize.py left  1";
+      "alt+l" = "kitten relative_resize.py right 1";
 
       # Tab management
       "ctrl+t" = "new_tab";
-      "ctrl+shift+t" = "set_tab_title";
 
       # Scrollback buffer
-      "ctrl+k" = "scroll_line_up";
-      "ctrl+j" = "scroll_line_down";
-      "kitty_mod+h" = "launch --type=overlay --stdin-source=@screen_scrollback --cwd=current nvim -u NONE -i NONE -c 'normal G' -c 'colorscheme vim' -c 'map q :q!<CR>' -c 'set clipboard=unnamedplus laststatus=0 nospell nomodifiable syntax=' -";
-      "kitty_mod+g" = "launch --type=overlay --stdin-source=@last_cmd_output --cwd=current nvim -u NONE -i NONE -c 'normal G' -c 'colorscheme vim' -c 'map q :q!<CR>' -c 'set clipboard=unnamedplus laststatus=0 nospell nomodifiable syntax=' -";
+      "ctrl+up" = "scroll_line_up";
+      "ctrl+down" = "scroll_line_down";
+      "alt+b" = "launch --type=overlay --stdin-source=@screen_scrollback --cwd=current nvim -u NONE -i NONE -c 'normal G' -c 'colorscheme vim' -c 'map q :q!<CR>' -c 'set clipboard=unnamedplus laststatus=0 nospell nomodifiable syntax=' -";
+      "alt+shift+b" = "launch --type=overlay --stdin-source=@last_cmd_output --cwd=current nvim -u NONE -i NONE -c 'normal G' -c 'colorscheme vim' -c 'map q :q!<CR>' -c 'set clipboard=unnamedplus laststatus=0 nospell nomodifiable syntax=' -";
     };
+
+    # Unmap some bindings inside Vim
+    extraConfig = ''
+      map --when-focus-on var:IS_NVIM ctrl+j
+      map --when-focus-on var:IS_NVIM ctrl+k
+      map --when-focus-on var:IS_NVIM ctrl+h
+      map --when-focus-on var:IS_NVIM ctrl+l
+
+      map --when-focus-on var:IS_NVIM alt+j
+      map --when-focus-on var:IS_NVIM alt+k
+      map --when-focus-on var:IS_NVIM alt+h
+      map --when-focus-on var:IS_NVIM alt+l
+
+      map --when-focus-on var:IS_NVIM ctrl+v
+    '';
+  };
+  home.file.".config/kitty/neighboring_window.py" = {
+    source = "${pkgs.vimPlugins.smart-splits-nvim}/kitty/neighboring_window.py";
+    executable = true;
+  };
+  home.file.".config/kitty/relative_resize.py" = {
+    source = "${pkgs.vimPlugins.smart-splits-nvim}/kitty/relative_resize.py";
+    executable = true;
+  };
+  home.file.".config/kitty/split_window.py" = {
+    source = "${pkgs.vimPlugins.smart-splits-nvim}/kitty/split_window.py";
+    executable = true;
   };
 }

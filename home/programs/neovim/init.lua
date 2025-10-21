@@ -68,12 +68,6 @@ require("ibl").setup {
 -- Line numbers
 vim.cmd([[set number]])
 
--- Pane navigation
-vim.cmd([[nnoremap <C-h> <C-w>h]])
-vim.cmd([[nnoremap <C-j> <C-w>j]])
-vim.cmd([[nnoremap <C-k> <C-w>k]])
-vim.cmd([[nnoremap <C-l> <C-w>l]])
-
 -- Buffer navigation
 vim.cmd([[map <Right> :bnext<CR>]])
 vim.cmd([[map <Left> :bprev<CR>]])
@@ -165,3 +159,17 @@ vim.keymap.set("n", "'", function()
       MiniFiles.open(path)
       MiniFiles.reveal_cwd()
     end, { desc = "Open Mini Files" })
+
+require('smart-splits').setup({
+    default_amount = 1,
+    at_edge = 'mux',
+})
+vim.keymap.set('n', '<A-h>', require('smart-splits').resize_left)
+vim.keymap.set('n', '<A-j>', require('smart-splits').resize_down)
+vim.keymap.set('n', '<A-k>', require('smart-splits').resize_up)
+vim.keymap.set('n', '<A-l>', require('smart-splits').resize_right)
+-- moving between splits
+vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
+vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
+vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up)
+vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)

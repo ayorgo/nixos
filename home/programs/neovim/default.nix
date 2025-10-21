@@ -20,6 +20,7 @@
       mini-statusline
       mini-tabline
       onedark-nvim
+      smart-splits-nvim
     ];
     extraLuaPackages = ps: [ ps.magick ];
     extraPackages = [ pkgs.imagemagick pkgs.gcc ];
