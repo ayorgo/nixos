@@ -173,3 +173,9 @@ vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
 vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
 vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up)
 vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { 'nix', 'lua', 'yaml', 'json' },
+  command = "setlocal shiftwidth=2 tabstop=2 softtabstop=2",
+  group = augroup,
+})
