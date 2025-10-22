@@ -1,5 +1,7 @@
 { lib, pkgs, ... }:
 
+with lib.hm.gvariant;
+
 {
   home.packages = with pkgs; [
     dconf-editor
@@ -15,6 +17,9 @@
   ];
 
   dconf.settings = {
+    "org/gnome/desktop/input-sources" = {
+      sources = [ (mkTuple [ "xkb" "us" ]) (mkTuple [ "xkb" "us+dvorak" ]) (mkTuple [ "xkb" "ru" ]) (mkTuple [ "xkb" "ua" ])];
+    };
     "org/gnome/desktop/interface" = {
       clock-format = "24h";
       clock-show-weekday = true;
@@ -51,8 +56,8 @@
       icon-size = 22;
     };
     "org/gnome/desktop/peripherals/keyboard" = {
-      delay = lib.hm.gvariant.mkUint32 175;
-      repeat-interval = lib.hm.gvariant.mkUint32 10;
+      delay = mkUint32 175;
+      repeat-interval = mkUint32 10;
       repeat = true;
     };
     "org/gnome/settings-daemon/plugins/power" = {
@@ -66,7 +71,7 @@
       lock-enabled = false;
     };
     "org/gnome/desktop/session" = {
-      idle-delay = lib.hm.gvariant.mkUint32 0;  # Disable automatic screen blank or turn off or lock
+      idle-delay = mkUint32 0;  # Disable automatic screen blank or turn off or lock
     };
     "org/gnome/shell/extensions/top-bar-organizer" = {
       left-box-order = [
@@ -117,7 +122,7 @@
       night-light-schedule-automatic = false;
       night-light-schedule-from = 0.0;
       night-light-schedule-to = 0.0;
-      night-light-temperature = lib.hm.gvariant.mkUint32 4200;
+      night-light-temperature = mkUint32 4200;
     };
     "org/gnome/mutter" = {
       dynamic-workspaces = true;
