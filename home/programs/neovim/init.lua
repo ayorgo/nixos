@@ -16,8 +16,8 @@ vim.cmd([[set so=999]])
 -- Configure auto-save-nvim plugin so it works
 -- which it stopped after the update to NixOS 24.05
 require('auto-save').setup({
-    enable = true,
-    debounce_delay = 10,
+  enable = true,
+  debounce_delay = 10,
 })
 
 -- No swap files
@@ -45,14 +45,14 @@ vim.cmd([[set smartcase]])
 
 -- Colorscheme
 require('onedark').setup({
-    transparent = true,
-    style = 'warm',
-    highlights = {
-        MatchParen = {bg = 'lightblue'},
-        MiniTablineCurrent = {fg='fg', bg='bg0', fmt='bold'},
-        MiniTablineVisible = {fg='grey', bg='bg1'},
-        MiniTablineHidden = {fg='grey', bg='bg1'},
-    }
+  transparent = true,
+  style = 'warm',
+  highlights = {
+    MatchParen = {bg = 'lightblue'},
+    MiniTablineCurrent = {fg='fg', bg='bg0', fmt='bold'},
+    MiniTablineVisible = {fg='grey', bg='bg1'},
+    MiniTablineHidden = {fg='grey', bg='bg1'},
+  }
 })
 vim.cmd.colorscheme "onedark"
 
@@ -61,8 +61,8 @@ vim.cmd([[set list]])
 vim.cmd([[set listchars=lead:·,trail:·,tab:->\ ]])
 
 require("ibl").setup {
-    indent = { char = "│" },
-    scope = { enabled = false },
+  indent = { char = "│" },
+  scope = { enabled = false },
 }
 
 -- Line numbers
@@ -85,15 +85,15 @@ vim.cmd([[set undodir=~/.config/nvim/undo/]])
 -- TrueColor support
 vim.cmd([[
 if (has("termguicolors"))
-    set termguicolors
+  set termguicolors
 endif]])
 
 -- Spell check
 vim.cmd([[:hi SpellBad ctermbg=lightred]])
 vim.cmd([[
 augroup fileSpell
-    autocmd!
-    autocmd FileType latex,tex,md,markdown setlocal spell
+  autocmd!
+  autocmd FileType latex,tex,md,markdown setlocal spell
 augroup END]])
 
 -- Delete buffer gracefully
@@ -105,9 +105,9 @@ vim.opt.clipboard = "unnamedplus"
 
 -- TreeSitter
 require 'nvim-treesitter.configs'.setup {
-    highlight = {
-        enable = true, -- enable syntax highlighting
-    }
+  highlight = {
+    enable = true, -- enable syntax highlighting
+  }
 }
 
 -- FZF shortcuts
@@ -124,10 +124,10 @@ vim.cmd([[nnoremap <C-d> :Gdiffsplit<CR>]])
 require('csvview').setup()
 
 require('ccc').setup({
-    highlighter = {
-        auto_enable = true,
-        lsp = true,
-    },
+  highlighter = {
+    auto_enable = true,
+    lsp = true,
+  },
 })
 
 require('mini.icons').setup()
@@ -147,22 +147,22 @@ require('mini.files').setup({
   },
 })
 require('mini.sessions').setup({
-    autoread = true,
-    autowrite = true,
+  autoread = true,
+  autowrite = true,
 })
 require('mini.statusline').setup()
 require('mini.tabline').setup()
 
 vim.keymap.set("n", "'", function()
-      local buf_name = vim.api.nvim_buf_get_name(0)
-      local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
-      MiniFiles.open(path)
-      MiniFiles.reveal_cwd()
-    end, { desc = "Open Mini Files" })
+  local buf_name = vim.api.nvim_buf_get_name(0)
+  local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
+  MiniFiles.open(path)
+  MiniFiles.reveal_cwd()
+end, { desc = "Open Mini Files" })
 
 require('smart-splits').setup({
-    default_amount = 1,
-    at_edge = 'mux',
+  default_amount = 1,
+  at_edge = 'mux',
 })
 vim.keymap.set('n', '<A-h>', require('smart-splits').resize_left)
 vim.keymap.set('n', '<A-j>', require('smart-splits').resize_down)
