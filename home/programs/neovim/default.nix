@@ -20,8 +20,6 @@
       onedark-nvim
       smart-splits-nvim
     ];
-    extraLuaPackages = ps: [ ps.magick ];
-    extraPackages = [ pkgs.imagemagick pkgs.gcc ];
     extraPackages = [
       pkgs.gcc  # required for treesitter to work properly
     ];
