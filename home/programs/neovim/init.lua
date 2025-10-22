@@ -121,7 +121,11 @@ vim.cmd([[nnoremap <C-g> :0G<CR>]])
 vim.cmd([[nnoremap <C-d> :Gdiffsplit<CR>]])
 
 -- CSVview
-require('csvview').setup()
+require('csvview').setup({
+  view = {
+    display_mode = "border",
+  },
+})
 
 require('ccc').setup({
   highlighter = {
