@@ -3,6 +3,7 @@
 {
   programs.librewolf = {
     enable = true;
+    languagePacks = [ "en-GB" ];
     policies = {
       OfferToSaveLogins = false;
       DisableTelemetry = true;
@@ -39,6 +40,11 @@
         # Simple Translate
         "simple-translate@sienori" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/simple-translate/latest.xpi";
+          installation_mode = "force_installed";
+        };
+        # British English dictionary
+        "marcoagpinto@mail.telepac.pt" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/british-english-dictionary-2/latest.xpi";
           installation_mode = "force_installed";
         };
       };
@@ -124,6 +130,7 @@
         "privacy.sanitize.sanitizeOnShutdown" = false;
         "browser.gesture.swipe.left" = "";
         "browser.gesture.swipe.right" = "";
+        "intl.accept_languages" = "en-GB";
       };
     };
   };
