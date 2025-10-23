@@ -23,6 +23,7 @@ with lib.hm.gvariant;
     "org/gnome/desktop/interface" = {
       clock-format = "24h";
       clock-show-weekday = true;
+      monospace-font-name = "SauceCodePro NF 12";
     };
     "org/gnome/shell".enabled-extensions = with pkgs.gnomeExtensions; [
       vitals.extensionUuid
