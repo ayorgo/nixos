@@ -126,6 +126,13 @@ require('csvview').setup({
     display_mode = "border",
   },
 })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "csv",
+  callback = function()
+    vim.cmd("CsvViewEnable")
+    vim.opt_local.wrap = false
+  end,
+})
 
 require('ccc').setup({
   highlighter = {
