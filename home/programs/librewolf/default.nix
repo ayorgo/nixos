@@ -75,13 +75,13 @@
           };
           nix-packages = {
             name = "Nix Packages";
-            urls = [ { template = "https://search.nixos.org/packages?query={searchTerms}"; } ];
+            urls = [ { template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}"; } ];
             icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
             definedAliases = [ "@nixp" ];
           };
           nixos-options = {
             name = "NixOS Options";
-            urls = [ { template = "https://search.nixos.org/options?query={searchTerms}"; } ];
+            urls = [ { template = "https://search.nixos.org/options?channel=unstable&query={searchTerms}"; } ];
             icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
             definedAliases = [ "@nixo" ];
           };
