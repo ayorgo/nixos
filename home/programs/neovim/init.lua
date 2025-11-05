@@ -110,12 +110,6 @@ require 'nvim-treesitter.configs'.setup {
   }
 }
 
--- FZF shortcuts
-vim.cmd([[
-nnoremap <space> :FZF<CR>
-nnoremap <C-space> :RG<CR>
-]])
-
 -- Vim Fugitive setup
 vim.cmd([[nnoremap <C-g> :0G<CR>]])
 vim.cmd([[nnoremap <C-d> :Gdiffsplit<CR>]])
@@ -190,3 +184,14 @@ vim.api.nvim_create_autocmd("FileType", {
   command = "setlocal shiftwidth=2 tabstop=2 softtabstop=2",
   group = augroup,
 })
+
+require('fzf-lua').setup({
+  fzf_opts = {
+    ['--layout'] = 'default', -- search prompt at the bottom
+  },
+})
+
+vim.cmd([[
+nnoremap <space> :FzfLua files<CR>
+nnoremap <C-space> :FzfLua live_grep<CR>
+]])

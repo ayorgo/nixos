@@ -4,7 +4,7 @@
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
-      fzf-vim
+      fzf-lua
       ccc-nvim
       auto-save-nvim
       nvim-treesitter.withAllGrammars
