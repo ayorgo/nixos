@@ -46,6 +46,9 @@ in
     tor-browser
     yazi
     ffmpeg
+    libreoffice
+    brave
+    zoom-us
   ];
 
   accounts.email.accounts = {
