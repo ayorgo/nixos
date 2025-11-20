@@ -39,6 +39,10 @@
     , darwin-emacs-packages
   }:
   let
+    user = {
+      name = "ADZHYG01";
+      home = "/Users/${user.name}";
+    };
     configuration = { pkgs, ... }: {
       # Determinate uses its own daemon to manage the Nix installation that
       # conflicts with nix-darwin’s native Nix management.
@@ -48,14 +52,14 @@
       # Necessary for using flakes
       nix.settings.experimental-features = "nix-command flakes";
 
-      users.users."ayorgo".home = "/Users/ayorgo";
+      users.users.${user.name}.home = user.home;
 
       system = {
-        primaryUser = "ayorgo";
+        primaryUser = user.name;
         keyboard = {
           enableKeyMapping = true;
         };
-        defaults = import ./macos.nix;
+        defaults = import ./macos.nix { inherit pkgs user; };
 
         # Set Git commit hash for darwin-version.
         configurationRevision = self.rev or self.dirtyRev or null;
@@ -96,6 +100,8 @@
       };
 
       homebrew = import ./homebrew.nix;
+
+      fonts.packages = with pkgs; [ source-code-pro ];
     };
   in
   {
@@ -114,15 +120,21 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users."ayorgo" = import ./home.nix;
+            extraSpecialArgs = {
+              inherit user;
+            };
+            users.${user.name}.imports = [
+              ./home.nix
+            ];
           };
         }
         nix-homebrew.darwinModules.nix-homebrew
         {
           nix-homebrew = {
+            # inherit user;
             enable = true;
             enableRosetta = true;
-            user = "ayorgo";
+            user = user.name;
           };
         }
       ];

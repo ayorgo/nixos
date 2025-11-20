@@ -1,13 +1,25 @@
 { lib, pkgs, ... }:
 
 {
-  programs.git = {
-    enable = true;
-    userName = "Georgios Adzhygai";
-    userEmail = "georgios.adzhygai@example.com";
-    package = pkgs.gitFull;
-    extraConfig = {
-      # http.sslverify = false; # just to be able to install homebrew
+  programs = {
+    git = {
+      enable = true;
+      package = pkgs.gitFull;
+    };
+
+    ssh = {
+      enable = true;
+
+      # SSH client configuration
+      extraConfig = ''
+        Host github.com
+          IdentityFile ~/.ssh/github
+          AddKeysToAgent yes
+
+        Host gitlab.kfplc.com
+          IdentityFile ~/.ssh/gitlab
+          PreferredAuthentications publickey
+      '';
     };
   };
 }

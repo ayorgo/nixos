@@ -10,3 +10,8 @@ fi
 
 # More lsd integration
 alias ld='lsd -laN --group-directories-first'
+
+# Neovim aliases
+alias vi='nvim'
+alias vim='nvim'
+alias vmi='nvim'

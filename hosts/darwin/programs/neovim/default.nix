@@ -23,6 +23,6 @@
     extraPackages = [
       pkgs.gcc  # required for treesitter to work properly
     ];
-    extraLuaConfig = lib.mkDefault (builtins.readFile ./init.lua + "\n" + "vim.cmd([[set background=dark']])");
+    extraLuaConfig = lib.mkDefault (builtins.readFile ./init.lua);
   };
 }

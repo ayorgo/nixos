@@ -3,7 +3,7 @@
 {
   programs.librewolf = {
     enable = true;
-
+    languagePacks = [ "en-GB" ];
     package = pkgs.librewolf.overrideAttrs (_: rec {
       override = _: pkgs.librewolf;
     });
@@ -24,25 +24,33 @@
       DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
       SearchBar = "unified"; # alternative: "separate"
     };
-    profiles.ayorgo = {
+    profiles.default = {
       isDefault = true;
       search = {
-        default = "google";
-        privateDefault = "google";
+        default = "ecosia";
+        privateDefault = "ecosia";
         force = true; # allows this setting to work
         engines = {
-          "Nix Packages" = {
-            urls = [{
-              template = "https://search.nixos.org/packages";
-              params = [
-                { name = "type"; value = "packages"; }
-                { name = "query"; value = "{searchTerms}"; }
-              ];
-            }];
-            icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+          ecosia = {
+            name = "Ecosia";
+            urls = [{template = "https://www.ecosia.org/search?q={searchTerms}";}];
+            icon = "https://www.ecosia.org/static/icons/favicon.ico";
+            definedAliases = ["@eco"];
+          };
+          github = {
+            name = "GitHub";
+            urls = [ { template = "https://github.com/search?q={searchTerms}&type=code"; } ];
+            iconMapObj."16" = "https://github.com/favicon.ico";
+            definedAliases = [ "@gh" ];
+          };
+          nix-packages = {
+            name = "Nix Packages";
+            urls = [ { template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}"; } ];
+            icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
             definedAliases = [ "@nixp" ];
           };
-          "Home Manager Options" = {
+          nix-home-manager-options = {
+            name = "Home Manager Options";
             urls = [{
               template = "https://home-manager-options.extranix.com/";
               params = [
@@ -52,11 +60,27 @@
             icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
             definedAliases = [ "@nixhm" ];
           };
+          stack-overflow = {
+            name = "Stack Overflow";
+            urls = [ { template = "https://stackoverflow.com/search?q={searchTerms}"; } ];
+            iconMapObj."16" = "https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico";
+            definedAliases = [ "@so" ];
+          };
+          wikipedia = {
+            name = "Wikipedia";
+            urls = [ { template = "https://en.wikipedia.org/wiki/{searchTerms}"; } ];
+            iconMapObj."16" = "https://en.wikipedia.org/favicon.ico";
+            definedAliases = [ "@wiki" ];
+          };
         };
       };
       settings = {
         # "security.cert_pinning.enforcement_level" = 1;
         "extensions.pocket.enabled" = false;
+        "extensions.autoDisableScopes" = 0;
+        "extensions.enabledScopes" = 3;
+        "extensions.update.autoUpdateDefault" = false;
+        "extensions.update.enabled" = false;
         "apz.kinetic_scroll.enabled" = false;
         "apz.gtk.kinetic_scroll.enabled" = false;
         "browser.ctrlTab.sortByRecentlyUsed" = true;
@@ -95,8 +119,8 @@
         # Preserve sessions and history
         "privacy.resistFingerprinting" = false;
         "privacy.sanitize.sanitizeOnShutdown" = false;
-        # "browser.sessionstore.resume_from_crash" = true;
-        # "browser.sessionstore.restore_on_demand" = false;
+        "browser.sessionstore.resume_from_crash" = true;
+        "browser.sessionstore.restore_on_demand" = false;
 
         "privacy.clearOnShutdown.cache" = false;
         "privacy.clearOnShutdown.cookies" = false;
@@ -107,19 +131,20 @@
         "privacy.clearOnShutdown.sessions" = false;
         "privacy.clearOnShutdown.siteSettings" = false;
 
-        # "privacy.clearOnShutdown_v2.browsingHistoryAndDownloads" = false;
-        # "privacy.clearOnShutdown_v2.cache" = false;
-        # "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
-        # "privacy.clearOnShutdown_v2.formdata" = false;
-        # "privacy.clearOnShutdown_v2.history" = false;
-        # "privacy.clearOnShutdown_v2.historyFormDataAndDownloads" = false;
-        # "privacy.clearOnShutdown_v2.sessions" = false;
-        # "privacy.clearOnShutdown_v2.siteSettings" = false;
+        "privacy.clearOnShutdown_v2.browsingHistoryAndDownloads" = false;
+        "privacy.clearOnShutdown_v2.cache" = false;
+        "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
+        "privacy.clearOnShutdown_v2.formdata" = false;
+        "privacy.clearOnShutdown_v2.history" = false;
+        "privacy.clearOnShutdown_v2.historyFormDataAndDownloads" = false;
+        "privacy.clearOnShutdown_v2.sessions" = false;
+        "privacy.clearOnShutdown_v2.siteSettings" = false;
       };
       extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
+        british-english-dictionary-2
         multi-account-containers
-        ublock-origin
         surfingkeys
+        ublock-origin
       ];
     };
   };

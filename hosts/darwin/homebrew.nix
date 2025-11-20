@@ -4,7 +4,8 @@
   onActivation.autoUpdate = true;
   onActivation.upgrade = true;
   casks = [
-    "docker"
+    "docker-desktop"
+    "qobuz"
   ];
   brews = [
     "ollama"
