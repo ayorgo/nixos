@@ -119,6 +119,24 @@
     # Unmap certain key combinations
     "com.apple.symbolichotkeys" = {
       AppleSymbolicHotKeys = {
+        # Show Launchpad on Cmd-R
+        "160" = {
+          enabled = true;
+          value = {
+            type = "standard";
+            # To get these numbers:
+            # 1. Run `defaults read com.apple.symbolichotkeys AppleSymbolicHotKeys`
+            # 2. Set the shortcut via UI
+            # 3. Run the command from 2. again
+            # 4. Get the diff between 1. and 2. and see what's changed.
+            # 5. The added entry will be the shortcut of interest.
+            parameters = [
+              114
+              15
+              1048576
+            ];
+          };
+        };
         # Mission Control / Spaces
         # So scrollback buffer navigation in kitty works
         "32" = { enabled = 0; }; # Mission Control (Ctrl-up_arrow)
