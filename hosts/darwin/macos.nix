@@ -1,7 +1,50 @@
+{ pkgs, user, ... }:
+
 {
+  # Night Shift settings
+  # Courtesy of https://github.com/nix-darwin/nix-darwin/issues/1046
+  # and https://raw.githubusercontent.com/philiprein/macos-settings/main/system_settings/displays.sh
+  # To check the values in runtime:
+  # sudo defaults read /var/root/Library/Preferences/com.apple.CoreBrightness.plist
+  CustomSystemPreferences = {
+    "/var/root/Library/Preferences/com.apple.CoreBrightness.plist" = let
+      userId = builtins.readFile (pkgs.runCommand "user-id" {} "/usr/bin/dscl . -read user.home GeneratedUID | /usr/bin/sed 's/GeneratedUID: //' | /usr/bin/tr -d \\\\n > $out");
+    in {
+      "CBUser-${userId}" = {
+        # Setting CBBlueLightReductionCCTTargetRaw doesn't really work for some reason.
+        # The slider remains in the middle after reboot.
+        CBBlueLightReductionCCTTargetRaw = "4800.064"; # The default is 4128.328
+        CBBlueReductionStatus = {
+          AutoBlueReductionEnabled = 1;
+          BlueLightReductionAlgoOverride = 4;
+          BlueLightReductionAlgoOverrideTimestamp = "3035-11-20 08:48:37 +0000";
+          BlueLightReductionDisableScheduleAlertCounter = 3;
+          BlueLightReductionSchedule = {
+            DayStartHour = 1;
+            DayStartMinute = 59;
+            NightStartHour = 2;
+            NightStartMinute = 0;
+          };
+          BlueReductionAvailable = 1;
+          BlueReductionEnabled = 1;
+          BlueReductionMode = 2;
+          BlueReductionSunScheduleAllowed = 1;
+          Version = 1;
+        };
+        CBColorAdaptationEnabled = 1;
+      };
+    };
+  };
   menuExtraClock.Show24Hour = true; # Show the clock in 24 hours format
+  controlcenter.BatteryShowPercentage = true;
   dock = {
     autohide = true;
+    # persistent-apps = [];
+    persistent-apps = [
+      "${pkgs.librewolf}/Applications/LibreWolf.app"
+      "${pkgs.kitty}/Applications/Kitty.app"
+      "/Applications/Microsoft Teams.app"
+    ];
     orientation = "right";
     show-recents = false;
     autohide-delay = 0.0; # Remove the auto-hiding Dock delay
@@ -12,7 +55,7 @@
     mouse-over-hilite-stack = true;
 
     # Set the icon size of Dock items
-    tilesize = 48;
+    tilesize = 32;
 
     # Change minimize/maximize window effect
     mineffect = "scale";
@@ -71,6 +114,57 @@
     Clicking = true;
     TrackpadThreeFingerDrag = true;
   };
+  CustomUserPreferences = {
+
+    # Unmap certain key combinations
+    "com.apple.symbolichotkeys" = {
+      AppleSymbolicHotKeys = {
+        # Mission Control / Spaces
+        # So scrollback buffer navigation in kitty works
+        "32" = { enabled = 0; }; # Mission Control (Ctrl-up_arrow)
+        "33" = { enabled = 0; }; # Application windows (Ctrl-down_arrow)
+
+        # Input source switching (Ctrl-Space)
+        # So FZF fuzzy search works in Vim
+        "60" = { enabled = 0; }; # Select previous input source
+        "61" = { enabled = 0; }; # Select next input source
+      };
+    };
+
+    # Keyboard layouts
+    "com.apple.HIToolbox" = {
+      AppleEnabledInputSources = [
+        {
+          InputSourceKind = "Keyboard Layout";
+          "KeyboardLayout Name" = "U.S.";
+          "KeyboardLayout ID" = 0;
+        }
+        {
+          InputSourceKind = "Keyboard Layout";
+          "KeyboardLayout Name" = "Dvorak";
+          "KeyboardLayout ID" = 16300;
+        }
+      ];
+
+      AppleCurrentKeyboardLayoutInputSourceID = "com.apple.keylayout.US";
+
+      # Order in the menu bar / quick switcher (first is primary)
+      AppleSelectedInputSources = [
+        {
+          "InputSourceKind" = "Keyboard Layout";
+          "KeyboardLayout ID" = 0;
+          "KeyboardLayout Name" = "U.S.";
+          "InputSourceID" = "com.apple.keylayout.US";
+        }
+        {
+          "InputSourceKind" = "Keyboard Layout";
+          "KeyboardLayout ID" = 16300;
+          "KeyboardLayout Name" = "Dvorak";
+          "InputSourceID" = "com.apple.keylayout.Dvorak";
+        }
+      ];
+    };
+  };
   NSGlobalDomain = {
     AppleInterfaceStyle = null; # Light theme; also "Dark"
     AppleInterfaceStyleSwitchesAutomatically = false;
@@ -83,7 +177,10 @@
     NSAutomaticPeriodSubstitutionEnabled = false; # No smart period
     NSAutomaticSpellingCorrectionEnabled = false; # No autocorrect
 
-    # Metric everywhere
+    # Disable "Natural" scrolling
+    "com.apple.swipescrolldirection" = false;
+
+    # Locale
     AppleMetricUnits = 1;
     AppleMeasurementUnits = "Centimeters";
     AppleTemperatureUnit = "Celsius";
