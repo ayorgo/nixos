@@ -1,6 +1,6 @@
 .PHONY: install
 install:
-	@sudo nix run nix-darwin/nix-darwin-25.05#darwin-rebuild -- switch --flake .#simple-darwin
+	@sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake .#simple-darwin
 
 .PHONY: rebuild
 rebuild:
