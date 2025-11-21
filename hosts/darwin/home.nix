@@ -18,7 +18,7 @@
     ./programs/emacs
     ./programs/git.nix
     ./programs/kitty.nix
-    ./programs/librewolf
+    ./programs/firefox
     ./programs/lsd.nix
     ./programs/neovim
     ./programs/starship
@@ -30,8 +30,8 @@
   };
   home.activation = {
     defaultBrowser = (lib.hm.dag.entryAfter ["installPackages"] ''
-      run echo "Setting default browser to librewolf"
-      run ${pkgs.defaultbrowser}/bin/defaultbrowser librewolf
+      run echo "Setting default browser to firefox"
+      run ${pkgs.defaultbrowser}/bin/defaultbrowser firefox
     '');
   };
   home.file.".config/nvim/bg".text = "light";
