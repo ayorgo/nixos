@@ -27,7 +27,7 @@
 (add-to-list 'default-frame-alist '(undecorated . t))
 
 ;;; Font
-(add-to-list 'default-frame-alist '(font . "SauceCodePro NFM SemiBold-12"))
+(add-to-list 'default-frame-alist '(font . "SauceCodePro NF-11"))
 
 ;;; Remove all the extra visual elements
 (menu-bar-mode -1)
@@ -88,6 +88,10 @@
 (setq auto-save-visited-interval 0.4) ;; in seconds; a lower value results in status bar flickering
 (auto-save-visited-mode t)
 
+
+;; Save sessions
+(desktop-save-mode 1)
+
 ;; Line numbers in programming modes
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
@@ -123,15 +127,6 @@
   ;; Optional, enables centered-cursor-mode in all buffers.
   (global-centered-cursor-mode))
 
-;; http://stackoverflow.com/a/6849467/519736
-;; also disable in Info mode, because it breaks going back with the backspace key
-; (define-global-minor-mode my-global-centered-cursor-mode centered-cursor-mode
-;   (lambda ()
-;     (when (not (memq major-mode
-;                      (list 'Info-mode 'term-mode 'eshell-mode 'shell-mode 'erc-mode)))
-;       (centered-cursor-mode))))
-
-; (my-global-centered-cursor-mode 1)
 
 ;;; --------------------------
 ;;;          PACKAGES
@@ -175,13 +170,29 @@
   (add-to-list 'major-mode-remap-alist mapping))
 (setopt treesit-font-lock-level 4)
 
-;;; Eat terminal emulator
-(use-package eat
-  :custom
-  (eat-kill-buffer-on-exit t)
-  ; :hook ((eshell-load . eat-eshell-mode))
-)
-; (setenv "TERM" "xterm256-color") ;; needed by eat on MacOS
-
 (global-visual-line-mode t)
-(setq org-archive-location "")
+
+(use-package org
+  :config
+  (setq org-hide-emphasis-markers t
+        org-src-fontify-natively t
+        org-startup-folded t
+        org-yank-dnd-method 'file-link ; So images can be pasted from clipboard
+        org-yank-image-save-method "~/pet/org/images"
+        org-archive-location "~/pet/org/archive.org_archive::" ; Another stupid gotcha with the `::` in the end.
+        org-image-actual-width nil ; So images can be resized
+        org-pretty-entities t)
+  (add-hook 'org-insert-heading-hook
+  (lambda()
+  (save-excursion
+            (org-back-to-heading)
+            (org-set-property "CREATED" (format-time-string "[%Y-%m-%d %T]")))))
+  :hook
+  ((org-mode . org-indent-mode)))
+
+(use-package evil-org
+  :after (evil org)
+  :hook (org-mode . evil-org-mode)
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
