@@ -17,6 +17,7 @@
       use-package
       eat
       centered-cursor-mode
+      evil-org
     ]) ++ (with epkgs.melpaStablePackages; [
       magit
       yaml-mode
