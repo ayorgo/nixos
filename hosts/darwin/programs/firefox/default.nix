@@ -128,15 +128,6 @@
         "privacy.clearOnShutdown.openWindows" = false;
         "privacy.clearOnShutdown.sessions" = false;
         "privacy.clearOnShutdown.siteSettings" = false;
-
-        "privacy.clearOnShutdown_v2.browsingHistoryAndDownloads" = false;
-        "privacy.clearOnShutdown_v2.cache" = false;
-        "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
-        "privacy.clearOnShutdown_v2.formdata" = false;
-        "privacy.clearOnShutdown_v2.history" = false;
-        "privacy.clearOnShutdown_v2.historyFormDataAndDownloads" = false;
-        "privacy.clearOnShutdown_v2.sessions" = false;
-        "privacy.clearOnShutdown_v2.siteSettings" = false;
       };
       extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
         british-english-dictionary-2
@@ -152,7 +143,7 @@
 
   home.packages = [ pkgs.dufs ];
 
-  # Serve surfingkeys.js to LibreWolf since FireFox
+  # Serve surfingkeys.js to Firefox since FireFox
   # does not support loading configuration from files.
   # Don't forget to configure surfingkeys manually
   # in the browser by pointing it to http://localhost:5000/surfingkeys.js
