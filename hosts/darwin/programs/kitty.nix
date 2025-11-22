@@ -59,19 +59,19 @@
       "ctrl+v" = "paste_from_clipboard";
 
       # Window management
-      "cmd+m" = "toggle_maximized";
-      "cmd+enter" = "launch --cwd=current";
-      "cmd+s" = "toggle_layout stack";
+      "alt+m" = "toggle_maximized";
+      "alt+enter" = "launch --cwd=current";
+      "alt+s" = "toggle_layout stack";
       "ctrl+j" = "neighboring_window down";
       "ctrl+k" = "neighboring_window up";
       "ctrl+h" = "neighboring_window left";
       "ctrl+l" = "neighboring_window right";
       "shift+tab" = "next_window";
 
-      "cmd+j" = "kitten relative_resize.py down  1";
-      "cmd+k" = "kitten relative_resize.py up    1";
-      "cmd+h" = "kitten relative_resize.py left  1";
-      "cmd+l" = "kitten relative_resize.py right 1";
+      "alt+j" = "kitten relative_resize.py down  1";
+      "alt+k" = "kitten relative_resize.py up    1";
+      "alt+h" = "kitten relative_resize.py left  1";
+      "alt+l" = "kitten relative_resize.py right 1";
 
       # Tab management
       "ctrl+t" = "new_tab";
@@ -79,8 +79,8 @@
       # Scrollback buffer
       "ctrl+up" = "scroll_line_up";
       "ctrl+down" = "scroll_line_down";
-      "cmd+b" = "launch --type=overlay --stdin-source=@screen_scrollback --cwd=current nvim -u NONE -i NONE -c 'normal G' -c 'colorscheme vim' -c 'map q :q!<CR>' -c 'set clipboard=unnamedplus laststatus=0 nospell nomodifiable syntax=' -";
-      "cmd+shift+b" = "launch --type=overlay --stdin-source=@last_cmd_output --cwd=current nvim -u NONE -i NONE -c 'normal G' -c 'colorscheme vim' -c 'map q :q!<CR>' -c 'set clipboard=unnamedplus laststatus=0 nospell nomodifiable syntax=' -";
+      "alt+b" = "launch --type=overlay --stdin-source=@screen_scrollback --cwd=current nvim -u NONE -i NONE -c 'normal G' -c 'colorscheme vim' -c 'map q :q!<CR>' -c 'set clipboard=unnamedplus laststatus=0 nospell nomodifiable syntax=' -";
+      "alt+shift+b" = "launch --type=overlay --stdin-source=@last_cmd_output --cwd=current nvim -u NONE -i NONE -c 'normal G' -c 'colorscheme vim' -c 'map q :q!<CR>' -c 'set clipboard=unnamedplus laststatus=0 nospell nomodifiable syntax=' -";
     };
 
     # Unmap some bindings inside Vim
@@ -90,10 +90,10 @@
       map --when-focus-on var:IS_NVIM ctrl+h
       map --when-focus-on var:IS_NVIM ctrl+l
 
-      map --when-focus-on var:IS_NVIM cmd+j
-      map --when-focus-on var:IS_NVIM cmd+k
-      map --when-focus-on var:IS_NVIM cmd+h
-      map --when-focus-on var:IS_NVIM cmd+l
+      map --when-focus-on var:IS_NVIM alt+j
+      map --when-focus-on var:IS_NVIM alt+k
+      map --when-focus-on var:IS_NVIM alt+h
+      map --when-focus-on var:IS_NVIM alt+l
 
       map --when-focus-on var:IS_NVIM ctrl+v
     '';

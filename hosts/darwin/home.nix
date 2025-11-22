@@ -23,6 +23,7 @@
     ./programs/neovim
     ./programs/starship
     ./programs/zsh
+    ./programs/karabiner-elements
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
