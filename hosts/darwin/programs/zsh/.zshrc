@@ -1,5 +1,5 @@
 # FZF config
-export FZF_DEFAULT_OPTS='--height 40% --border --color=gutter:-1'
+export FZF_DEFAULT_OPTS='--height 40% --border --gutter " "'
 export FZF_DEFAULT_COMMAND='find'
 
 # FZF keybindings
