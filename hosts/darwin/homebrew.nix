@@ -6,6 +6,7 @@
   casks = [
     "docker-desktop"
     "qobuz"
+    "karabiner-elements"
   ];
   brews = [
     "ollama"

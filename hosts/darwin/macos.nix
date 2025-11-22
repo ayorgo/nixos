@@ -119,7 +119,7 @@
     # Unmap certain key combinations
     "com.apple.symbolichotkeys" = {
       AppleSymbolicHotKeys = {
-        # Show Launchpad on Cmd-R
+        # Show Launchpad on Opt-R (same as Alt-R)
         "160" = {
           enabled = true;
           value = {
@@ -133,7 +133,7 @@
             parameters = [
               114
               15
-              1048576
+              524288
             ];
           };
         };
