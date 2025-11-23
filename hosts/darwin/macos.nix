@@ -39,12 +39,7 @@
   controlcenter.BatteryShowPercentage = true;
   dock = {
     autohide = true;
-    # persistent-apps = [];
-    persistent-apps = [
-      "${pkgs.librewolf}/Applications/LibreWolf.app"
-      "${pkgs.kitty}/Applications/Kitty.app"
-      "/Applications/Microsoft Teams.app"
-    ];
+    static-only=true;
     orientation = "right";
     show-recents = false;
     autohide-delay = 0.0; # Remove the auto-hiding Dock delay
@@ -93,6 +88,7 @@
   };
   finder = {
     AppleShowAllExtensions = true;
+    AppleShowAllFiles = true;  # show hidden files
     FXPreferredViewStyle = "clmv";
 
     # Allow quitting via ⌘ + Q; doing so will also hide desktop icons
@@ -112,7 +108,13 @@
   };
   trackpad = {
     Clicking = true;
+    ActuationStrength = 0;  # 0 to enable Silent Clicking, 1 to disable. The default is null.
+    FirstClickThreshold = 0;  # For normal click: 0 for light clicking, 1 for medium, 2 for firm. The default is null.
+    ForceSuppressed = true;  # Whether to disable force click. The default is null.
+    Dragging = true;
+    DragLock = false;
     TrackpadThreeFingerDrag = true;
+    TrackpadMomentumScroll = false;
   };
   CustomUserPreferences = {
 
@@ -197,6 +199,10 @@
 
     # Disable "Natural" scrolling
     "com.apple.swipescrolldirection" = false;
+
+    # Tap to click. Unclear how this overlaps with trackpad.Clicking.
+    # This actually enables the tap+drag to select behaviour like in Linux.
+    "com.apple.mouse.tapBehavior" = 1;
 
     # Locale
     AppleMetricUnits = 1;
