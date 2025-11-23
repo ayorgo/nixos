@@ -41,6 +41,9 @@ mapkey('<Ctrl-q>', '#3Close current tab', () => {
   RUNTIME('closeTab');
 });
 
+// Open in active new tab always
+map('f', 'af');
+
 // Show only tabs from the current window
 settings.omnibarTabsQuery = {currentWindow: true};
 
