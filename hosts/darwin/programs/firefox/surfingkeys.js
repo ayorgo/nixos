@@ -36,6 +36,11 @@ map('<Ctrl-s>', '<Alt-s>');
 map('L', 'D');
 map('H', 'S');
 
+// Close tab
+mapkey('<Ctrl-q>', '#3Close current tab', () => {
+  RUNTIME('closeTab');
+});
+
 // Show only tabs from the current window
 settings.omnibarTabsQuery = {currentWindow: true};
 
