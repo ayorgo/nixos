@@ -12,16 +12,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    darwin-emacs = {
-      url = "github:nix-giant/nix-darwin-emacs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    darwin-emacs-packages = {
-      url = "github:nix-community/emacs-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,8 +25,6 @@
     , nixpkgs-firefox-darwin
     , nur
     , nix-homebrew
-    , darwin-emacs
-    , darwin-emacs-packages
   }:
   let
     user = {
@@ -114,8 +102,6 @@
           nixpkgs.overlays = [
             nixpkgs-firefox-darwin.overlay
             nur.overlays.default
-            darwin-emacs.overlays.emacs
-            darwin-emacs-packages.overlays.package
           ];
           home-manager = {
             useGlobalPkgs = true;

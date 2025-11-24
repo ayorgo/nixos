@@ -4,17 +4,19 @@
 
 ;;; Startup
 ;;; PACKAGE LIST
-; (setq package-archives
-;       '(("melpa" . "https://melpa.org/packages/")
-;         ("elpa" . "https://elpa.gnu.org/packages/")))
+(setq package-archives
+      '(("melpa" . "https://melpa.org/packages/")
+        ("elpa" . "https://elpa.gnu.org/packages/")))
 
 ;;; BOOTSTRAP USE-PACKAGE
-; (package-initialize)
-; (setq use-package-always-ensure t)
-; (unless (package-installed-p 'use-package)
-;   (package-refresh-contents)
-;   (package-install 'use-package))
-; (eval-when-compile (require 'use-package))
+(package-initialize)
+(setq use-package-always-ensure t)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(eval-when-compile (require 'use-package))
+
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
 ;;; -------------
 ;;; GENERAL SETUP
@@ -41,63 +43,24 @@
 (setq ring-bell-function 'ignore)
 
 ;;; THEME
-(use-package catppuccin-theme)
-(setq catppuccin-flavor 'latte) ;; or 'latte, 'macchiato, or 'mocha
-(catppuccin-set-color 'base "#fcfcfc")
-(load-theme 'catppuccin :no-confirm)
-(catppuccin-reload)
-
-;;; WHITESPACE HIGHLIGHTING
-;; Use · for spaces
-(setq whitespace-display-mappings
-      '((space-mark ?\ [?·] [?.])))
-
-;; Enable for programming modes
-(add-hook 'prog-mode-hook #'whitespace-mode)
-(add-hook 'text-mode-hook #'whitespace-mode)
-
-;; Enable everything
-(setq whitespace-style
-      '(face               ;; Enable highlighting using faces
-        tabs               ;; highlight tab chars
-        tab-mark           ;; show a printable tab mark
-        spaces             ;; highlight space chars
-        space-mark         ;; show a printable space mark
-        trailing           ;; highlight trailing whitespace
-        ))
-
-;; Redefine hspace as leading space
-(setq whitespace-hspace-regexp "\\(^ +\\)")
-
-(with-eval-after-load 'whitespace
-  ;; Make leading whitespaces follow current theme's comment colouring
-  (set-face-attribute 'whitespace-hspace nil
-                      :foreground (face-foreground 'font-lock-comment-face nil t)
-                      :background nil)
-  ;; Hide the whitespaces between words
-  (set-face-attribute 'whitespace-space nil
-                      :foreground (face-background 'default nil t)
-                      :background nil)
-  ;; Don't chanege anything about trailing whitespaces, just leave it here for reference
-  (set-face-attribute 'whitespace-trailing nil
-                      :foreground nil
-                      :background nil)
-  ;; Make leading tabs follow current theme's comment colouring
-  (set-face-attribute 'whitespace-tab nil
-                      :foreground (face-foreground 'font-lock-comment-face nil t)
-                      :background nil))
-
-;    (setq-default tab-width 4 indent-tabs-mode nil))
-
-;; Refresh all buffers when underlying file changes
-(global-auto-revert-mode t)
+(use-package doom-themes
+  ; :custom
+  ;; Global settings (defaults)
+  ; (doom-themes-enable-bold t)   ; if nil, bold is universally disabled
+  ; (doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  ;; for treemacs users
+  :ensure t
+  :config
+  (load-theme 'doom-one-light t))
 
 ;;; UNDO
 ;; Vim style undo not needed for emacs 28
-(use-package undo-fu)
+(use-package undo-fu
+  :ensure t)
 
 ;;; Vim Bindings
 (use-package evil
+  :ensure t
   :demand t
   :bind (("<escape>" . keyboard-escape-quit))
   :init
@@ -109,36 +72,16 @@
   :config
   (evil-mode 1))
 
-;;; Comments
-(evil-commentary-mode)
-
 ;;; Vim Bindings Everywhere else
 (use-package evil-collection
+  :ensure t
   :after evil
   :config
   (setq evil-want-integration t)
   (evil-collection-init))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(evil-collection treemacs treemacs-evil treemacs-icons-dired
-		     treemacs-magit treemacs-persp treemacs-projectile
-		     treemacs-tab-bar undo-fu)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
-)
 
 ;; Enable buffer tabs
 (global-tab-line-mode 1)
-
-;; Save sessions
-(desktop-save-mode 1)
 
 ;; Treat _ as part of the word when navigating in vim
 ;; https://emacs.stackexchange.com/a/20717/36755
@@ -151,9 +94,12 @@
 (setq auto-save-visited-interval 0.4) ;; in seconds; a lower value results in status bar flickering
 (auto-save-visited-mode t)
 
+
+;; Save sessions
+(desktop-save-mode 1)
+
 ;; Line numbers in programming modes
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-(add-hook 'text-mode-hook #'display-line-numbers-mode)
 
 ;;; REMAP SOME KEYBINDINGS
 ;; Unbind C-h from help (optional, if you want to override it)
@@ -183,75 +129,26 @@
 
 ;; keep the cursor centered to avoid sudden scroll jumps
 (use-package centered-cursor-mode
+  :ensure t
   :config
   ;; Optional, enables centered-cursor-mode in all buffers.
   (global-centered-cursor-mode))
 
-;; disable in terminal modes
-;; http://stackoverflow.com/a/6849467/519736
-;; also disable in Info mode, because it breaks going back with the backspace key
-; (define-global-minor-mode my-global-centered-cursor-mode centered-cursor-mode
-;   (lambda ()
-;     (when (not (memq major-mode
-;                      (list 'Info-mode 'term-mode 'eshell-mode 'shell-mode 'erc-mode)))
-;       (centered-cursor-mode))))
-
-; (my-global-centered-cursor-mode 1)
 
 ;;; --------------------------
 ;;;          PACKAGES
 ;;; --------------------------
 
-;;; TREEMACS
-(use-package treemacs
-  :init
-  (with-eval-after-load 'winum
-    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
-  :config
-  (progn
-    ;; The default width and height of the icons is 22 pixels. If you are
-    ;; using a Hi-DPI display, uncomment this to double the icon size.
-    (treemacs-resize-icons 16)))
-
-(setq treemacs-width 50)
-(setq treemacs--width-is-locked nil)
-;(treemacs-width-is-initially-locked nil)
-;(treemacs-width 40)
-
-(use-package treemacs-evil
-  :after (treemacs evil))
-
-(use-package treemacs-projectile
-  :after (treemacs projectile))
-
-(use-package treemacs-icons-dired
-  :hook (dired-mode . treemacs-icons-dired-enable-once))
-
-(use-package treemacs-persp ;;treemacs-perspective if you use perspective.el vs. persp-mode
-  :after (treemacs persp-mode) ;;or perspective vs. persp-mode
-  :config (treemacs-set-scope-type 'Perspectives))
-
-(use-package treemacs-tab-bar ;;treemacs-tab-bar if you use tab-bar-mode
-  :after (treemacs)
-  :config (treemacs-set-scope-type 'Tabs))
-
-(treemacs-start-on-boot)
-
-(with-eval-after-load 'treemacs
-  (define-key treemacs-mode-map (kbd "C-h") 'windmove-left)
-  (define-key treemacs-mode-map (kbd "C-l") 'windmove-right)
-  (define-key treemacs-mode-map (kbd "C-j") 'windmove-down)
-  (define-key treemacs-mode-map (kbd "C-k") 'windmove-up))
-
-
 ;;; Syntax highlighting
 
 ;;; Nix
 (use-package nix-mode
+  :ensure t
   :mode "\\.nix\\'")
 
 ;;; Docker
 (use-package dockerfile-mode
+  :ensure t
   :mode "Dockerfile\\'"
   ;; :config
   ;; (add-hook 'dockerfile-mode 'smartparens-mode)
@@ -259,6 +156,7 @@
 
 ;;; Markdown
 (use-package markdown-mode
+  :ensure t
   :mode ("\\.md\\'" . gfm-mode)
   ; :init (setq markdown-command "multimarkdown")
 )
@@ -281,3 +179,33 @@
            (nix-mode        . nix-ts-mode)))
   (add-to-list 'major-mode-remap-alist mapping))
 (setopt treesit-font-lock-level 4)
+
+(global-visual-line-mode t)
+
+(use-package org
+  :ensure t
+  :config
+  (setq org-hide-emphasis-markers t
+        org-src-fontify-natively t
+        org-startup-folded t
+        org-yank-dnd-method 'file-link ; So images can be pasted from clipboard
+        org-yank-image-save-method "~/org/images"
+        org-archive-location "~/org/archive.org_archive::" ; Another stupid gotcha with the `::` in the end.
+        org-image-actual-width nil ; So images can be resized
+        org-pretty-entities t)
+  (add-hook 'org-insert-heading-hook
+  (lambda()
+  (save-excursion
+            (org-back-to-heading)
+            (org-set-property "CREATED" (format-time-string "[%Y-%m-%d %T]")))))
+  :hook
+  ((org-mode . org-indent-mode))
+  ((org-mode . org-toggle-pretty-entities)))
+
+(use-package evil-org
+  :ensure t
+  :after (evil org)
+  :hook (org-mode . evil-org-mode)
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))

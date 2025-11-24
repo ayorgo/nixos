@@ -126,7 +126,8 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "net.kovidgoyal.kitty"
+                                            "net.kovidgoyal.kitty",
+                                            "org.gnu.Emacs"
                                         ],
                                         "type": "frontmost_application_unless"
                                     }
@@ -142,7 +143,8 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "net.kovidgoyal.kitty"
+                                            "net.kovidgoyal.kitty",
+                                            "org.gnu.Emacs"
                                         ],
                                         "type": "frontmost_application_unless"
                                     }
