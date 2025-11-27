@@ -88,6 +88,10 @@
         "general.useragent.locale" = "en-GB";
         "accessibility.typeaheadfind.prefillwithselection" = true; # prefill find with selected text
 
+        # Disable trackpad gestures to go back and forward
+        "browser.gesture.swipe.left" = "";
+        "browser.gesture.swipe.right" = "";
+
         "browser.topsites.contile.enabled" = false;
         "browser.formfill.enable" = false;
         "browser.search.suggest.enabled" = false;
