@@ -13,6 +13,7 @@
     httpie
     ripgrep
     unzip
+    mpv
   ];
   imports = [
     ./programs/emacs
