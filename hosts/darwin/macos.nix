@@ -39,8 +39,8 @@
   controlcenter.BatteryShowPercentage = true;
   dock = {
     autohide = true;
-    static-only=true;
-    orientation = "right";
+    static-only = true;
+    orientation = "left";
     show-recents = false;
     autohide-delay = 0.0; # Remove the auto-hiding Dock delay
     autohide-time-modifier = 0.0; # Remove the animation when hiding/showing the Dock
