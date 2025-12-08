@@ -13,6 +13,10 @@
     httpie
     ripgrep
     unzip
+    docker
+    docker-compose
+    docker-credential-helpers
+    colima
     mpv
   ];
   imports = [
