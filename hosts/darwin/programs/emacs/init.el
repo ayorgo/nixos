@@ -185,6 +185,7 @@
 (use-package org
   :ensure t
   :config
+  (require 'org-tempo)
   (setq org-hide-emphasis-markers t
         org-src-fontify-natively t
         org-startup-folded t
