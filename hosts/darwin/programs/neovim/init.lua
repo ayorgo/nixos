@@ -112,7 +112,7 @@ require 'nvim-treesitter.configs'.setup {
 
 -- Vim Fugitive setup
 vim.cmd([[nnoremap <C-g> :0G<CR>]])
-vim.cmd([[nnoremap <C-d> :Gdiffsplit<CR>]])
+vim.cmd([[nnoremap <C-d> :Gvdiffsplit<CR>]])
 
 -- CSVview
 require('csvview').setup({
@@ -169,10 +169,10 @@ require('smart-splits').setup({
   default_amount = 1,
   at_edge = 'mux',
 })
-vim.keymap.set('n', '<D-h>', require('smart-splits').resize_left)
-vim.keymap.set('n', '<D-j>', require('smart-splits').resize_down)
-vim.keymap.set('n', '<D-k>', require('smart-splits').resize_up)
-vim.keymap.set('n', '<D-l>', require('smart-splits').resize_right)
+vim.keymap.set('n', '<A-h>', require('smart-splits').resize_left)
+vim.keymap.set('n', '<A-j>', require('smart-splits').resize_down)
+vim.keymap.set('n', '<A-k>', require('smart-splits').resize_up)
+vim.keymap.set('n', '<A-l>', require('smart-splits').resize_right)
 -- moving between splits
 vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
 vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
@@ -188,6 +188,12 @@ vim.api.nvim_create_autocmd("FileType", {
 require('fzf-lua').setup({
   fzf_opts = {
     ['--layout'] = 'default', -- search prompt at the bottom
+  },
+  winopts = {
+    width = 1.0,
+  },
+  grep = {
+    rg_opts = '--multiline --column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e',
   },
 })
 
