@@ -4,7 +4,6 @@
   onActivation.autoUpdate = true;
   onActivation.upgrade = true;
   casks = [
-    "docker-desktop"
     "qobuz"
     "karabiner-elements"
   ];
