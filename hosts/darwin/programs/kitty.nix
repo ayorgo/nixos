@@ -75,6 +75,8 @@
 
       # Tab management
       "ctrl+t" = "new_tab";
+      "shift+right" = "next_tab";
+      "shift+left" = "previous_tab";
 
       # Scrollback buffer
       "ctrl+up" = "scroll_line_up";
