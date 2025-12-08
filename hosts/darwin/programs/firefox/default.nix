@@ -74,6 +74,7 @@
       };
       settings = {
         # "security.cert_pinning.enforcement_level" = 1;
+        "app.update.auto" = false;
         "extensions.pocket.enabled" = false;
         "extensions.autoDisableScopes" = 0;
         "extensions.enabledScopes" = 3;
