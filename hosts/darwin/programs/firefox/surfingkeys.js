@@ -24,10 +24,10 @@ const {
 } = api;
 
 // Tab to the right
-map('K', 'R');
+map('<ArrowRight>', 'R');
 
 // Tab to the left
-map('J', 'E');
+map('<ArrowLeft>', 'E');
 
 // Disable on websites
 map('<Ctrl-s>', '<Alt-s>');
