@@ -158,6 +158,14 @@ require('mini.sessions').setup({
 require('mini.statusline').setup()
 require('mini.tabline').setup()
 
+vim.keymap.set("n", "<C-,>", function()
+  print("Left!")
+end, { desc = "Move Tab Left" })
+
+vim.keymap.set("n", "<C-.>", function()
+  print("Right!")
+end, { desc = "Move Tab Left" })
+
 vim.keymap.set("n", "'", function()
   local buf_name = vim.api.nvim_buf_get_name(0)
   local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
