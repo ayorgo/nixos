@@ -74,9 +74,11 @@
       "alt+l" = "kitten relative_resize.py right 1";
 
       # Tab management
-      "ctrl+t" = "new_tab";
-      "shift+right" = "next_tab";
-      "shift+left" = "previous_tab";
+      "alt+t" = "new_tab";
+      "alt+right" = "next_tab";
+      "alt+left" = "previous_tab";
+      "alt+." = "move_tab_forward";
+      "alt+," = "move_tab_backward";
 
       # Scrollback buffer
       "ctrl+up" = "scroll_line_up";
