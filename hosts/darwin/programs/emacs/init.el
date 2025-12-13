@@ -188,12 +188,20 @@
   (require 'org-tempo)
   (setq org-hide-emphasis-markers t
         org-src-fontify-natively t
+        org-src-tab-acts-natively t
+        org-edit-src-content-indentation 0
         org-startup-folded t
         org-yank-dnd-method 'file-link ; So images can be pasted from clipboard
         org-yank-image-save-method "~/org/images"
         org-archive-location "~/org/archive.org_archive::" ; Another stupid gotcha with the `::` in the end.
         org-image-actual-width nil ; So images can be resized
-        org-pretty-entities t)
+        org-return-follows-link t  ; Open links on Enter
+        org-pretty-entities t)  ; Can insert LaTeX characters with \
+  (setq org-todo-keywords
+        '((sequence
+           "IDEA(i!)" "TODO(t!)" "IN-PROGRESS(p!)" "ON-HOLD(h@/!)"
+           "|"
+           "DONE(d!)" "CANCELLED(c@/!)")))
   (add-hook 'org-insert-heading-hook
   (lambda()
   (save-excursion
@@ -206,7 +214,17 @@
 (use-package evil-org
   :ensure t
   :after (evil org)
-  :hook (org-mode . evil-org-mode)
+  :hook
+  (org-mode . evil-org-mode)
   :config
   (require 'evil-org-agenda)
+  (evil-org-set-key-theme '(navigation todo insert textobjects additional))
   (evil-org-agenda-set-keys))
+
+(use-package org-appear
+  :ensure t
+  :after (evil org)
+  :custom
+  (org-appear-autolinks t)
+  :hook
+  (org-mode . org-appear-mode))
