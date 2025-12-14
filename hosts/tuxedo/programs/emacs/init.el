@@ -178,10 +178,14 @@
         org-src-fontify-natively t
         org-startup-folded t
         org-yank-dnd-method 'file-link ; So images can be pasted from clipboard
-        org-yank-image-save-method "~/pet/org/images"
-        org-archive-location "~/pet/org/archive.org_archive::" ; Another stupid gotcha with the `::` in the end.
+        org-yank-image-save-method "~/diy/org/images"
+        org-archive-location "~/diy/org/archive.org_archive::" ; Another stupid gotcha with the `::` in the end.
         org-image-actual-width nil ; So images can be resized
         org-pretty-entities t)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)
+     (shell . t)))
   (add-hook 'org-insert-heading-hook
   (lambda()
   (save-excursion
