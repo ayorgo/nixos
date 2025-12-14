@@ -202,6 +202,11 @@
            "IDEA(i!)" "TODO(t!)" "IN-PROGRESS(p!)" "ON-HOLD(h@/!)"
            "|"
            "DONE(d!)" "CANCELLED(c@/!)")))
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)
+     (shell . t)))
   (add-hook 'org-insert-heading-hook
   (lambda()
   (save-excursion
