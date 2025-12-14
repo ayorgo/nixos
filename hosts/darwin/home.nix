@@ -20,15 +20,15 @@
     mpv
   ];
   imports = [
-    ./programs/emacs
-    ./programs/git.nix
-    ./programs/kitty.nix
-    ./programs/firefox
-    ./programs/lsd.nix
-    ./programs/neovim
-    ./programs/starship
-    ./programs/zsh
-    ./programs/karabiner-elements
+    ../../programs/emacs
+    ../../programs/git.nix
+    ../../programs/kitty.nix
+    ../../programs/firefox
+    ../../programs/lsd.nix
+    ../../programs/neovim
+    ../../programs/starship
+    ../../programs/zsh
+    ../../programs/karabiner-elements
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
