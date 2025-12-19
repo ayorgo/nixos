@@ -4,55 +4,91 @@
   programs.kitty = {
     enable = true;
     themeFile = lib.mkDefault "OneHalfLight";
-    shellIntegration.enableZshIntegration = true;
-    settings = {
-      shell = "zsh";
+    shellIntegration = lib.mkMerge [
+      (lib.mkIf pkgs.stdenv.isDarwin {
+        enableZshIntegration = true;
+      })
+      (lib.mkIf pkgs.stdenv.isLinux {
+        enableBashIntegration = true;
+      })
+    ];
+    settings = lib.mkMerge [
+      {
+        shell = "zsh";
 
-      # Don't phone home
-      update_check_interval = 0;
+        # Improve performance on MacOS and, probably, Linux, although Linux was already fast enough
+        # Copied from https://sw.kovidgoyal.net/kitty/performance/#keyboard-to-screen-latency
+        # TODO: figure out which one does the job.
+        input_delay = 0;
+        repaint_delay = 2;
+        sync_to_monitor = "no";
+        wayland_enable_ime = "no";
 
-      # Tabs
-      tab_bar_edge = "top";
-      tab_bar_style = "powerline";
-      tab_powerline_style = "slanted";
-      active_tab_font_style = "bold";
-      active_tab_background = "#FAFAFA";
-      inactive_tab_font_style = "normal";
-      inactive_tab_background = "#FAFAFA";
-      inactive_tab_foreground = "#999999";
+        # Don't phone home
+        update_check_interval = 0;
 
-      # Clicking on URLs
-      mouse_map = "ctrl+left release grabbed,ungrabbed mouse_handle_click link";
-      mouse_hide_wait = -1;
+        # Tabs
+        tab_bar_edge = "top";
+        tab_bar_style = "powerline";
+        tab_powerline_style = "slanted";
+        active_tab_font_style = "bold";
+        active_tab_background = "#FAFAFA";
+        inactive_tab_font_style = "normal";
+        inactive_tab_background = "#FAFAFA";
+        inactive_tab_foreground = "#999999";
 
-      # Sound bell
-      enable_audio_bell = "no";
+        # Clicking on URLs
+        mouse_map = "ctrl+left release grabbed,ungrabbed mouse_handle_click link";
+        mouse_hide_wait = -1;
 
-      # Font
-      font_family = "Source Code Pro Medium";
-      bold_font = "Source Code Pro Bold";
-      font_size = 14;
+        # Sound bell
+        enable_audio_bell = "no";
 
-      # Remote control
-      # Needed for smart-splits.nvim to work
-      allow_remote_control = "yes";
-      listen_on = "unix:/tmp/pussycat";
+        # Remote control
+        # Needed for smart-splits.nvim to work
+        allow_remote_control = "yes";
+        listen_on = "unix:/tmp/pussycat";
 
-      # Always ask to close window
-      confirm_os_window_close = 1;
+        # Always ask to close window
+        confirm_os_window_close = 1;
 
-      # Hide the title bar and window borders
-      hide_window_decorations = "yes";
+        # Hide the title bar and window borders
+        hide_window_decorations = "yes";
 
-      # Fade text in inactive windows
-      inactive_text_alpha = 0.4;
-      active_border_color = "none";
+        # Fade text in inactive windows
+        inactive_text_alpha = 0.4;
+        active_border_color = "none";
 
-      # Stacked tab title decorations
-      tab_title_template = "{bell_symbol}{activity_symbol}{' ' if layout_name == 'stack' and num_windows > 1 else ''}{tab.active_wd.rsplit('/', 1)[-1]}";
+        # Stacked tab title decorations
+        tab_title_template = "{bell_symbol}{activity_symbol}{' ' if layout_name == 'stack' and num_windows > 1 else ''}{tab.active_wd.rsplit('/', 1)[-1]}";
 
-      cursor = "#999999";
-    };
+        cursor = "#999999";
+      }
+
+      (lib.mkIf pkgs.stdenv.isDarwin {
+        # Shell
+        shell = "zsh";
+
+        # Font
+        font_family = "Source Code Pro Medium";
+        bold_font = "Source Code Pro Bold";
+        font_size = 14;
+      })
+
+      (lib.mkIf pkgs.stdenv.isLinux {
+        # Shell
+        shell = "bash";
+
+        # Font
+        font_family = "SauceCodePro NF SemiBold";
+        bold_font = "SauceCodePro NF Bold";
+        font_size = 11;
+      })
+
+      (lib.mkIf pkgs.stdenv.isDarwin {
+        macos_option_as_alt = true;
+      })
+    ];
     keybindings = {
       # Clipboard
       "ctrl+c" = "copy_or_interrupt";
@@ -83,8 +119,10 @@
       # Scrollback buffer
       "ctrl+up" = "scroll_line_up";
       "ctrl+down" = "scroll_line_down";
-      "alt+b" = "launch --type=overlay --stdin-source=@screen_scrollback --cwd=current nvim -u NONE -i NONE -c 'normal G' -c 'colorscheme vim' -c 'map q :q!<CR>' -c 'set clipboard=unnamedplus laststatus=0 nospell nomodifiable syntax=' -";
-      "alt+shift+b" = "launch --type=overlay --stdin-source=@last_cmd_output --cwd=current nvim -u NONE -i NONE -c 'normal G' -c 'colorscheme vim' -c 'map q :q!<CR>' -c 'set clipboard=unnamedplus laststatus=0 nospell nomodifiable syntax=' -";
+      "alt+b" =
+        "launch --type=overlay --stdin-source=@screen_scrollback --cwd=current nvim -u NONE -i NONE -c 'normal G' -c 'colorscheme vim' -c 'map q :q!<CR>' -c 'set clipboard=unnamedplus laststatus=0 nospell nomodifiable syntax=' -";
+      "alt+shift+b" =
+        "launch --type=overlay --stdin-source=@last_cmd_output --cwd=current nvim -u NONE -i NONE -c 'normal G' -c 'colorscheme vim' -c 'map q :q!<CR>' -c 'set clipboard=unnamedplus laststatus=0 nospell nomodifiable syntax=' -";
     };
 
     # Unmap some bindings inside Vim
