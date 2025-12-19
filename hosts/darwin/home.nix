@@ -18,6 +18,7 @@
     docker-credential-helpers
     colima
     mpv
+    nixfmt-rfc-style
   ];
   imports = [
     ../../programs/emacs
