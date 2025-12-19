@@ -70,7 +70,9 @@
   ;; no vim insert bindings
   (setq evil-undo-system 'undo-fu)
   :config
-  (evil-mode 1))
+  (evil-mode 1)
+  ;; Make the Enter key follow links in evil Normal mode
+  (with-eval-after-load 'evil-maps (define-key evil-motion-state-map (kbd "RET") nil)))
 
 ;;; Vim Bindings Everywhere else
 (use-package evil-collection
