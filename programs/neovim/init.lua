@@ -209,3 +209,11 @@ vim.cmd([[
 nnoremap <space> :FzfLua files<CR>
 nnoremap <C-space> :FzfLua live_grep<CR>
 ]])
+
+-- Folding
+vim.opt.foldenable = true
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.keymap.set("n", "<Tab>", "za")
