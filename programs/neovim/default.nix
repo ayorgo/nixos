@@ -9,6 +9,7 @@
       auto-save-nvim
       nvim-treesitter.withAllGrammars
       vim-fugitive
+      fugitive-gitlab-vim
       vim-rhubarb
       indent-blankline-nvim
       csvview-nvim
