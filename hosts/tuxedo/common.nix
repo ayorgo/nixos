@@ -8,7 +8,6 @@ let
 in
 {
   imports = [
-    ./programs/anki.nix
     ./programs/bash
     ./programs/emacs
     ./programs/librewolf
@@ -18,6 +17,7 @@ in
     ./programs/neovim
     ./programs/starship
     ./services/watch-gnome-theme.nix
+    ../../programs/anki.nix
     ../../programs/kitty.nix
   ];
 
