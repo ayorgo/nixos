@@ -14,11 +14,11 @@ in
     ./programs/librewolf
     ./programs/git.nix
     ./programs/gnome.nix
-    ./programs/kitty.nix
     ./programs/lsd.nix
     ./programs/neovim
     ./programs/starship
     ./services/watch-gnome-theme.nix
+    ../../programs/kitty.nix
   ];
 
   home.username = "ayorgo";
