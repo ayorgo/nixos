@@ -12,12 +12,12 @@ in
     ./programs/emacs
     ./programs/librewolf
     ./programs/git.nix
-    ./programs/gnome.nix
     ./programs/lsd.nix
     ./programs/neovim
     ./programs/starship
     ./services/watch-gnome-theme.nix
     ../../programs/anki.nix
+    ../../programs/gnome.nix
     ../../programs/kitty.nix
   ];
 
