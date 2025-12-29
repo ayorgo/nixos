@@ -8,7 +8,7 @@ home-light:
 
 .PHONY: rebuild-host
 rebuild-host:
-	sudo nixos-rebuild switch --flake './hosts#tuxedo'
+	sudo nixos-rebuild switch --flake .#tuxedo
 
 .PHONY: rebuild-dark
 rebuild-dark: rebuild-host home-dark
@@ -19,8 +19,8 @@ rebuild-light: rebuild-host home-light
 .PHONY: update
 update:
 	nix flake update
-	(cd ~/pet/nixos/hosts/tuxedo/flavours/dark/ && nix flake update)
-	(cd ~/pet/nixos/hosts/tuxedo/flavours/light/ && nix flake update)
+	(cd ~/diy/nixos/hosts/tuxedo/flavours/dark/ && nix flake update)
+	(cd ~/diy/nixos/hosts/tuxedo/flavours/light/ && nix flake update)
 
 .PHONY: collect-garbage
 collect-garbage:
