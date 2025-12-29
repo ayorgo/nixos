@@ -14,8 +14,6 @@
     ];
     settings = lib.mkMerge [
       {
-        shell = "zsh";
-
         # Improve performance on MacOS and, probably, Linux, although Linux was already fast enough
         # Copied from https://sw.kovidgoyal.net/kitty/performance/#keyboard-to-screen-latency
         # TODO: figure out which one does the job.
