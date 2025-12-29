@@ -4,13 +4,13 @@
   programs.emacs = {
     enable = true;
     package = pkgs.emacs-pgtk;
-    package = pkgs.emacs-pgtk.override {
-      withSQLite3 = true;
-      withWebP = true;
-      withImageMagick = true;
-      withTreeSitter = true;
-      withNativeCompilation = true;
-    };
+    # package = pkgs.emacs-pgtk.override {
+    #   withSQLite3 = true;
+    #   withWebP = true;
+    #   withImageMagick = true;
+    #   withTreeSitter = true;
+    #   withNativeCompilation = true;
+    # };
     extraPackages = epkgs: (with epkgs; [
       treesit-grammars.with-all-grammars
       use-package
