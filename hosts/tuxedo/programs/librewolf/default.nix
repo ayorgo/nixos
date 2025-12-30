@@ -142,4 +142,35 @@
   imports = [
     ./vimium
   ];
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "x-scheme-handler/http" = "librewolf.desktop";
+      "x-scheme-handler/https" = "librewolf.desktop";
+      "x-scheme-handler/about" = "librewolf.desktop";
+      "x-scheme-handler/unknown" = "librewolf.desktop";
+      "text/html" = "librewolf.desktop";
+      "application/pdf" = "librewolf.desktop";
+
+      # At the time of this being added
+      # ~/.config/mimeapps.list:
+      # [Default Applications]
+      # x-scheme-handler/mailto=userapp-Evolution-A8OZV2.desktop
+      # message/rfc822=userapp-Thunderbird-Y8D8M2.desktop
+      # x-scheme-handler/mid=userapp-Thunderbird-Y8D8M2.desktop
+      # x-scheme-handler/webcal=userapp-Thunderbird-ZDN7M2.desktop
+      # text/calendar=userapp-Thunderbird-ZDN7M2.desktop
+      # application/x-extension-ics=userapp-Thunderbird-ZDN7M2.desktop
+      # x-scheme-handler/webcals=userapp-Thunderbird-ZDN7M2.desktop
+      # application/pdf=librewolf.desktop
+      #
+      # [Added Associations]
+      # x-scheme-handler/mailto=userapp-Thunderbird-Y8D8M2.desktop;userapp-Evolution-A8OZV2.desktop;
+      # x-scheme-handler/mid=userapp-Thunderbird-Y8D8M2.desktop;
+      # x-scheme-handler/webcal=userapp-Thunderbird-ZDN7M2.desktop;
+      # x-scheme-handler/webcals=userapp-Thunderbird-ZDN7M2.desktop;
+      # application/pdf=librewolf.desktop;
+      # font/ttf=nvim.desktop;
+    };
+  };
 }
