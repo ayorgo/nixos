@@ -104,7 +104,7 @@ vim.cmd([[nnoremap <C-q> :bw<CR>]])
 vim.opt.clipboard = "unnamedplus"
 
 -- TreeSitter
-require 'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.config'.setup {
   highlight = {
     enable = true, -- enable syntax highlighting
   }
@@ -113,6 +113,7 @@ require 'nvim-treesitter.configs'.setup {
 -- Vim Fugitive setup
 vim.cmd([[nnoremap <C-g> :0G<CR>]])
 vim.cmd([[nnoremap <C-d> :Gvdiffsplit<CR>]])
+vim.g.fugitive_gitlab_domains = { 'https://gitlab.kfplc.com' }
 
 -- CSVview
 require('csvview').setup({
