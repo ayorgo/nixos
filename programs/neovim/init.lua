@@ -104,11 +104,9 @@ vim.cmd([[nnoremap <C-q> :bw<CR>]])
 vim.opt.clipboard = "unnamedplus"
 
 -- TreeSitter
-require 'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true, -- enable syntax highlighting
-  }
-}
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function() vim.treesitter.start() end,
+})
 
 -- Vim Fugitive setup
 vim.cmd([[nnoremap <C-g> :0G<CR>]])
