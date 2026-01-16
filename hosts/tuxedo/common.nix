@@ -49,6 +49,7 @@ in
     libreoffice
     brave
     zoom-us
+    pyright
   ];
 
   accounts.email.accounts = {

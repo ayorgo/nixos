@@ -225,3 +225,31 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.keymap.set("n", "<Tab>", "za")
+
+vim.lsp.config('pyright', {
+  cmd = { 'pyright-langserver', '--stdio' },
+  filetypes = { 'python' },
+  root_markers = { '.git' },
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "off",
+        diagnosticMode = "off",
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        indexing = true,
+        diagnosticSeverityOverrides = {
+          reportMissingImports = "none",
+        },
+      },
+    },
+  },
+})
+vim.lsp.enable('pyright')
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(ev)
+    local opts = { buffer = ev.buf }
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+  end,
+})
