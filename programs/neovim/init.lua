@@ -105,7 +105,17 @@ vim.opt.clipboard = "unnamedplus"
 
 -- TreeSitter
 vim.api.nvim_create_autocmd('FileType', {
-  callback = function() vim.treesitter.start() end,
+  callback = function()
+    disabled = {
+      ["minifiles"] = true,
+      ["fzf"] = true,
+      ["qf"] = true,
+    }
+    if disabled[vim.bo.filetype] then
+      return
+    end
+    vim.treesitter.start()
+  end,
 })
 
 -- Vim Fugitive setup
