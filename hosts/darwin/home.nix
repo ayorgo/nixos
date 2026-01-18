@@ -18,7 +18,7 @@
     docker-credential-helpers
     colima
     mpv
-    nixfmt-rfc-style
+    nixfmt
     pyright
   ];
   imports = [
