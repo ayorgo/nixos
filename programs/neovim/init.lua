@@ -110,6 +110,9 @@ vim.api.nvim_create_autocmd('FileType', {
       ["minifiles"] = true,
       ["fzf"] = true,
       ["qf"] = true,
+      ["fugitive"] = true,
+      ["dbout"] = true,
+      ["text"] = true,
     }
     if disabled[vim.bo.filetype] then
       return
@@ -302,3 +305,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.diagnostic.config{
     virtual_lines = { current_line = true, },  -- floating text displayed on line below current line
 }
+
+-- Display dadbod results as csv
+vim.filetype.add({
+  extension = {
+    dbout = "csv",
+  },
+})

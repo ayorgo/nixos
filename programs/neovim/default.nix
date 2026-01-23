@@ -20,10 +20,19 @@
       mini-tabline
       onedark-nvim
       smart-splits-nvim
+      vim-dadbod
     ];
     extraPackages = [
       pkgs.gcc  # required for treesitter to work properly
     ];
     extraLuaConfig = lib.mkDefault (builtins.readFile ./init.lua);
   };
+  home.file.".bigqueryrc".text = ''
+--project_id=my-project
+--format=csv
+
+[query]
+--use_legacy_sql=false
+--max_rows=150
+'';
 }
