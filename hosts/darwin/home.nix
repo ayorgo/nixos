@@ -19,7 +19,7 @@
     colima
     mpv
     nixfmt
-    pyright
+    ty
   ];
   imports = [
     ../../programs/emacs

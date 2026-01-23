@@ -226,26 +226,71 @@ vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.keymap.set("n", "<Tab>", "za")
 
-vim.lsp.config('pyright', {
-  cmd = { 'pyright-langserver', '--stdio' },
+-- vim.lsp.config('pyright', {
+--   cmd = { 'pyright-langserver', '--stdio' },
+--   filetypes = { 'python' },
+--   root_markers = { '.git' },
+--   settings = {
+--     python = {
+--       pythonVersion = "3.11",  -- doesn't seem to work
+--       venvPath = vim.fn.getcwd(),
+--       venv = "venv_default",
+--       analysis = {
+--         useLibraryCodeForTypes = false,  -- doesn't seem to work
+--         -- pythonPath = vim.fn.getcwd() .. "/.venv_default/bin/python", -- https://github.com/astral-sh/uv/issues/6782
+--         extraPaths = {
+--           -- vim.fn.getcwd() .. "/python-site-packages",
+--           vim.fn.getcwd() .. "/.venv_default/lib/python3.11/site-packages",
+--         },
+--         typeCheckingMode = "standard",
+--         diagnosticMode = "openFilesOnly",
+--         autoSearchPaths = true,
+--         diagnosticSeverityOverrides = {
+--           reportMissingImports = false,
+--           reportAttributeAccessIssue = false,
+--           reportMissingTypeStubs = false,
+--           reportGeneralTypeIssues = false,
+--           reportCallIssue = false,
+--           reportArgumentType = false,
+--         },
+--       },
+--     },
+--   },
+-- })
+-- vim.lsp.enable('pyright')
+vim.lsp.config('ty', {
+  cmd = { 'ty', 'server' },
   filetypes = { 'python' },
   root_markers = { '.git' },
   settings = {
-    python = {
-      analysis = {
-        typeCheckingMode = "off",
-        diagnosticMode = "off",
-        autoSearchPaths = true,
-        useLibraryCodeForTypes = true,
-        indexing = true,
-        diagnosticSeverityOverrides = {
-          reportMissingImports = "none",
+    ty = {
+      diagnosticMode = "openFilesOnly",
+      configuration = {
+        environment = {
+          ["python-version"] = "3.11",
+          -- For Docker container Python packages exposed to the host via e.g.:
+          -- ```
+          -- docker cp <container-name>:/home/vscode/.local/lib/python3.11/site-packages python-site-packages
+          -- ```
+          -- This mitigates version conflicts between Python packages from different projects on the host
+          -- while also avoiding the hassle of installing Neovim inside a container, copying its config
+          -- and plugins over, running it in server mode, and then attaching a host Neovim instance as client.
+          -- I.e. essentially what VSCode does with its devcontainers.
+          -- Sure this doesn't expose the container environment in its entirety missing:
+          -- * environment variables
+          -- * applications, such as: formatters, linters, or cloud clients.
+          -- but I don't think a text editor should replace the terminal when it comes to
+          -- running commands either inside containers or on the host.
+          -- Tools like LSPs, linters, and formatters can live on the host without issue.
+          ["extra-paths"] = {
+            vim.fn.getcwd() .. "/.venv_default/lib/python3.11/site-packages",
+          },
         },
       },
     },
   },
 })
-vim.lsp.enable('pyright')
+vim.lsp.enable('ty')
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(ev)
     local opts = { buffer = ev.buf }
@@ -253,3 +298,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
   end,
 })
+
+vim.diagnostic.config{
+    virtual_lines = { current_line = true, },  -- floating text displayed on line below current line
+}
