@@ -59,13 +59,15 @@
   };
 
   # Ensure GNOME and GDM are enabled
-  services.xserver = {
-    enable = true;
+  services = {
     desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
-    xkb.layout = "us,us,ua,ru";
-    xkb.variant = ",dvorak,,";
-    wacom.enable = true;
+    xserver = {
+      enable = true;
+      xkb.layout = "us,us,ua,ru";
+      xkb.variant = ",dvorak,,";
+      wacom.enable = true;
+    };
   };
 
   # Enable OpenGL
@@ -148,7 +150,7 @@
     openFirewall = true;
   };
 
-  services.logind.lidSwitch = "hibernate";
+  services.logind.settings.Login.HandleLidSwitch = "hibernate";
 
   services.fwupd.enable = true;
 
