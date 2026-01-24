@@ -111,6 +111,8 @@ vim.api.nvim_create_autocmd('FileType', {
       ["fzf"] = true,
       ["qf"] = true,
       ["fugitive"] = true,
+      ["fugitiveblame"] = true,
+      ["git"] = true,
       ["dbout"] = true,
       ["text"] = true,
     }
