@@ -13,7 +13,7 @@ in
     ./programs/librewolf
     ./programs/git.nix
     ./programs/lsd.nix
-    ./programs/neovim
+    ../../programs/neovim
     ./programs/starship
     ./services/watch-gnome-theme.nix
     ../../programs/anki.nix
