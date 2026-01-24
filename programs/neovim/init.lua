@@ -152,9 +152,9 @@ require('mini.icons').setup()
 require('mini.files').setup({
   mappings = {
     close       = '<ESC>',
-    go_in       = 'l',
-    go_in_plus  = '<CR>',  -- changed from L
-    go_out      = 'h',
+    go_in       = '<Right>',
+    go_in_plus  = '<CR>',
+    go_out      = '<Left>',
     go_out_plus = 'H',
     reset       = '<BS>',
     reveal_cwd  = '@',
