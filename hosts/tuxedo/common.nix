@@ -50,6 +50,7 @@ in
     brave
     zoom-us
     pyright
+    mpv
   ];
 
   accounts.email.accounts = {
