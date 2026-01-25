@@ -25,7 +25,7 @@
     extraPackages = [
       pkgs.gcc  # required for treesitter to work properly
     ];
-    extraLuaConfig = lib.mkDefault (builtins.readFile ./init.lua);
+    initLua = lib.mkDefault (builtins.readFile ./init.lua);
   };
   home.file.".bigqueryrc".text = ''
 --project_id=my-project
