@@ -9,7 +9,7 @@ in
 {
   imports = [
     ./programs/bash
-    ./programs/emacs
+    ../../programs/emacs
     ./programs/librewolf
     ./programs/git.nix
     ./programs/lsd.nix
