@@ -213,8 +213,12 @@ require('fzf-lua').setup({
   winopts = {
     width = 1.0,
   },
+  files = {
+    -- Need to repeat the same options from fd.nix and fzf.nix all over again.
+    cmd = "fd --type f --type l --no-ignore --hidden --exclude .git",
+  },
   grep = {
-    rg_opts = '--multiline --column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e',
+    cmd = "rg --multiline --column --line-number --color=always --smart-case --no-heading --no-ignore --hidden --glob '!.git' --max-columns=4096 -e",
   },
 })
 

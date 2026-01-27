@@ -12,6 +12,8 @@ in
     ../../programs/emacs
     ./programs/librewolf
     ./programs/git.nix
+    ../../programs/fd.nix
+    ../../programs/fzf.nix
     ./programs/lsd.nix
     ../../programs/neovim
     ./programs/starship
@@ -29,9 +31,7 @@ in
   home.packages = with pkgs; [
     freetube
     fastfetch
-    fzf
     ripgrep
-    fd
     texlive.combined.scheme-full
     rnote # sketching and handwritten note taking
     httpie
