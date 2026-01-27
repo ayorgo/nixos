@@ -8,8 +8,6 @@
     btop
     coreutils
     fastfetch
-    fd
-    fzf
     httpie
     ripgrep
     unzip
@@ -23,6 +21,8 @@
   ];
   imports = [
     ../../programs/emacs
+    ../../programs/fd.nix
+    ../../programs/fzf.nix
     ../../programs/git.nix
     ../../programs/kitty.nix
     ../../programs/firefox

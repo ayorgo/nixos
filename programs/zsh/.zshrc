@@ -1,7 +1,3 @@
-# FZF config
-export FZF_DEFAULT_OPTS='--height 40% --border --gutter " "'
-export FZF_DEFAULT_COMMAND='find'
-
 # FZF keybindings
 if command -v fzf-share >/dev/null; then
   source "$(fzf-share)/key-bindings.zsh"
