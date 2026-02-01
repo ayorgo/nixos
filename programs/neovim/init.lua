@@ -305,17 +305,29 @@ vim.lsp.config('ty', {
     },
   },
 })
-vim.lsp.enable('ty')
+vim.lsp.enable("ty")
 vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(ev)
-    local opts = { buffer = ev.buf }
+  callback = function(args)
+    local opts = { buffer = args.buf }
+    -- https://neovim.io/doc/user/lsp.html#lsp-defaults
+    -- "grr" is mapped to vim.lsp.buf.references()
+    -- "grt" is mapped to vim.lsp.buf.type_definition()
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "grn", function() vim.lsp.buf.rename() vim.cmd("silent! wa") end, opts)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client.name == "ty" then
+      client.server_capabilities.semanticTokensProvider = nil
+    end
+    if client:supports_method('textDocument/foldingRange') then
+      local win = vim.api.nvim_get_current_win()
+      vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+    end
   end,
 })
 
 vim.diagnostic.config{
     virtual_lines = { current_line = true, },  -- floating text displayed on line below current line
+    virtual_text = false,
 }
 
 -- Display dadbod results as csv
