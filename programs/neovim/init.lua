@@ -118,6 +118,9 @@ vim.api.nvim_create_autocmd('FileType', {
       ["git"] = true,
       ["dbout"] = true,
       ["text"] = true,
+      ["csv"] = true,  -- in favour of csvview.nvim
+      ["tsv"] = true,  -- in favour of csvview.nvim
+      ["csvview-info"] = true,  -- in favour of csvview.nvim
     }
     if disabled[vim.bo.filetype] then
       return
