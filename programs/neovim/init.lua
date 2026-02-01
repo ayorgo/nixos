@@ -43,6 +43,9 @@ vim.cmd([[set hlsearch]])
 vim.cmd([[set ignorecase]])
 vim.cmd([[set smartcase]])
 
+-- Rounded border around floating (pop-up) windows
+vim.o.winborder = "rounded"
+
 -- Colorscheme
 require('onedark').setup({
   transparent = true,
