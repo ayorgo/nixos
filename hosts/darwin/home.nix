@@ -33,7 +33,7 @@
     ../../programs/karabiner-elements
   ];
   home.sessionVariables = {
-    EDITOR = "nvim";
+    # EDITOR = "nvim";  # done inside the Neovim config
     MANPAGER = "nvim +Man! --clean";
     MOZ_LEGACY_PROFILES = "1";
   };
