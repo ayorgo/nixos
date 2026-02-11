@@ -236,6 +236,20 @@
   :hook
   (org-mode . org-appear-mode))
 
+
+(setq org-latex-compiler "xelatex")
+
+(setq org-latex-pdf-process
+      '("xelatex -shell-escape -interaction nonstopmode %f"
+        "xelatex -shell-escape -interaction nonstopmode %f"))
+
+(setq org-latex-src-block-backend 'minted)
+
+(setq org-latex-prefer-user-labels t)
+
+(use-package ox-gfm
+  :ensure t)
+
 ;; Platform-specific stuff
 (when (eq system-type 'darwin)
   ;; Work around a bug on OS X where system-name is FQDN
