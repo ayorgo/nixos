@@ -121,6 +121,7 @@ vim.api.nvim_create_autocmd('FileType', {
       ["csv"] = true,  -- in favour of csvview.nvim
       ["tsv"] = true,  -- in favour of csvview.nvim
       ["csvview-info"] = true,  -- in favour of csvview.nvim
+      ["man"] = true,
     }
     if disabled[vim.bo.filetype] then
       return
