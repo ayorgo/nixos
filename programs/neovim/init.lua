@@ -55,6 +55,10 @@ require('onedark').setup({
     MiniTablineCurrent = {fg='fg', bg='bg0', fmt='bold'},
     MiniTablineVisible = {fg='grey', bg='bg1'},
     MiniTablineHidden = {fg='grey', bg='bg1'},
+
+    -- Floating window styling
+    FloatBorder = { bg = "none", fg='fg', fmt='bold' },
+    NormalFloat = { bg = "none" },
   }
 })
 vim.cmd.colorscheme "onedark"
@@ -327,9 +331,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 vim.diagnostic.config{
-    virtual_lines = { current_line = true, },  -- floating text displayed on line below current line
+    virtual_lines = false,
     virtual_text = false,
 }
+vim.opt.updatetime = 300
+vim.cmd([[autocmd CursorHold * lua vim.diagnostic.open_float(nil, {scope="cursor", header="", focusable=false})]])
 
 -- Display dadbod results as csv
 vim.filetype.add({
