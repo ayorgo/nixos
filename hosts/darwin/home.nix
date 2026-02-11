@@ -34,6 +34,7 @@
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
+    MANPAGER = "nvim +Man! --clean";
     MOZ_LEGACY_PROFILES = "1";
   };
   home.activation = {
