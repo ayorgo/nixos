@@ -46,24 +46,6 @@ vim.cmd([[set smartcase]])
 -- Rounded border around floating (pop-up) windows
 vim.o.winborder = "rounded"
 
--- Colorscheme
-require('onedark').setup({
-  transparent = true,
-  style = 'warm',
-  highlights = {
-    MatchParen = {bg = 'lightblue'},
-    -- barbar settings
-    BufferCurrent = {fg='fg', bg='bg0', fmt='bold'},
-    BufferVisible = {fg='grey', bg='bg1'},
-    BufferInactive = {fg='grey', bg='bg1'},
-
-    -- Floating window styling
-    FloatBorder = { bg = "none", fg='fg', fmt='bold' },
-    NormalFloat = { bg = "none" },
-  }
-})
-vim.cmd.colorscheme "onedark"
-
 -- Indentation
 vim.cmd([[set list]])
 vim.cmd([[set listchars=lead:·,trail:·,tab:->\ ]])
@@ -103,6 +85,82 @@ augroup END]])
 -- Set clipboard to use system clipboard
 vim.opt.clipboard = "unnamedplus"
 
+---------------
+-- Key mappings
+---------------
+-- Map leader key to space
+vim.g.mapleader = " "
+
+-- barbar: buffer navigation and management
+vim.keymap.set('n', '<Right>', ':BufferNext<CR>')
+vim.keymap.set('n', '<Left>', ':BufferPrevious<CR>')
+vim.keymap.set('n', '<C-Right>', ':BufferMoveNext<CR>')
+vim.keymap.set('n', '<C-Left>', ':BufferMovePrevious<CR>')
+vim.keymap.set('n', '<C-q>', ':BufferClose<CR>')
+vim.keymap.set('n', '<S-x>', ':BufferRestore<CR>')
+vim.keymap.set('n', '<C-p>', ':BufferPick<CR>')
+
+-- smart-splits: resizing
+vim.keymap.set('n', '<A-h>', ':SmartResizeLeft<CR>')
+vim.keymap.set('n', '<A-j>', ':SmartResizeDown<CR>')
+vim.keymap.set('n', '<A-k>', ':SmartResizeUp<CR>')
+vim.keymap.set('n', '<A-l>', ':SmartResizeRight<CR>')
+
+-- smart-splits: moving between splits
+vim.keymap.set('n', '<C-h>', ':SmartCursorMoveLeft<CR>')
+vim.keymap.set('n', '<C-j>', ':SmartCursorMoveDown<CR>')
+vim.keymap.set('n', '<C-k>', ':SmartCursorMoveUp<CR>')
+vim.keymap.set('n', '<C-l>', ':SmartCursorMoveRight<CR>')
+
+-- Vim Fugitive
+vim.keymap.set('n', '<leader>gg', ':0G<CR>')
+vim.keymap.set('n', '<leader>gd', ':Gvdiffsplit<CR>')
+vim.keymap.set('n', '<leader>gb', ':Git blame<CR>')
+vim.keymap.set('n', '<leader>gbr', ':GBrowse!<CR>')
+vim.keymap.set('v', '<leader>gbr', ":'<,'>GBrowse!<CR>")
+
+-- fzf-lua
+vim.keymap.set('n', '<leader>ff', ':FzfLua files<CR>')
+vim.keymap.set('n', '<leader>ft', ':FzfLua live_grep<CR>')
+vim.keymap.set('n', '<leader>fb', ':FzfLua buffers<CR>')
+vim.keymap.set('n', '<leader>fc', ':FzfLua command_history<CR>')
+
+-- Folding
+vim.keymap.set("n", "<Tab>", "za")
+
+
+-- Colorscheme
+require('onedark').setup({
+  transparent = true,
+  style = 'warm',
+  highlights = {
+    MatchParen = {bg = 'lightblue'},
+    -- barbar settings
+    BufferCurrent = {fg='fg', bg='bg0', fmt='bold'},
+    BufferVisible = {fg='grey', bg='bg1'},
+    BufferInactive = {fg='grey', bg='bg1'},
+
+    -- Floating window styling
+    FloatBorder = { bg = "none", fg='fg', fmt='bold' },
+    NormalFloat = { bg = "none" },
+  }
+})
+vim.cmd.colorscheme "onedark"
+
+-- mini.files
+vim.keymap.set("n", "'", function()
+  local buf_name = vim.api.nvim_buf_get_name(0)
+  local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
+  MiniFiles.open(path)
+  MiniFiles.reveal_cwd()
+end, { desc = "Open Mini Files" })
+
+
+require('smart-splits').setup({
+  default_amount = 1,
+  at_edge = 'mux',
+})
+
 -- TreeSitter
 vim.api.nvim_create_autocmd('FileType', {
   callback = function()
@@ -126,10 +184,6 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.treesitter.start()
   end,
 })
-
--- Vim Fugitive setup
-vim.cmd([[nnoremap <C-g> :0G<CR>]])
-vim.cmd([[nnoremap <C-d> :Gvdiffsplit<CR>]])
 
 -- CSVview
 require('csvview').setup({
@@ -176,7 +230,7 @@ require('mini.sessions').setup({
   autoread = true,
   autowrite = true,
 
-  -- barbar integration with mini.sessions
+  -- barbar integration
   hooks = {
     pre = {
       write = function() vim.api.nvim_exec_autocmds('User', {pattern = 'SessionSavePre'}) end,
@@ -202,37 +256,6 @@ require('barbar').setup({
   },
 })
 
--- Buffer navigation and management (powered by barbar)
-vim.cmd([[map <Right> :BufferNext<CR>]])
-vim.cmd([[map <Left> :BufferPrevious<CR>]])
-vim.cmd([[map <C-Right> :BufferMoveNext<CR>]])
-vim.cmd([[map <C-Left> :BufferMovePrevious<CR>]])
-vim.cmd([[nnoremap <C-q> :BufferClose<CR>]])
-vim.cmd([[nnoremap <S-x> :BufferRestore<CR>]])
-vim.cmd([[nnoremap <C-p> :BufferPick<CR>]])
-
-
-vim.keymap.set("n", "'", function()
-  local buf_name = vim.api.nvim_buf_get_name(0)
-  local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
-  MiniFiles.open(path)
-  MiniFiles.reveal_cwd()
-end, { desc = "Open Mini Files" })
-
-require('smart-splits').setup({
-  default_amount = 1,
-  at_edge = 'mux',
-})
-vim.keymap.set('n', '<A-h>', require('smart-splits').resize_left)
-vim.keymap.set('n', '<A-j>', require('smart-splits').resize_down)
-vim.keymap.set('n', '<A-k>', require('smart-splits').resize_up)
-vim.keymap.set('n', '<A-l>', require('smart-splits').resize_right)
--- moving between splits
-vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
-vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
-vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up)
-vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)
-
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { 'nix', 'lua', 'yaml', 'json', 'lisp' },
   command = "setlocal shiftwidth=2 tabstop=2 softtabstop=2",
@@ -255,18 +278,12 @@ require('fzf-lua').setup({
   },
 })
 
-vim.cmd([[
-nnoremap <space> :FzfLua files<CR>
-nnoremap <C-space> :FzfLua live_grep<CR>
-]])
-
 -- Folding
 vim.opt.foldenable = true
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
-vim.keymap.set("n", "<Tab>", "za")
 
 -- vim.lsp.config('pyright', {
 --   cmd = { 'pyright-langserver', '--stdio' },
