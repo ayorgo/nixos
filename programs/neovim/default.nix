@@ -21,10 +21,11 @@
       mini-icons
       mini-sessions
       mini-statusline
-      mini-tabline
       onedark-nvim
       smart-splits-nvim
       vim-dadbod
+      barbar-nvim
+      nvim-web-devicons
     ];
     extraPackages = [
       pkgs.gcc  # required for treesitter to work properly
