@@ -52,9 +52,10 @@ require('onedark').setup({
   style = 'warm',
   highlights = {
     MatchParen = {bg = 'lightblue'},
-    MiniTablineCurrent = {fg='fg', bg='bg0', fmt='bold'},
-    MiniTablineVisible = {fg='grey', bg='bg1'},
-    MiniTablineHidden = {fg='grey', bg='bg1'},
+    -- barbar settings
+    BufferCurrent = {fg='fg', bg='bg0', fmt='bold'},
+    BufferVisible = {fg='grey', bg='bg1'},
+    BufferInactive = {fg='grey', bg='bg1'},
 
     -- Floating window styling
     FloatBorder = { bg = "none", fg='fg', fmt='bold' },
@@ -74,10 +75,6 @@ require("ibl").setup {
 
 -- Line numbers
 vim.cmd([[set number]])
-
--- Buffer navigation
-vim.cmd([[map <Right> :bnext<CR>]])
-vim.cmd([[map <Left> :bprev<CR>]])
 
 -- Ruler
 -- vim.cmd([[let &colorcolumn=join(range(81,999), ',')]])
@@ -102,10 +99,6 @@ augroup fileSpell
   autocmd!
   autocmd FileType latex,tex,md,markdown setlocal spell
 augroup END]])
-
--- Delete buffer gracefully
-vim.cmd([[nnoremap <C-q> :bw<CR>]])
-
 
 -- Set clipboard to use system clipboard
 vim.opt.clipboard = "unnamedplus"
@@ -159,6 +152,7 @@ require('ccc').setup({
   },
 })
 
+require('mini.statusline').setup()
 require('mini.icons').setup()
 require('mini.files').setup({
   mappings = {
@@ -175,20 +169,48 @@ require('mini.files').setup({
     trim_right  = '>',
   },
 })
+
+-- barbar integration with mini.sessions
+vim.opt.sessionoptions:append 'globals'
 require('mini.sessions').setup({
   autoread = true,
   autowrite = true,
+
+  -- barbar integration with mini.sessions
+  hooks = {
+    pre = {
+      write = function() vim.api.nvim_exec_autocmds('User', {pattern = 'SessionSavePre'}) end,
+    },
+  },
 })
-require('mini.statusline').setup()
-require('mini.tabline').setup()
+require('barbar').setup({
+  clickable = false,
+  maximum_length = 80,
+  minimum_length = 5,
+  maximum_padding = 1,
+  minimum_padding = 1,
+  icons = {
+    button = '',
+    filetype = {
+      enabled = true,
+      custom_colors = false,
+    },
+    inactive = {button = '', separator = { left = '', right = '' }},
+    separator = {left = '', right = ''},
+    separator_at_end = false,
+    modified = {button = ''},
+  },
+})
 
-vim.keymap.set("n", "<C-,>", function()
-  print("Left!")
-end, { desc = "Move Tab Left" })
+-- Buffer navigation and management (powered by barbar)
+vim.cmd([[map <Right> :BufferNext<CR>]])
+vim.cmd([[map <Left> :BufferPrevious<CR>]])
+vim.cmd([[map <C-Right> :BufferMoveNext<CR>]])
+vim.cmd([[map <C-Left> :BufferMovePrevious<CR>]])
+vim.cmd([[nnoremap <C-q> :BufferClose<CR>]])
+vim.cmd([[nnoremap <S-x> :BufferRestore<CR>]])
+vim.cmd([[nnoremap <C-p> :BufferPick<CR>]])
 
-vim.keymap.set("n", "<C-.>", function()
-  print("Right!")
-end, { desc = "Move Tab Left" })
 
 vim.keymap.set("n", "'", function()
   local buf_name = vim.api.nvim_buf_get_name(0)
