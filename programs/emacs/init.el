@@ -29,7 +29,10 @@
 (add-to-list 'default-frame-alist '(undecorated . t))
 
 ;;; Font
-(add-to-list 'default-frame-alist '(font . "Source Code Pro Medium-14"))
+(when (eq system-type 'darwin)
+  (add-to-list 'default-frame-alist '(font . "Source Code Pro Medium-14")))
+(when (eq system-type 'gnu/linux)
+  (add-to-list 'default-frame-alist '(font . "SauceCodePro NF Medium-11")))
 
 ;;; Remove all the extra visual elements
 (menu-bar-mode -1)
