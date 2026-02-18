@@ -281,9 +281,15 @@ require('fzf-lua').setup({
   files = {
     -- Need to repeat the same options from fd.nix and fzf.nix all over again.
     cmd = "fd --type f --type l --no-ignore --hidden --exclude .git --exclude .venv_default",
+    fzf_opts = {
+      ['--history'] = vim.fn.stdpath("data") .. '/fzf-lua-files-history',
+    },
   },
   grep = {
     cmd = "rg --multiline --column --line-number --color=always --smart-case --no-heading --no-ignore --hidden --glob '!.git' --glob '!.venv_default' --max-columns=4096 -e",
+    fzf_opts = {
+      ['--history'] = vim.fn.stdpath("data") .. '/fzf-lua-grep-history',
+    },
   },
 })
 
