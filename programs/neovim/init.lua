@@ -128,6 +128,9 @@ vim.keymap.set('n', '<leader>fc', ':FzfLua command_history<CR>')
 -- Folding
 vim.keymap.set("n", "<Tab>", "za")
 
+-- Pasting in command mode
+vim.keymap.set('c', '<C-v>', '<C-r>+')
+
 
 -- Colorscheme
 require('onedark').setup({
@@ -268,6 +271,11 @@ require('fzf-lua').setup({
   },
   winopts = {
     width = 1.0,
+    on_create = function(e)
+      vim.keymap.set('t', '<c-V>', function()
+        vim.api.nvim_paste(vim.fn.getreg('+'), false, -1)
+      end, { buffer = e.bufnr })
+    end
   },
   files = {
     -- Need to repeat the same options from fd.nix and fzf.nix all over again.
