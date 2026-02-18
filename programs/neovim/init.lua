@@ -242,6 +242,7 @@ require('mini.sessions').setup({
 })
 require('barbar').setup({
   clickable = false,
+  animation = false,
   maximum_length = 80,
   minimum_length = 5,
   maximum_padding = 1,
