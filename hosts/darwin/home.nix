@@ -18,6 +18,7 @@
     mpv
     nixfmt
     ty
+    rustup
   ];
   imports = [
     ../../programs/emacs
