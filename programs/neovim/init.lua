@@ -180,6 +180,7 @@ vim.api.nvim_create_autocmd('FileType', {
       ["tsv"] = true,  -- in favour of csvview.nvim
       ["csvview-info"] = true,  -- in favour of csvview.nvim
       ["man"] = true,
+      ["rust"] = true,
     }
     if disabled[vim.bo.filetype] then
       return
@@ -397,3 +398,10 @@ vim.filetype.add({
     dbout = "csv",
   },
 })
+
+-- Rust LSP
+vim.lsp.config("rust-analyzer", {
+	cmd = { "rust-analyzer" },
+	filetypes = { "rust" },
+})
+vim.lsp.enable("rust-analyzer")
