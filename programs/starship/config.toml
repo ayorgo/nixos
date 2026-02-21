@@ -1,4 +1,6 @@
 format = '''
+$cmd_duration
+
 ╭─$username@$hostname:$directory$git_branch$nix_shell
 ╰─[❯❯❯](red) '''
 
@@ -25,3 +27,9 @@ disabled = false
 symbol = '❄️'
 style = 'bold'
 format = 'via [$symbol $name]($style)'
+
+[cmd_duration]
+min_time = 1_000
+show_notifications = true
+min_time_to_notify = 10_000
+format = '⏱️ [$duration](black)'
