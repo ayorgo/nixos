@@ -16,6 +16,7 @@
     docker-credential-helpers
     colima
     mpv
+    just
     nixfmt
     ty
     rustup
