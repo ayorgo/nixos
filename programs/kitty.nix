@@ -88,6 +88,9 @@
       })
     ];
     keybindings = {
+      # Reload config
+      "alt+shift+r" = "load_config_file";
+
       # Clipboard
       "ctrl+c" = "copy_or_interrupt";
       "ctrl+v" = "paste_from_clipboard";
