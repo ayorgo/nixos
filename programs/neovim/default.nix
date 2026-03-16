@@ -15,6 +15,7 @@
       vim-fugitive
       fugitive-gitlab-vim
       vim-rhubarb
+      gitsigns-nvim
       indent-blankline-nvim
       csvview-nvim
       mini-files
