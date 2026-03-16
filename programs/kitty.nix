@@ -61,6 +61,8 @@
         tab_title_template = "{bell_symbol}{activity_symbol}{' ' if layout_name == 'stack' and num_windows > 1 else ''}{tab.active_wd.rsplit('/', 1)[-1]}";
 
         cursor = "#999999";
+
+        startup_session = "~/launch.kitty-session";
       }
 
       (lib.mkIf pkgs.stdenv.isDarwin {
@@ -90,6 +92,9 @@
     keybindings = {
       # Reload config
       "alt+shift+r" = "load_config_file";
+
+      # Save session
+      "alt+shift+s" = "save_as_session --use-foreground-process --save-only --relocatable ~/launch.kitty-session";
 
       # Clipboard
       "ctrl+c" = "copy_or_interrupt";
