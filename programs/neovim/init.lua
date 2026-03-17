@@ -182,6 +182,7 @@ vim.api.nvim_create_autocmd('FileType', {
       ["gitsigns-blame"] = true,
       ["man"] = true,
       ["rust"] = true,
+      ["image_nvim"] = true,
     }
     if disabled[vim.bo.filetype] then
       return
