@@ -36,7 +36,7 @@
   ];
   home.sessionVariables = {
     # EDITOR = "nvim";  # done inside the Neovim config
-    MANPAGER = "nvim +Man! --clean";
+    MANPAGER = "nvim +Man! --clean -c 'set ignorecase smartcase'";
     MOZ_LEGACY_PROFILES = "1";
   };
   home.activation = {
