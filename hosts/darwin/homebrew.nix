@@ -8,7 +8,6 @@
     "karabiner-elements"
   ];
   brews = [
-    "ollama"
   ];
   taps = [
   ];
