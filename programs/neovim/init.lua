@@ -271,10 +271,13 @@ vim.api.nvim_create_autocmd("FileType", {
 
 require('fzf-lua').setup({
   fzf_opts = {
-    ['--layout'] = 'default', -- search prompt at the bottom
+    ['--layout'] = 'reverse', -- search prompt at the bottom
   },
   winopts = {
     width = 1.0,
+    preview = {
+      layout = "vertical",
+    },
     on_create = function(e)
       vim.keymap.set('t', '<c-V>', function()
         vim.api.nvim_paste(vim.fn.getreg('+'), false, -1)
