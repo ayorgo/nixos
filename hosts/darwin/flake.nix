@@ -37,6 +37,9 @@
       # Turn off nix-darwin’s management of the Nix installation:
       nix.enable = false;
 
+      # Prevent the machine from falling into deep sleep after several minutes and disabling the network
+      power.sleep.computer = "never";
+
       # Necessary for using flakes
       nix.settings.experimental-features = "nix-command flakes";
 
