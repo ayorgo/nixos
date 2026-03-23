@@ -74,6 +74,7 @@
   (setq evil-undo-system 'undo-fu)
   :config
   (evil-mode 1)
+  (setq evil-respect-visual-line-mode nil)
   ;; Make the Enter key follow links in evil Normal mode
   (with-eval-after-load 'evil-maps (define-key evil-motion-state-map (kbd "RET") nil)))
 
@@ -98,7 +99,6 @@
 ;; Autosave
 (setq auto-save-visited-interval 0.4) ;; in seconds; a lower value results in status bar flickering
 (auto-save-visited-mode t)
-
 
 ;; Save sessions
 (desktop-save-mode 1)
