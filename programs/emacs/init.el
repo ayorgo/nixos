@@ -132,6 +132,13 @@
 (global-set-key (kbd "S-<down>")  'enlarge-window)
 (global-set-key (kbd "S-<up>")    'shrink-window)
 
+(global-visual-line-mode t)
+
+
+;;; --------------------------
+;;;          PACKAGES
+;;; --------------------------
+
 ;; keep the cursor centered to avoid sudden scroll jumps
 (use-package centered-cursor-mode
   :ensure t
@@ -139,58 +146,47 @@
   ;; Optional, enables centered-cursor-mode in all buffers.
   (global-centered-cursor-mode))
 
-
-;;; --------------------------
-;;;          PACKAGES
-;;; --------------------------
-
-;;; Syntax highlighting
-
-;;; Nix
-(use-package nix-mode
-  :ensure t
-  :mode "\\.nix\\'")
-
-;;; Docker
-(use-package dockerfile-mode
-  :ensure t
-  :mode "Dockerfile\\'"
-  ;; :config
-  ;; (add-hook 'dockerfile-mode 'smartparens-mode)
-)
-
-;;; Markdown
-(use-package markdown-mode
-  :ensure t
-  :mode ("\\.md\\'" . gfm-mode)
-  ; :init (setq markdown-command "multimarkdown")
-)
-
 ;;; Tree-sitter
 (dolist (mapping
          '((python-mode     . python-ts-mode)
-           (tsx-mode        . tsx-ts-mode)
            (json-mode       . json-ts-mode)
-           (css-mode        . css-ts-mode)
            (rust-mode       . rust-ts-mode)
            (bash-mode       . bash-ts-mode)
-           (cmake-mode      . cmake-ts-mode)
            (yaml-mode       . yaml-ts-mode)
            (toml-mode       . toml-ts-mode)
-           (dockerfile-mode . dockerfile-ts-mode)
-           (markdown-mode   . markdown-ts-mode)
            (sql-mode        . sql-ts-mode)
-           (makefile-mode   . makefile-ts-mode)
            (nix-mode        . nix-ts-mode)))
   (add-to-list 'major-mode-remap-alist mapping))
 (setopt treesit-font-lock-level 4)
 
-(global-visual-line-mode t)
-
+;;; org-mode
 (use-package org
   :ensure t
+  :after (evil)
   :config
   (require 'org-tempo)
+  (use-package evil-org
+    :ensure t
+    :hook
+    (org-mode . evil-org-mode)
+    :config
+    (require 'evil-org-agenda)
+    (evil-org-set-key-theme '(navigation todo insert textobjects additional))
+    (evil-org-agenda-set-keys))
+  (use-package org-appear
+    :ensure t
+    :custom
+    (org-appear-autolinks t)
+    :hook
+    (org-mode . org-appear-mode))
+  (use-package org-pomodoro
+    :ensure t
+    :after (evil org)
+    :config
+    (setq org-pomodoro-length 60
+          org-pomodoro-short-break-length 0
+          org-pomodoro-long-break-length 0
+          org-pomodoro-long-break-frequency 4))
   (setq org-hide-emphasis-markers t
         org-src-fontify-natively t
         org-src-tab-acts-natively t
@@ -207,50 +203,29 @@
            "IDEA(i!)" "TODO(t!)" "IN-PROGRESS(p!)" "ON-HOLD(h@/!)"
            "|"
            "DONE(d!)" "CANCELLED(c@/!)")))
-
+  (setq org-latex-compiler "xelatex"
+        org-latex-pdf-process
+              '("xelatex -shell-escape -interaction nonstopmode %f"
+                "xelatex -shell-escape -interaction nonstopmode %f")
+        org-latex-src-block-backend 'minted
+        org-latex-prefer-user-labels t)
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)
      (shell . t)))
   (add-hook 'org-insert-heading-hook
   (lambda()
-  (save-excursion
-            (org-back-to-heading)
-            (org-set-property "CREATED" (format-time-string "[%Y-%m-%d %T]")))))
+    (save-excursion
+              (org-back-to-heading)
+              (org-set-property "CREATED" (format-time-string "[%Y-%m-%d %T]")))))
   :hook
   ((org-mode . org-indent-mode))
   ((org-mode . org-toggle-pretty-entities)))
 
-(use-package evil-org
-  :ensure t
-  :after (evil org)
-  :hook
-  (org-mode . evil-org-mode)
-  :config
-  (require 'evil-org-agenda)
-  (evil-org-set-key-theme '(navigation todo insert textobjects additional))
-  (evil-org-agenda-set-keys))
-
-(use-package org-appear
-  :ensure t
-  :after (evil org)
-  :custom
-  (org-appear-autolinks t)
-  :hook
-  (org-mode . org-appear-mode))
-
-
-(setq org-latex-compiler "xelatex")
-
-(setq org-latex-pdf-process
-      '("xelatex -shell-escape -interaction nonstopmode %f"
-        "xelatex -shell-escape -interaction nonstopmode %f"))
-
-(setq org-latex-src-block-backend 'minted)
-
-(setq org-latex-prefer-user-labels t)
-
 (use-package ox-gfm
+  :ensure t)
+
+(use-package osx-plist
   :ensure t)
 
 ;; Platform-specific stuff
