@@ -274,7 +274,7 @@
 
   environment.variables = {
     # EDITOR = "nvim";  # done inside the Neovim config
-    MANPAGER = "nvim +Man! --clean -c 'set ignorecase smartcase'";
+    MANPAGER = "nvim +Man! --clean -c 'set ignorecase smartcase so=999'";
   };
 
   # Fonts
