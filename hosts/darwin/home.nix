@@ -20,6 +20,7 @@
     nixfmt
     ty
     rustup
+    tree
   ];
   imports = [
     ../../programs/emacs

@@ -51,6 +51,7 @@ in
     zoom-us
     pyright
     mpv
+    tree
   ];
 
   accounts.email.accounts = {
