@@ -33,7 +33,7 @@
       pkgs.gcc  # required for treesitter to work properly
       pkgs.imagemagick  # required for image-nvim to work properly
     ];
-    initLua = lib.mkDefault (builtins.readFile ./init.lua);
+    initLua = builtins.readFile ./init.lua;
   };
   home.file.".bigqueryrc".text = ''
 --project_id=my-project
