@@ -28,7 +28,7 @@
         # Tabs
         tab_bar_edge = "top";
         tab_bar_style = "powerline";
-        tab_powerline_style = "slanted";
+        tab_powerline_style = "angled";
         active_tab_font_style = "bold";
         active_tab_background = "#FAFAFA";
         inactive_tab_font_style = "normal";
@@ -58,7 +58,7 @@
         active_border_color = "none";
 
         # Stacked tab title decorations
-        tab_title_template = "{bell_symbol}{activity_symbol}{' ' if layout_name == 'stack' and num_windows > 1 else ''}{tab.active_wd.rsplit('/', 1)[-1]}";
+        tab_title_template = "{bell_symbol}{activity_symbol}{' ' if layout_name == 'stack' and num_windows > 1 else ''}{(lambda path: path[-3] + '/' + path[-1] if path[-2] == 'worktrees' else path[-1])(tab.active_wd.rsplit('/'))}";
 
         cursor = "#999999";
 
