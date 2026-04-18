@@ -2,7 +2,7 @@
 
 {
   home.username = user.name;
-  home.stateVersion = "25.11";
+  home.stateVersion = "26.05";
 
   home.packages = with pkgs; [
     btop
@@ -11,16 +11,28 @@
     httpie
     ripgrep
     unzip
+    devcontainer
+    (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
     docker
     docker-compose
     docker-credential-helpers
+    docker-buildx
     colima
+    kubectl
     mpv
     just
+    yq
     nixfmt
+    texlive.combined.scheme-full
+    texlivePackages.minted
+    python313Packages.pygments
     ty
+    visidata
+    mermaid-cli
     rustup
+    gemini-cli
     tree
+    # qobuz-player
   ];
   imports = [
     ../../programs/emacs
