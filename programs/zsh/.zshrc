@@ -5,7 +5,7 @@ if command -v fzf-share >/dev/null; then
 fi
 
 # More lsd integration
-alias ld='lsd -laN --group-directories-first'
+alias ld='lsd -lAN --group-directories-first'
 
 # Neovim aliases
 alias vi='nvim'
