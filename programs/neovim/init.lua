@@ -230,19 +230,37 @@ require('mini.files').setup({
   },
 })
 
--- barbar integration with mini.sessions
-vim.opt.sessionoptions:append 'globals'
-require('mini.sessions').setup({
-  autoread = true,
-  autowrite = true,
-
-  -- barbar integration
-  hooks = {
-    pre = {
-      write = function() vim.api.nvim_exec_autocmds('User', {pattern = 'SessionSavePre'}) end,
-    },
-  },
+-- Sessions
+vim.opt.sessionoptions:append({
+  "buffers",
+  "tabpages",
+  "globals",
 })
+
+-- Create session on exit if there was none
+vim.api.nvim_create_autocmd('VimLeavePre', {
+  callback = function()
+    if vim.fn.argc() == 0 then
+      -- Notify barbar before saving session
+      vim.api.nvim_exec_autocmds('User', { pattern = 'SessionSavePre' })
+
+      vim.cmd('mks!')
+    end
+  end,
+})
+
+-- Load session on enter if there is one
+vim.api.nvim_create_autocmd('VimEnter', {
+  nested = true,
+  once = true,
+  callback = function()
+    if vim.fn.argc() == 0 and vim.fn.filereadable('Session.vim') == 1 then
+      vim.cmd('silent! %bwipeout!')
+      vim.cmd('silent! source Session.vim')
+    end
+  end,
+})
+
 require('barbar').setup({
   clickable = false,
   animation = false,
