@@ -20,7 +20,6 @@
       csvview-nvim
       mini-files
       mini-icons
-      mini-sessions
       mini-statusline
       onedark-nvim
       smart-splits-nvim
