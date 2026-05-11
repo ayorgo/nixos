@@ -314,7 +314,7 @@ require('fzf-lua').setup({
     },
   },
   grep = {
-    cmd = "rg --multiline --column --line-number --color=always --smart-case --no-heading --no-ignore --hidden --glob '!.git' --glob '!.venv_default' --glob '!.mypy_cache' --max-columns=4096 -e",
+    cmd = "rg --multiline --column --line-number --color=always --smart-case --sort=path --no-heading --no-ignore --hidden --glob '!.git' --glob '!.venv_default' --glob '!.mypy_cache' --max-columns=4096 -e",
     fzf_opts = {
       ['--history'] = vim.fn.stdpath("data") .. '/fzf-lua-grep-history',
     },
