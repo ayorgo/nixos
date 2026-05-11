@@ -131,6 +131,10 @@ vim.keymap.set("n", "<Tab>", "za")
 -- Pasting in command mode
 vim.keymap.set('c', '<C-v>', '<C-r>+')
 
+-- Jump list navigation
+vim.keymap.set('n', 'gb', '<C-o>')
+vim.keymap.set('n', 'gf', '<C-i>')
+
 
 -- Colorscheme
 require('onedark').setup({
