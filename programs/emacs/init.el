@@ -45,6 +45,9 @@
 ;;; Turn off the sound when hitting buffer's beginning or end
 (setq ring-bell-function 'ignore)
 
+;;; Save command history
+(savehist-mode 1)
+
 ;;; THEME
 (use-package doom-themes
   ; :custom
@@ -187,6 +190,15 @@
           org-pomodoro-short-break-length 0
           org-pomodoro-long-break-length 0
           org-pomodoro-long-break-frequency 4))
+  (use-package ob-mermaid
+    :ensure t
+    :config
+    (setq ob-mermaid-cli-path "/opt/homebrew/bin/mmdr"))
+  ; (use-package plantuml-mode
+  ;   :ensure t
+  ;   :config
+  ;   (setq plantuml-default-exec-mode 'executable
+  ;         plantuml-executable-path "/etc/profiles/per-user/ADZHYG01/bin/plantuml"))
   (setq org-hide-emphasis-markers t
         org-src-fontify-natively t
         org-src-tab-acts-natively t
@@ -197,7 +209,15 @@
         org-archive-location "~/org/archive.org_archive::" ; Another stupid gotcha with the `::` in the end.
         org-image-actual-width nil ; So images can be resized
         org-return-follows-link t  ; Open links on Enter
-        org-pretty-entities t)  ; Can insert LaTeX characters with \
+        org-pretty-entities t  ; Can insert LaTeX characters with \
+        org-confirm-babel-evaluate nil  ; do not confirm babel code block evaluation
+
+        ; Display inline images
+        org-display-inline-images t
+        org-startup-with-inline-images t
+        org-redisplay-inline-images t
+        org-plantuml-exec-mode 'plantuml
+        org-plantuml-executable-path "/etc/profiles/per-user/ADZHYG01/bin/plantuml")
   (setq org-todo-keywords
         '((sequence
            "IDEA(i!)" "TODO(t!)" "IN-PROGRESS(p!)" "ON-HOLD(h@/!)"
@@ -212,12 +232,16 @@
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)
-     (shell . t)))
+     (shell . t)
+     (mermaid . t)
+     (plantuml . t)))
   (add-hook 'org-insert-heading-hook
   (lambda()
     (save-excursion
               (org-back-to-heading)
               (org-set-property "CREATED" (format-time-string "[%Y-%m-%d %T]")))))
+
+  (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
   :hook
   ((org-mode . org-indent-mode))
   ((org-mode . org-toggle-pretty-entities)))
