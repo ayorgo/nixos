@@ -118,6 +118,13 @@ vim.keymap.set('n', '<leader>gd', ':Gvdiffsplit<CR>')
 vim.keymap.set('n', '<leader>gb', ':Git blame<CR>')
 vim.keymap.set('n', '<leader>gbr', ':GBrowse!<CR>')
 vim.keymap.set('v', '<leader>gbr', ":'<,'>GBrowse!<CR>")
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "fugitive",
+  callback = function()
+    vim.keymap.set('n', '<Tab>', '=', {buffer = true, remap = true})
+    vim.keymap.set('n', '<CR>', 'dv', {buffer = true, remap = true})
+  end,
+})
 
 -- fzf-lua
 vim.keymap.set('n', '<leader>ff', ':FzfLua files<CR>')
