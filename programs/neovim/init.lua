@@ -170,27 +170,24 @@ require('smart-splits').setup({
 -- TreeSitter
 vim.api.nvim_create_autocmd('FileType', {
   callback = function()
-    disabled = {
-      ["minifiles"] = true,
-      ["fzf"] = true,
-      ["qf"] = true,
-      ["fugitive"] = true,
-      ["fugitiveblame"] = true,
-      ["git"] = true,
-      ["dbout"] = true,
-      ["text"] = true,
-      ["csv"] = true,  -- in favour of csvview.nvim
-      ["tsv"] = true,  -- in favour of csvview.nvim
-      ["csvview-info"] = true,  -- in favour of csvview.nvim
-      ["gitsigns-blame"] = true,
-      ["man"] = true,
-      ["rust"] = true,
-      ["image_nvim"] = true,
+    enabled = {
+      ["json"] = true,
+      ["latex"] = true,
+      ["lisp"] = true,
+      ["lua"] = true,
+      ["make"] = true,
+      ["markdown"] = true,
+      ["md"] = true,
+      ["nix"] = true,
+      ["python"] = true,
+      ["sh"] = true,
+      ["sql"] = true,
+      ["tex"] = true,
+      ["yaml"] = true,
     }
-    if disabled[vim.bo.filetype] then
-      return
+    if enabled[vim.bo.filetype] then
+      vim.treesitter.start()
     end
-    vim.treesitter.start()
   end,
 })
 
