@@ -10,7 +10,6 @@
     plugins = with pkgs.vimPlugins; [
       fzf-lua
       ccc-nvim
-      auto-save-nvim
       nvim-treesitter.withAllGrammars
       vim-fugitive
       fugitive-gitlab-vim

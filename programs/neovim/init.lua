@@ -12,14 +12,6 @@ vim.cmd([[set re=1]])
 -- Have the cursor at the center of the screen at all times
 vim.cmd([[set so=999]])
 
--- Autosave
--- Configure auto-save-nvim plugin so it works
--- which it stopped after the update to NixOS 24.05
-require('auto-save').setup({
-  enable = true,
-  debounce_delay = 10,
-})
-
 -- No swap files
 vim.cmd([[set noswapfile]])
 
@@ -424,7 +416,18 @@ vim.diagnostic.config{
     virtual_text = false,
 }
 vim.opt.updatetime = 300
-vim.cmd([[autocmd CursorHold * lua vim.diagnostic.open_float(nil, {scope="cursor", header="", focusable=false})]])
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    -- Autosave
+    vim.cmd("wa")
+    -- Display LSP diagnostics tip
+    vim.diagnostic.open_float(nil, {
+      scope = "cursor",
+      header = "",
+      focusable = false,
+    })
+  end,
+})
 
 -- Display dadbod results as csv
 vim.filetype.add({
