@@ -84,13 +84,37 @@ vim.opt.clipboard = "unnamedplus"
 vim.g.mapleader = " "
 
 -- barbar: buffer navigation and management
-vim.keymap.set('n', '<Right>', ':BufferNext<CR>')
-vim.keymap.set('n', '<Left>', ':BufferPrevious<CR>')
-vim.keymap.set('n', '<C-Right>', ':BufferMoveNext<CR>')
-vim.keymap.set('n', '<C-Left>', ':BufferMovePrevious<CR>')
-vim.keymap.set('n', '<C-q>', ':BufferClose<CR>')
-vim.keymap.set('n', '<S-x>', ':BufferRestore<CR>')
-vim.keymap.set('n', '<C-p>', ':BufferPick<CR>')
+local function fugitive_close_diff()
+  if not vim.wo.diff then
+    return
+  end
+
+  local bufname = vim.api.nvim_buf_get_name(0)
+  local is_index_buffer = bufname:match('/0/')
+  if is_index_buffer then
+    vim.cmd('bd')
+    vim.cmd('only')
+  else
+    vim.cmd('only')
+  end
+end
+
+local function barbar_navigation_map(key, barbar_navigation_command)
+  vim.keymap.set('n', key,
+    function()
+      fugitive_close_diff()
+      vim.cmd(barbar_navigation_command)
+    end
+  )
+end
+
+barbar_navigation_map('<Right>', 'BufferNext')
+barbar_navigation_map('<Left>', 'BufferPrevious')
+barbar_navigation_map('<C-Right>', 'BufferMoveNext')
+barbar_navigation_map('<C-Left>', 'BufferMovePrevious')
+barbar_navigation_map('<C-q>', 'BufferClose')
+barbar_navigation_map('<S-x>', 'BufferRestore')
+barbar_navigation_map('<C-p>', 'BufferPick')
 
 -- smart-splits: resizing
 vim.keymap.set('n', '<A-h>', ':SmartResizeLeft<CR>')
@@ -107,13 +131,24 @@ vim.keymap.set('n', '<C-l>', ':SmartCursorMoveRight<CR>')
 -- Vim Fugitive
 vim.keymap.set('n', '<leader>gg', ':0G<CR>')
 vim.keymap.set('n', '<leader>gd', ':Gvdiffsplit<CR>')
+vim.keymap.set('n', '<leader>gd', function()
+  vim.cmd('Gvdiffsplit')
+
+  -- Go back to the previous window which is the working copy
+  vim.cmd('wincmd p')
+end, { desc = 'Open fugitive diff' })
+
+vim.keymap.set('n', '<leader>go', function() fugitive_close_diff() end, { desc = 'Close fugitive diff view' })
+
 vim.keymap.set('n', '<leader>gb', ':Git blame<CR>')
 vim.keymap.set('n', '<leader>gbr', ':GBrowse!<CR>')
 vim.keymap.set('v', '<leader>gbr', ":'<,'>GBrowse!<CR>")
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "fugitive",
   callback = function()
+    -- Open fugitive's inline diff
     vim.keymap.set('n', '<Tab>', '=', {buffer = true, remap = true})
+    -- Open fugitive's split diff
     vim.keymap.set('n', '<CR>', 'dv', {buffer = true, remap = true})
   end,
 })
