@@ -123,6 +123,7 @@ vim.keymap.set('n', '<leader>ff', ':FzfLua files<CR>')
 vim.keymap.set('n', '<leader>ft', ':FzfLua live_grep<CR>')
 vim.keymap.set('n', '<leader>fb', ':FzfLua buffers<CR>')
 vim.keymap.set('n', '<leader>fc', ':FzfLua command_history<CR>')
+vim.keymap.set('n', '<leader>fr', ':FzfLua resume<CR>')
 
 -- Folding
 vim.keymap.set("n", "<Tab>", "za")
