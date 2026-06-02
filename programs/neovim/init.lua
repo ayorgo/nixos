@@ -134,7 +134,6 @@ vim.keymap.set('n', '<C-l>', ':SmartCursorMoveRight<CR>')
 
 -- Vim Fugitive
 vim.keymap.set('n', '<leader>gg', ':0G<CR>')
-vim.keymap.set('n', '<leader>gd', ':Gvdiffsplit<CR>')
 vim.keymap.set('n', '<leader>gd', function()
   vim.cmd('Gvdiffsplit')
 
