@@ -116,6 +116,10 @@ barbar_navigation_map('<C-q>', 'BufferClose')
 barbar_navigation_map('<S-x>', 'BufferRestore')
 barbar_navigation_map('<C-p>', 'BufferPick')
 
+-- Prevent pasting from overwriting the register
+vim.keymap.set('v', 'P', 'p')
+vim.keymap.set('v', 'p', 'P')
+
 -- smart-splits: resizing
 vim.keymap.set('n', '<A-h>', ':SmartResizeLeft<CR>')
 vim.keymap.set('n', '<A-j>', ':SmartResizeDown<CR>')
