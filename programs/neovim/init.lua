@@ -222,6 +222,8 @@ vim.api.nvim_create_autocmd('FileType', {
       ["sh"] = true,
       ["sql"] = true,
       ["tex"] = true,
+      ["typescript"] = true,
+      ["typescriptreact"] = true,
       ["yaml"] = true,
     }
     if enabled[vim.bo.filetype] then
