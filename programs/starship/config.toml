@@ -1,8 +1,4 @@
-format = '''
-$cmd_duration
-
-╭─$username@$hostname:$directory$git_branch$nix_shell
-╰─[❯❯❯](red) '''
+format = "($cmd_duration)\n╭─$username@$hostname(\n│ $directory)(\n│ $git_branch)(\n│ $nix_shell)\n╰─[❯❯❯](red) "
 
 [username]
 show_always = true
@@ -17,10 +13,14 @@ style = 'bold green'
 
 [directory]
 style = 'bold bright-cyan'
+truncation_symbol = '../'
 truncate_to_repo = false
+format = '[$read_only]($read_only_style)[ $path]($style)'
+read_only = ' '
 
 [git_branch]
 symbol = ' '
+format = '[$symbol$branch(:$remote_branch)]($style) '
 
 [nix_shell]
 disabled = false
@@ -31,5 +31,5 @@ format = 'via [$symbol $name]($style)'
 [cmd_duration]
 min_time = 1_000
 show_notifications = true
-min_time_to_notify = 10_000
+min_time_to_notify = 60_000
 format = '⏱️ [$duration](black)'
