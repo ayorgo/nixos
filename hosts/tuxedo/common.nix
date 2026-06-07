@@ -16,7 +16,7 @@ in
     ../../programs/fzf.nix
     ./programs/lsd.nix
     ../../programs/neovim
-    ./programs/starship
+    ../../programs/starship
     ./services/watch-gnome-theme.nix
     ../../programs/anki.nix
     ../../programs/gnome.nix
