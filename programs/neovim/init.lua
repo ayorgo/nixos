@@ -457,7 +457,7 @@ vim.opt.updatetime = 300
 vim.api.nvim_create_autocmd("CursorHold", {
   callback = function()
     -- Autosave
-    vim.cmd("wa")
+    vim.cmd("sil! wa")
     -- Display LSP diagnostics tip
     vim.diagnostic.open_float(nil, {
       scope = "cursor",
