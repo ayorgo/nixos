@@ -1,4 +1,7 @@
-format = "($cmd_duration)\n╭─$username@$hostname(\n│ $directory)(\n│ $git_branch)(\n│ $nix_shell)\n╰─[❯❯❯](red) "
+format = "($cmd_duration\n)╭─$username@$hostname$fill(\n│ $directory)(\n│ $git_branch)(\n│ $nix_shell)\n╰─► "
+
+[fill]
+symbol = '─'
 
 [username]
 show_always = true
@@ -21,15 +24,18 @@ read_only = ' '
 [git_branch]
 symbol = ' '
 format = '[$symbol$branch(:$remote_branch)]($style) '
+style = 'bold purple'
 
 [nix_shell]
 disabled = false
-symbol = '❄️'
-style = 'bold'
-format = 'via [$symbol $name]($style)'
+symbol = ' '
+style = 'bold blue'
+format = '[$symbol $name]($style)'
 
 [cmd_duration]
 min_time = 1_000
+show_milliseconds = false
 show_notifications = true
 min_time_to_notify = 60_000
-format = '⏱️ [$duration](black)'
+format = '󰔛 $duration'
+style = ''
