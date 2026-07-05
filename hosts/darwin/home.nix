@@ -29,6 +29,8 @@
     ty
     visidata
     rustup
+    graphviz
+    plantuml
     tree
   ];
   imports = [
