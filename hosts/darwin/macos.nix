@@ -55,8 +55,8 @@
     # Change minimize/maximize window effect
     mineffect = "scale";
 
-    # Minimize windows into their application’s icon
-    minimize-to-application = false;
+    # Minimize windows into their application's icon
+    minimize-to-application = true;
 
     # Enable spring loading for all Dock items
     enable-spring-load-actions-on-all-items = true;
