@@ -108,6 +108,7 @@
       "ctrl+k" = "neighboring_window up";
       "ctrl+h" = "neighboring_window left";
       "ctrl+l" = "neighboring_window right";
+      "shift+`" = "previous_window";
       "shift+tab" = "next_window";
 
       "alt+j" = "kitten relative_resize.py down  1";
