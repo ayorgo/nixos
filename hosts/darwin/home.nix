@@ -21,7 +21,7 @@
     kubectl
     mpv
     just
-    yq
+    yq-go
     nixfmt
     texlive.combined.scheme-full
     texlivePackages.minted
