@@ -20,3 +20,11 @@ nix-daemon:
 	@sudo launchctl bootout system/org.nixos.nix-daemon \
 	&& sleep 1 \
 	&& sudo launchctl bootstrap system /Library/LaunchDaemons/org.nixos.nix-daemon.plist
+
+.PHONY: generations
+generations:
+	@sudo darwin-rebuild --list-generations
+
+.PHONY: rollback
+rollback:
+	@sudo darwin-rebuild rollback
