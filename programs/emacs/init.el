@@ -143,11 +143,11 @@
 ;;; --------------------------
 
 ;; keep the cursor centered to avoid sudden scroll jumps
-(use-package centered-cursor-mode
-  :ensure t
-  :config
-  ;; Optional, enables centered-cursor-mode in all buffers.
-  (global-centered-cursor-mode))
+; (use-package centered-cursor-mode
+;   :ensure t
+;   :config
+;   ;; Optional, enables centered-cursor-mode in all buffers.
+;   (global-centered-cursor-mode))
 
 ;;; Tree-sitter
 (dolist (mapping
