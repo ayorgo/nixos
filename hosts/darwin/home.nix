@@ -29,7 +29,6 @@
     ty
     visidata
     rustup
-    gemini-cli
     tree
     # qobuz-player
   ];
