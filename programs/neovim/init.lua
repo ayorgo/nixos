@@ -356,6 +356,9 @@ require('fzf-lua').setup({
       ['--history'] = vim.fn.stdpath("data") .. '/fzf-lua-grep-history',
     },
   },
+  buffers = {
+    sort_lastused = true,
+  },
 })
 
 -- Folding
