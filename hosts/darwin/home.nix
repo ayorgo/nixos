@@ -30,7 +30,6 @@
     visidata
     rustup
     tree
-    # qobuz-player
   ];
   imports = [
     ../../programs/emacs
