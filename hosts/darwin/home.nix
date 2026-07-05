@@ -28,7 +28,6 @@
     python313Packages.pygments
     ty
     visidata
-    mermaid-cli
     rustup
     gemini-cli
     tree
