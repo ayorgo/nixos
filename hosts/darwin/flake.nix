@@ -45,6 +45,10 @@
 
       users.users.${user.name}.home = user.home;
 
+      # Workaround for https://github.com/nix-darwin/nix-darwin/issues/1817
+      documentation.enable = false;
+      system.tools.darwin-uninstaller.enable = false;
+
       system = {
         primaryUser = user.name;
         keyboard = {
