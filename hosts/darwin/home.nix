@@ -49,6 +49,7 @@
     # EDITOR = "nvim";  # done inside the Neovim config
     MANPAGER = "nvim +Man! --clean -c 'set ignorecase smartcase so=999'";
     MOZ_LEGACY_PROFILES = "1";
+    PATH = "$HOME/.cargo/bin:$PATH";
   };
   home.activation = {
     defaultBrowser = (lib.hm.dag.entryAfter ["installPackages"] ''
