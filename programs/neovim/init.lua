@@ -102,7 +102,7 @@ end
 local function barbar_navigation_map(key, barbar_navigation_command)
   vim.keymap.set('n', key,
     function()
-      fugitive_close_diff()
+      -- fugitive_close_diff()
       vim.cmd(barbar_navigation_command)
     end
   )
@@ -401,6 +401,8 @@ vim.opt.foldlevelstart = 99
 --   },
 -- })
 -- vim.lsp.enable('pyright')
+
+-- Python LSP
 vim.lsp.config('ty', {
   cmd = { 'ty', 'server' },
   filetypes = { 'python' },
@@ -410,7 +412,7 @@ vim.lsp.config('ty', {
       diagnosticMode = "openFilesOnly",
       configuration = {
         environment = {
-          ["python-version"] = "3.11",
+          ["python-version"] = "3.14",
           -- For Docker container Python packages exposed to the host via e.g.:
           -- ```
           -- docker cp <container-name>:/home/vscode/.local/lib/python3.11/site-packages python-site-packages
@@ -426,7 +428,10 @@ vim.lsp.config('ty', {
           -- running commands either inside containers or on the host.
           -- Tools like LSPs, linters, and formatters can live on the host without issue.
           ["extra-paths"] = {
-            vim.fn.getcwd() .. "/.venv_default/lib/python3.11/site-packages",
+            -- vim.fn.getcwd() .. "/.venv_default/lib/python3.11/site-packages",
+            -- vim.fn.getcwd() .. "/.venv_default/lib/python3.12/site-packages",
+            -- vim.fn.getcwd() .. "/.venv_default/lib/python3.13/site-packages",
+            vim.fn.getcwd() .. "/.venv_default/lib/python3.14/site-packages",
           },
         },
       },
@@ -434,6 +439,15 @@ vim.lsp.config('ty', {
   },
 })
 vim.lsp.enable("ty")
+
+-- Rust LSP
+vim.lsp.config("rust-analyzer", {
+  cmd = { "rust-analyzer" },
+  filetypes = { "rust" },
+  root_markers = { '.git' },
+})
+vim.lsp.enable("rust-analyzer")
+
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local opts = { buffer = args.buf }
@@ -449,6 +463,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
     if client:supports_method('textDocument/foldingRange') then
       local win = vim.api.nvim_get_current_win()
       vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+    end
+    if client:supports_method('textDocument/formatting') then
+      vim.keymap.set("n", "gf", vim.lsp.buf.format, opts)
+    end
+    if client.server_capabilities.inlayHintProvider then
+      -- vim.defer_fn(function()
+      --   vim.lsp.inlay_hint.enable(client.name == "rust-analyzer")
+      -- end, 3000)  -- 3000ms, non-blocking
+      vim.keymap.set('n', 'gt', function ()  -- toggle inlay hints globally
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+      end)
     end
   end,
 })
@@ -478,10 +503,29 @@ vim.filetype.add({
   },
 })
 
--- Rust LSP
-vim.lsp.config("rust-analyzer", {
-  cmd = { "rust-analyzer" },
-  filetypes = { "rust" },
-  root_markers = { '.git' },
-})
-vim.lsp.enable("rust-analyzer")
+require("image").setup()
+
+
+local function get_secret()
+  local ok, result = pcall(function()
+    return vim.system({
+      "security",
+      "find-generic-password",
+      "-s", "athena-gemini",
+      "-a", os.getenv("USER"),
+      "-w",
+    }):wait()
+  end)
+
+  if not ok or result.code ~= 0 then
+    return {url="", api_key=""}
+  end
+
+  local ok, secret = pcall(vim.json.decode, vim.trim(result.stdout))
+
+  if not ok then
+    return {url="", api_key=""}
+  end
+
+  return secret
+end
