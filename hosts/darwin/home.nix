@@ -27,7 +27,6 @@
     texlivePackages.minted
     python313Packages.pygments
     ty
-    visidata
     rustup
     graphviz
     plantuml
