@@ -35,7 +35,16 @@ format = '[$symbol $name]($style)'
 [cmd_duration]
 min_time = 1_000
 show_milliseconds = false
-show_notifications = true
-min_time_to_notify = 60_000
+
+# This causes delay on MacOS so is disabled.
+# `rust_notify`'s `Notification::show()` that is used here is synchronous
+# and needs to wait not only for the notification pop-up to appear but also
+# for the notification process to get back to it. The notification process
+# on MacOS is synchronous and on company-managed defices may take long to report
+# back to the caller.
+# https://github.com/starship/starship/issues/7288
+# https://github.com/hoodie/notify-rust/issues/249
+# show_notifications = true
+# min_time_to_notify = 60_000
 format = '󰔛 $duration'
 style = ''
