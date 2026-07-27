@@ -31,6 +31,7 @@
     graphviz
     plantuml
     tree
+    claude-code
   ];
   imports = [
     ../../programs/emacs
