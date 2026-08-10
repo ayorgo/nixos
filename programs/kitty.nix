@@ -94,7 +94,8 @@
       "alt+shift+r" = "load_config_file";
 
       # Save session
-      "alt+shift+s" = "save_as_session --use-foreground-process --save-only --relocatable ~/launch.kitty-session";
+      "alt+shift+s" =
+        "save_as_session --use-foreground-process --save-only --relocatable ~/launch.kitty-session";
 
       # Clipboard
       "ctrl+c" = "copy_or_interrupt";

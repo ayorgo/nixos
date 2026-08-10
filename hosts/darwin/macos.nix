@@ -7,33 +7,38 @@
   # To check the values in runtime:
   # sudo defaults read /var/root/Library/Preferences/com.apple.CoreBrightness.plist
   CustomSystemPreferences = {
-    "/var/root/Library/Preferences/com.apple.CoreBrightness.plist" = let
-      userId = builtins.readFile (pkgs.runCommand "user-id" {} "/usr/bin/dscl . -read user.home GeneratedUID | /usr/bin/sed 's/GeneratedUID: //' | /usr/bin/tr -d \\\\n > $out");
-    in {
-      "CBUser-${userId}" = {
-        # Setting CBBlueLightReductionCCTTargetRaw doesn't really work for some reason.
-        # The slider remains in the middle after reboot.
-        CBBlueLightReductionCCTTargetRaw = "4800.064"; # The default is 4128.328
-        CBBlueReductionStatus = {
-          AutoBlueReductionEnabled = 1;
-          BlueLightReductionAlgoOverride = 4;
-          BlueLightReductionAlgoOverrideTimestamp = "3035-11-20 08:48:37 +0000";
-          BlueLightReductionDisableScheduleAlertCounter = 3;
-          BlueLightReductionSchedule = {
-            DayStartHour = 1;
-            DayStartMinute = 59;
-            NightStartHour = 2;
-            NightStartMinute = 0;
+    "/var/root/Library/Preferences/com.apple.CoreBrightness.plist" =
+      let
+        userId = builtins.readFile (
+          pkgs.runCommand "user-id" { }
+            "/usr/bin/dscl . -read user.home GeneratedUID | /usr/bin/sed 's/GeneratedUID: //' | /usr/bin/tr -d \\\\n > $out"
+        );
+      in
+      {
+        "CBUser-${userId}" = {
+          # Setting CBBlueLightReductionCCTTargetRaw doesn't really work for some reason.
+          # The slider remains in the middle after reboot.
+          CBBlueLightReductionCCTTargetRaw = "4800.064"; # The default is 4128.328
+          CBBlueReductionStatus = {
+            AutoBlueReductionEnabled = 1;
+            BlueLightReductionAlgoOverride = 4;
+            BlueLightReductionAlgoOverrideTimestamp = "3035-11-20 08:48:37 +0000";
+            BlueLightReductionDisableScheduleAlertCounter = 3;
+            BlueLightReductionSchedule = {
+              DayStartHour = 1;
+              DayStartMinute = 59;
+              NightStartHour = 2;
+              NightStartMinute = 0;
+            };
+            BlueReductionAvailable = 1;
+            BlueReductionEnabled = 1;
+            BlueReductionMode = 2;
+            BlueReductionSunScheduleAllowed = 1;
+            Version = 1;
           };
-          BlueReductionAvailable = 1;
-          BlueReductionEnabled = 1;
-          BlueReductionMode = 2;
-          BlueReductionSunScheduleAllowed = 1;
-          Version = 1;
+          CBColorAdaptationEnabled = 1;
         };
-        CBColorAdaptationEnabled = 1;
       };
-    };
   };
   menuExtraClock.Show24Hour = true; # Show the clock in 24 hours format
   controlcenter.BatteryShowPercentage = true;
@@ -88,7 +93,7 @@
   };
   finder = {
     AppleShowAllExtensions = true;
-    AppleShowAllFiles = true;  # show hidden files
+    AppleShowAllFiles = true; # show hidden files
     FXPreferredViewStyle = "clmv";
 
     # Allow quitting via ⌘ + Q; doing so will also hide desktop icons
@@ -108,9 +113,9 @@
   };
   trackpad = {
     Clicking = true;
-    ActuationStrength = 0;  # 0 to enable Silent Clicking, 1 to disable. The default is null.
-    FirstClickThreshold = 0;  # For normal click: 0 for light clicking, 1 for medium, 2 for firm. The default is null.
-    ForceSuppressed = true;  # Whether to disable force click. The default is null.
+    ActuationStrength = 0; # 0 to enable Silent Clicking, 1 to disable. The default is null.
+    FirstClickThreshold = 0; # For normal click: 0 for light clicking, 1 for medium, 2 for firm. The default is null.
+    ForceSuppressed = true; # Whether to disable force click. The default is null.
     Dragging = true;
     DragLock = false;
     TrackpadThreeFingerDrag = true;
@@ -141,13 +146,21 @@
         };
         # Mission Control / Spaces
         # So scrollback buffer navigation in kitty works
-        "32" = { enabled = 0; }; # Mission Control (Ctrl-up_arrow)
-        "33" = { enabled = 0; }; # Application windows (Ctrl-down_arrow)
+        "32" = {
+          enabled = 0;
+        }; # Mission Control (Ctrl-up_arrow)
+        "33" = {
+          enabled = 0;
+        }; # Application windows (Ctrl-down_arrow)
 
         # Input source switching (Ctrl-Space)
         # So FZF fuzzy search works in Vim
-        "60" = { enabled = 0; }; # Select previous input source
-        "61" = { enabled = 0; }; # Select next input source
+        "60" = {
+          enabled = 0;
+        }; # Select previous input source
+        "61" = {
+          enabled = 0;
+        }; # Select next input source
       };
     };
 

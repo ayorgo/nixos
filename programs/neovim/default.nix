@@ -28,17 +28,17 @@
       image-nvim
     ];
     extraPackages = [
-      pkgs.gcc  # required for treesitter to work properly
-      pkgs.imagemagick  # required for image-nvim to work properly
+      pkgs.gcc # required for treesitter to work properly
+      pkgs.imagemagick # required for image-nvim to work properly
     ];
     initLua = builtins.readFile ./init.lua;
   };
   home.file.".bigqueryrc".text = ''
---project_id=my-project
---format=csv
+    --project_id=kf-gds-markdown-promo-dev-01
+    --format=csv
 
-[query]
---use_legacy_sql=false
---max_rows=150
-'';
+    [query]
+    --use_legacy_sql=false
+    --max_rows=150
+  '';
 }

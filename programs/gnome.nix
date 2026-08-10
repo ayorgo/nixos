@@ -18,7 +18,24 @@ with lib.hm.gvariant;
 
   dconf.settings = {
     "org/gnome/desktop/input-sources" = {
-      sources = [ (mkTuple [ "xkb" "us" ]) (mkTuple [ "xkb" "us+dvorak" ]) (mkTuple [ "xkb" "ru" ]) (mkTuple [ "xkb" "ua" ])];
+      sources = [
+        (mkTuple [
+          "xkb"
+          "us"
+        ])
+        (mkTuple [
+          "xkb"
+          "us+dvorak"
+        ])
+        (mkTuple [
+          "xkb"
+          "ru"
+        ])
+        (mkTuple [
+          "xkb"
+          "ua"
+        ])
+      ];
     };
     "org/gnome/desktop/interface" = {
       clock-format = "24h";
@@ -72,7 +89,7 @@ with lib.hm.gvariant;
       lock-enabled = false;
     };
     "org/gnome/desktop/session" = {
-      idle-delay = mkUint32 0;  # Disable automatic screen blank or turn off or lock
+      idle-delay = mkUint32 0; # Disable automatic screen blank or turn off or lock
     };
     "org/gnome/shell/extensions/top-bar-organizer" = {
       left-box-order = [
@@ -97,7 +114,7 @@ with lib.hm.gvariant;
         "_battery_rate_"
       ];
       menu-centered = false;
-      position-in-panel = 2;  # 0: left box, 1: center box, 2: right box
+      position-in-panel = 2; # 0: left box, 1: center box, 2: right box
     };
     "org/gnome/desktop/interface" = {
       enable-hot-corners = false;
@@ -139,7 +156,7 @@ with lib.hm.gvariant;
       close = [ "<Alt>q" ];
       maximize = [ "<Alt>m" ];
       switch-windows = [ "<Alt>Tab" ];
-      switch-applications = [];
+      switch-applications = [ ];
     };
     "org/gnome/settings-daemon/plugins/media-keys".custom-keybindings = [
       "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"

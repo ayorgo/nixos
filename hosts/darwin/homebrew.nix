@@ -1,6 +1,6 @@
 {
   enable = true;
-  onActivation.cleanup = "zap";
+  onActivation.cleanup = "zap"; # anything not mentioned here is removed
   onActivation.autoUpdate = true;
   onActivation.upgrade = true;
   casks = [
@@ -12,8 +12,6 @@
     # to be manually dragged and dropped to "Accessibility Access" System list
     "wacom-tablet"
   ];
-  brews = [
-  ];
-  taps = [
-  ];
+  brews = [ ];
+  taps = [ ];
 }

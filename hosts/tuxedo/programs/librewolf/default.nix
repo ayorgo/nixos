@@ -9,7 +9,7 @@
       DisableTelemetry = true;
       DisableFirefoxStudies = true;
       EnableTrackingProtection = {
-        Value= true;
+        Value = true;
         Locked = true;
         Cryptomining = true;
         Fingerprinting = true;
@@ -63,9 +63,9 @@
         engines = {
           ecosia = {
             name = "Ecosia";
-            urls = [{template = "https://www.ecosia.org/search?q={searchTerms}";}];
+            urls = [ { template = "https://www.ecosia.org/search?q={searchTerms}"; } ];
             icon = "https://www.ecosia.org/static/icons/favicon.ico";
-            definedAliases = ["@eco"];
+            definedAliases = [ "@eco" ];
           };
           github = {
             name = "GitHub";

@@ -1,4 +1,9 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 
 {
   programs.fd = {
@@ -6,7 +11,8 @@
     extraOptions = [
       "--no-ignore"
       "--hidden"
-      "--exclude" ".git"
+      "--exclude"
+      ".git"
     ];
   };
 }

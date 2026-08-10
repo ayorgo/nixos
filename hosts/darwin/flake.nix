@@ -1,5 +1,5 @@
 {
-  description = "Example nix-darwin system flake";
+  description = "nix-darwin system flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -18,122 +18,122 @@
     };
   };
 
-  outputs = inputs@{ self
-    , nix-darwin
-    , nixpkgs
-    , home-manager
-    , nixpkgs-firefox-darwin
-    , nur
-    , nix-homebrew
-  }:
-  let
-    user = {
-      name = "ADZHYG01";
-      home = "/Users/${user.name}";
-    };
-    configuration = { pkgs, ... }: {
-      # Determinate uses its own daemon to manage the Nix installation that
-      # conflicts with nix-darwin’s native Nix management.
-      # Turn off nix-darwin’s management of the Nix installation:
-      nix.enable = false;
+  outputs =
+    inputs@{
+      self,
+      nix-darwin,
+      nixpkgs,
+      home-manager,
+      nixpkgs-firefox-darwin,
+      nur,
+      nix-homebrew,
+    }:
+    let
+      user = {
+        name = "ADZHYG01";
+        home = "/Users/${user.name}";
+      };
+      configuration = { pkgs, ... }: {
+        # Determinate uses its own daemon to manage the Nix installation that
+        # conflicts with nix-darwin’s native Nix management.
+        # Turn off nix-darwin’s management of the Nix installation:
+        nix.enable = false;
 
-      # Prevent the machine from falling into deep sleep after several minutes and disabling the network
-      power.sleep.computer = "never";
+        # Prevent the machine from falling into deep sleep after several minutes and disabling the network
+        power.sleep.computer = "never";
 
-      # Necessary for using flakes
-      nix.settings.experimental-features = "nix-command flakes";
+        # Necessary for using flakes
+        nix.settings.experimental-features = "nix-command flakes";
 
-      users.users.${user.name}.home = user.home;
+        users.users.${user.name}.home = user.home;
 
-      # Workaround for https://github.com/nix-darwin/nix-darwin/issues/1817
-      documentation.enable = false;
-      system.tools.darwin-uninstaller.enable = false;
+        # Workaround for https://github.com/nix-darwin/nix-darwin/issues/1817
+        documentation.enable = false;
+        system.tools.darwin-uninstaller.enable = false;
 
-      system = {
-        primaryUser = user.name;
-        keyboard = {
-          enableKeyMapping = true;
+        system = {
+          primaryUser = user.name;
+          keyboard = {
+            enableKeyMapping = true;
+          };
+          defaults = import ./macos.nix { inherit pkgs user; };
+
+          # Set Git commit hash for darwin-version.
+          configurationRevision = self.rev or self.dirtyRev or null;
+
+          # Used for backwards compatibility, please read the changelog before changing.
+          # $ darwin-rebuild changelog
+          stateVersion = 5;
         };
-        defaults = import ./macos.nix { inherit pkgs user; };
 
-        # Set Git commit hash for darwin-version.
-        configurationRevision = self.rev or self.dirtyRev or null;
+        # The platform the configuration will be used on.
+        nixpkgs = {
+          hostPlatform = "aarch64-darwin";
+          config.allowUnfree = true;
+        };
 
-        # Used for backwards compatibility, please read the changelog before changing.
-        # $ darwin-rebuild changelog
-        stateVersion = 5;
+        # `sudo` through fingerprint
+        security.pam.services.sudo_local.touchIdAuth = true;
+
+        # An alternative to `security.sudo.extraConfig`
+        environment.etc = {
+          "sudoers.d/10-nix-darwin-extra-config".text =
+            let
+              commands = [
+                "/run/current-system/sw/bin/darwin-rebuild"
+                "/nix/var/nix/profiles/default/bin/nix*"
+                "/nix/store/*/activate"
+              ];
+              commandsString = builtins.concatStringsSep ", " commands;
+            in
+            ''
+              # Set `sudo` timeout in minutes
+              Defaults timestamp_timeout = 5
+
+              # Share `sudo` timeout across terminals
+              Defaults !tty_tickets
+
+              # No `sudo` password for these commands
+              %admin ALL=(ALL:ALL) NOPASSWD: ${commandsString}
+            '';
+        };
+
+        homebrew = import ./homebrew.nix;
+
+        fonts.packages = with pkgs; [ source-code-pro ];
       };
-
-      # The platform the configuration will be used on.
-      nixpkgs = {
-        hostPlatform = "aarch64-darwin";
-        config.allowUnfree = true;
-      };
-
-      # `sudo` through fingerprint
-      security.pam.services.sudo_local.touchIdAuth = true;
-
-      # An alternative to `security.sudo.extraConfig`
-      environment.etc = {
-        "sudoers.d/10-nix-darwin-extra-config".text = let
-          commands = [
-            "/run/current-system/sw/bin/darwin-rebuild"
-            "/nix/var/nix/profiles/default/bin/nix*"
-            "/nix/store/*/activate"
-          ];
-          commandsString = builtins.concatStringsSep ", " commands;
-        in ''
-          # Set `sudo` timeout in minutes
-          Defaults timestamp_timeout = 5
-
-          # Share `sudo` timeout across terminals
-          Defaults !tty_tickets
-
-          # No `sudo` password for these commands
-          %admin ALL=(ALL:ALL) NOPASSWD: ${commandsString}
-        '';
-      };
-
-      homebrew = import ./homebrew.nix;
-
-      fonts.packages = with pkgs; [ source-code-pro ];
-    };
-  in
-  {
-    darwinConfigurations."simple-darwin" = nix-darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      modules = [
-        configuration
-        home-manager.darwinModules.home-manager
-        {
-          nixpkgs.overlays = [
-            nixpkgs-firefox-darwin.overlay
-            nur.overlays.default
-          ];
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            extraSpecialArgs = {
-              inherit user;
-            };
-            users.${user.name}.imports = [
-              ./home.nix
+    in
+    {
+      darwinConfigurations."simple-darwin" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = [
+          configuration
+          home-manager.darwinModules.home-manager
+          {
+            nixpkgs.overlays = [
+              nixpkgs-firefox-darwin.overlay
+              nur.overlays.default
             ];
-          };
-        }
-        nix-homebrew.darwinModules.nix-homebrew
-        {
-          nix-homebrew = {
-            # inherit user;
-            enable = true;
-            enableRosetta = true;
-            user = user.name;
-          };
-        }
-      ];
-    };
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit user; };
+              users.${user.name}.imports = [ ./home.nix ];
+            };
+          }
+          nix-homebrew.darwinModules.nix-homebrew
+          {
+            nix-homebrew = {
+              # inherit user;
+              enable = true;
+              enableRosetta = true;
+              user = user.name;
+            };
+          }
+        ];
+      };
 
-    # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."simple-darwin".pkgs;
-  };
+      # Expose the package set, including overlays, for convenience.
+      darwinPackages = self.darwinConfigurations."simple-darwin".pkgs;
+    };
 }

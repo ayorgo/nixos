@@ -1,4 +1,9 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 
 {
   programs.fzf = {
@@ -15,4 +20,3 @@
     ];
   };
 }
-

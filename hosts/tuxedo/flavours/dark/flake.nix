@@ -10,10 +10,17 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs =
+    { nixpkgs, home-manager, ... }:
     let
-      pkgs = import nixpkgs { system = "x86_64-linux"; config = { allowUnfree = true; }; };
-    in {
+      pkgs = import nixpkgs {
+        system = "x86_64-linux";
+        config = {
+          allowUnfree = true;
+        };
+      };
+    in
+    {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       homeConfigurations."ayorgo" = home-manager.lib.homeManagerConfiguration {

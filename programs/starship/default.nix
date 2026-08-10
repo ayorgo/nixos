@@ -7,4 +7,3 @@
     settings = pkgs.lib.importTOML ./config.toml;
   };
 }
-

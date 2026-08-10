@@ -4,12 +4,13 @@
   imports = [ ../../common.nix ];
 
   programs.kitty.themeFile = "OneHalfLight";
-  programs.kitty.settings.active_tab_foreground = lib.mkForce "#383A42";  # `foreground` colour from OneHalfLight
-  programs.kitty.settings.active_tab_background = lib.mkForce "#FAFAFA";  # `background` colour from OneHalfLight
-  programs.kitty.settings.inactive_tab_background = lib.mkForce "#FAFAFA";  # `background` colour from OneHalfLight
+  programs.kitty.settings.active_tab_foreground = lib.mkForce "#383A42"; # `foreground` colour from OneHalfLight
+  programs.kitty.settings.active_tab_background = lib.mkForce "#FAFAFA"; # `background` colour from OneHalfLight
+  programs.kitty.settings.inactive_tab_background = lib.mkForce "#FAFAFA"; # `background` colour from OneHalfLight
   programs.neovim.initLua = ("\n" + "vim.cmd([[set background=light]])");
   home.file."/home/ayorgo/.emacs.d/init.el" = {
-    text = "(setq my-theme-flavour \"light\")" + "\n" + (builtins.readFile ../../../../programs/emacs/init.el);
+    text =
+      "(setq my-theme-flavour \"light\")" + "\n" + (builtins.readFile ../../../../programs/emacs/init.el);
   };
   dconf.settings = {
     "org/gnome/desktop/interface" = {

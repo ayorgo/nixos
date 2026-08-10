@@ -1,4 +1,9 @@
-{ lib, pkgs, user, ... }:
+{
+  lib,
+  pkgs,
+  user,
+  ...
+}:
 
 {
   home.username = user.name;
@@ -12,7 +17,7 @@
     ripgrep
     unzip
     devcontainer
-    (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
+    (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
     docker
     docker-compose
     docker-credential-helpers
@@ -53,10 +58,12 @@
     PATH = "$HOME/.cargo/bin:$PATH";
   };
   home.activation = {
-    defaultBrowser = (lib.hm.dag.entryAfter ["installPackages"] ''
-      run echo "Setting default browser to firefox"
-      run ${pkgs.defaultbrowser}/bin/defaultbrowser firefox
-    '');
+    defaultBrowser = (
+      lib.hm.dag.entryAfter [ "installPackages" ] ''
+        run echo "Setting default browser to firefox"
+        run ${pkgs.defaultbrowser}/bin/defaultbrowser firefox
+      ''
+    );
   };
   home.file.".config/nvim/bg".text = "light";
 }

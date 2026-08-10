@@ -1,4 +1,9 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 
 {
   # The service doesn't seem to be working on MacOS.
@@ -13,10 +18,9 @@
           withWebP = true;
           withImageMagick = true;
           withTreeSitter = true;
-      }))
-      (lib.mkIf pkgs.stdenv.isLinux
-        pkgs.emacs-pgtk
-      )
+        }
+      ))
+      (lib.mkIf pkgs.stdenv.isLinux pkgs.emacs-pgtk)
     ];
   };
   home = {
@@ -28,9 +32,9 @@
     # On Tuxedo Linux `init.el` is copied by the flavours
     file = lib.mkMerge [
       (lib.mkIf pkgs.stdenv.isDarwin {
-          ".emacs.d/init.el" = {
-            source = ./init.el;
-          };
+        ".emacs.d/init.el" = {
+          source = ./init.el;
+        };
       })
     ];
   };

@@ -1,4 +1,9 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 
 {
   programs.lsd = {
@@ -6,8 +11,14 @@
     enableBashIntegration = true;
 
     settings = {
-      blocks = ["permission" "user" "size" "date" "name"];
-      total-size = false;  # turn off to avoid Permission denied errors on root owned directories
+      blocks = [
+        "permission"
+        "user"
+        "size"
+        "date"
+        "name"
+      ];
+      total-size = false; # turn off to avoid Permission denied errors on root owned directories
       date = "+%Y-%m-%d %H:%M:%S %z";
     };
     # https://github.com/lsd-rs/lsd/tree/v1.0.0#color-theme-file-content
