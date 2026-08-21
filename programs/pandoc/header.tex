@@ -19,6 +19,12 @@
 \renewcommand{\theFancyVerbLine}{%
   \ttfamily\small\color{black!50}\arabic{FancyVerbLine}}
 
+% Start every top-level section on a new page. \clearpage rather than
+% \newpage so pending floats flush before the break instead of drifting into
+% the following section.
+\usepackage{titlesec}
+\newcommand{\sectionbreak}{\clearpage}
+
 % Inline code, on the shadecolor that pandoc derives from code.theme. \fboxsep
 % is tighter than the 3pt default, which otherwise inflates line spacing.
 \let\oldtexttt\texttt
