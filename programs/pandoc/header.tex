@@ -1,11 +1,23 @@
 % Code blocks: smaller type, wrap long lines rather than run into the margin.
+% baselinestretch is pinned because setspace's \setstretch, which the
+% linestretch variable turns on, is global and would otherwise loosen code to
+% match the prose leading. Code reads better tighter than prose.
 \usepackage{fvextra}
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{
   fontsize=\small,
+  baselinestretch=1,
+  numbers=left,
+  numbersep=8pt,
+  xleftmargin=25pt,
   breaklines,
   breakanywhere,
   commandchars=\\\{\}
 }
+
+% Make the code block line numbers render with the same monospace font
+% as the rest of the code
+\renewcommand{\theFancyVerbLine}{%
+  \ttfamily\small\color{black!50}\arabic{FancyVerbLine}}
 
 % Inline code, on the shadecolor that pandoc derives from code.theme. \fboxsep
 % is tighter than the 3pt default, which otherwise inflates line spacing.
