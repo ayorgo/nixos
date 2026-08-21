@@ -47,6 +47,7 @@
     ../../programs/firefox
     ../../programs/lsd.nix
     ../../programs/neovim
+    ../../programs/pandoc
     ../../programs/starship
     ../../programs/zsh
     ../../programs/karabiner-elements

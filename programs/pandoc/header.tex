@@ -1,0 +1,16 @@
+% Code blocks: smaller type, wrap long lines rather than run into the margin.
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{
+  fontsize=\footnotesize,
+  breaklines,
+  breakanywhere,
+  commandchars=\\\{\}
+}
+
+% Inline code, on the shadecolor that pandoc derives from code.theme. \fboxsep
+% is tighter than the 3pt default, which otherwise inflates line spacing.
+\let\oldtexttt\texttt
+\renewcommand{\texttt}[1]{{%
+  \setlength{\fboxsep}{1.5pt}%
+  \colorbox{shadecolor}{\footnotesize\oldtexttt{#1}}%
+}}
