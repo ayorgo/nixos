@@ -8,11 +8,13 @@
 let
   headerTex = "pandoc/header.tex";
   codeTheme = "pandoc/code.theme";
+  snippetLua = "pandoc/git-snippet.lua";
   dataPath = name: "${config.xdg.dataHome}/${name}";
 in
 {
   xdg.dataFile.${headerTex}.source = ./header.tex;
   xdg.dataFile.${codeTheme}.source = ./code.theme;
+  xdg.dataFile.${snippetLua}.source = ./git-snippet.lua;
 
   programs.pandoc = {
     enable = true;
@@ -21,6 +23,7 @@ in
       toc = true;
       highlight-style = dataPath codeTheme;
       include-in-header = [ (dataPath headerTex) ];
+      filters = [ (dataPath snippetLua) ];
       variables = {
         mainfont = "Libertinus Serif";
         sansfont = "Libertinus Sans";
