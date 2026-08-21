@@ -34,7 +34,7 @@ in
         urlcolor = "[RGB]{30,100,190}";
         citecolor = "[RGB]{30,100,190}";
         filecolor = "[RGB]{30,100,190}";
-        hyperrefoptions = [ "breaklinks=true" ];
+        hyperrefoptions = [ "breaklinks=true" "linktoc=all" ];
       };
     };
   };
