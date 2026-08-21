@@ -1,7 +1,7 @@
 % Code blocks: smaller type, wrap long lines rather than run into the margin.
 \usepackage{fvextra}
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{
-  fontsize=\footnotesize,
+  fontsize=\small,
   breaklines,
   breakanywhere,
   commandchars=\\\{\}
@@ -12,5 +12,5 @@
 \let\oldtexttt\texttt
 \renewcommand{\texttt}[1]{{%
   \setlength{\fboxsep}{1.5pt}%
-  \colorbox{shadecolor}{\footnotesize\oldtexttt{#1}}%
+  \colorbox{shadecolor}{\small\oldtexttt{#1}}%
 }}

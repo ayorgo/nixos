@@ -22,7 +22,9 @@ in
       highlight-style = dataPath codeTheme;
       include-in-header = [ (dataPath headerTex) ];
       variables = {
-        mainfont = "Alegreya";
+        mainfont = "Libertinus Serif";
+        sansfont = "Libertinus Sans";
+        mathfont = "Libertinus Math";
         monofont = "Source Code Pro";
         monofontoptions = [ "Weight=Medium" ];
         fontsize = "11pt";
