@@ -25,6 +25,17 @@
 \usepackage{titlesec}
 \newcommand{\sectionbreak}{\clearpage}
 
+% Headings in Sans against the Serif body. Starred \titleformat* replaces
+% only the font, so the class's own sizes and spacing carry over unchanged.
+% The sizes restate the article defaults and must be given per level;
+% only the face is shared.
+\newcommand{\headingface}{\sffamily}
+\titleformat*{\section}{\headingface\Large\bfseries}
+\titleformat*{\subsection}{\headingface\large\bfseries}
+\titleformat*{\subsubsection}{\headingface\normalsize\bfseries}
+\titleformat*{\paragraph}{\headingface\normalsize\bfseries}
+\titleformat*{\subparagraph}{\headingface\normalsize\bfseries}
+
 % Inline code, on the shadecolor that pandoc derives from code.theme. \fboxsep
 % is tighter than the 3pt default, which otherwise inflates line spacing.
 \let\oldtexttt\texttt
