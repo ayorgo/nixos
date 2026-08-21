@@ -28,6 +28,7 @@ in
         monofont = "Source Code Pro";
         monofontoptions = [ "Weight=Medium" ];
         fontsize = "11pt";
+        linestretch = "1.05";
         geometry = [ "top=1cm" "bottom=1cm" "left=3cm" "right=3cm" "footskip=0.7cm" ];
         colorlinks = true;
         linkcolor = "[RGB]{30,100,190}";
