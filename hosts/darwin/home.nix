@@ -37,6 +37,8 @@
     plantuml
     tree
     claude-code
+    pgadmin4
+    visidata
   ];
   imports = [
     ../../programs/emacs
