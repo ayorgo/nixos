@@ -49,6 +49,7 @@
     ../../programs/firefox
     ../../programs/lsd.nix
     ../../programs/neovim
+    ../../programs/opencode
     ../../programs/pandoc
     ../../programs/starship
     ../../programs/zsh
