@@ -12,6 +12,7 @@
   home.packages = with pkgs; [
     btop
     coreutils
+    util-linux
     fastfetch
     httpie
     ripgrep
