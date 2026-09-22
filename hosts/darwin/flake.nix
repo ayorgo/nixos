@@ -100,7 +100,7 @@
 
         homebrew = import ./homebrew.nix;
 
-        fonts.packages = with pkgs; [ source-code-pro libertinus ];
+        fonts.packages = with pkgs; [ source-code-pro libertinus source-sans source-serif];
       };
     in
     {
