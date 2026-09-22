@@ -5,12 +5,8 @@
     enable = true;
     themeFile = lib.mkDefault "OneHalfLight";
     shellIntegration = lib.mkMerge [
-      (lib.mkIf pkgs.stdenv.isDarwin {
-        enableZshIntegration = true;
-      })
-      (lib.mkIf pkgs.stdenv.isLinux {
-        enableBashIntegration = true;
-      })
+      (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin { enableZshIntegration = true; })
+      (lib.mkIf pkgs.stdenv.hostPlatform.isLinux { enableBashIntegration = true; })
     ];
     settings = lib.mkMerge [
       {
@@ -65,7 +61,7 @@
         startup_session = "~/launch.kitty-session";
       }
 
-      (lib.mkIf pkgs.stdenv.isDarwin {
+      (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
         # Shell
         shell = "zsh";
 
@@ -75,7 +71,7 @@
         font_size = 14;
       })
 
-      (lib.mkIf pkgs.stdenv.isLinux {
+      (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
         # Shell
         shell = "bash";
 
@@ -85,9 +81,7 @@
         font_size = 11;
       })
 
-      (lib.mkIf pkgs.stdenv.isDarwin {
-        macos_option_as_alt = true;
-      })
+      (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin { macos_option_as_alt = true; })
     ];
     keybindings = {
       # Reload config
