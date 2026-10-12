@@ -36,6 +36,6 @@
 
     [query]
     --use_legacy_sql=false
-    --max_rows=150
+    --max_rows=30000
   '';
 }
