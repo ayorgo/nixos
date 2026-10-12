@@ -25,11 +25,9 @@
       vim-dadbod
       barbar-nvim
       nvim-web-devicons
-      image-nvim
     ];
     extraPackages = [
       pkgs.gcc # required for treesitter to work properly
-      pkgs.imagemagick # required for image-nvim to work properly
     ];
     initLua = builtins.readFile ./init.lua;
   };
