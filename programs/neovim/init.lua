@@ -502,30 +502,3 @@ vim.filetype.add({
     dbout = "csv",
   },
 })
-
-require("image").setup()
-
-
-local function get_secret()
-  local ok, result = pcall(function()
-    return vim.system({
-      "security",
-      "find-generic-password",
-      "-s", "athena-gemini",
-      "-a", os.getenv("USER"),
-      "-w",
-    }):wait()
-  end)
-
-  if not ok or result.code ~= 0 then
-    return {url="", api_key=""}
-  end
-
-  local ok, secret = pcall(vim.json.decode, vim.trim(result.stdout))
-
-  if not ok then
-    return {url="", api_key=""}
-  end
-
-  return secret
-end
