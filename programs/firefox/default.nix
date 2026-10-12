@@ -95,6 +95,7 @@
         "browser.ctrlTab.sortByRecentlyUsed" = true;
         "browser.search.region" = "GB";
         "browser.search.isUS" = false;
+        "browser.nova.enabled" = false;
         "distribution.searchplugins.defaultLocale" = "en-GB";
         "general.useragent.locale" = "en-GB";
         "accessibility.typeaheadfind.prefillwithselection" = true; # prefill find with selected text
