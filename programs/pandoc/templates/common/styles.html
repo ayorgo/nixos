@@ -1,0 +1,365 @@
+
+    $if(document-css)$
+    html {
+    $if(mainfont)$
+      font-family: $mainfont$;
+    $endif$
+    $if(fontsize)$
+      font-size: $fontsize$;
+    $endif$
+    $if(linestretch)$
+      line-height: $linestretch$;
+    $endif$
+      color: $if(fontcolor)$$fontcolor$$else$#1a1a1a$endif$;
+      background-color: $if(backgroundcolor)$$backgroundcolor$$else$#fdfdfd$endif$;
+    }
+    body {
+      margin: 0 auto;
+      max-width: $if(maxwidth)$$maxwidth$$else$36em$endif$;
+      padding-left: $if(margin-left)$$margin-left$$else$50px$endif$;
+      padding-right: $if(margin-right)$$margin-right$$else$50px$endif$;
+      padding-top: $if(margin-top)$$margin-top$$else$50px$endif$;
+      padding-bottom: $if(margin-bottom)$$margin-bottom$$else$50px$endif$;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: $if(backgroundcolor)$$backgroundcolor$$else$white$endif$;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: $if(linkcolor)$$linkcolor$$else$#1a1a1a$endif$;
+    }
+    a:visited {
+      color: $if(linkcolor)$$linkcolor$$else$#1a1a1a$endif$;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    $if(abstract)$
+    div.abstract {
+      margin: 2em 2em 2em 2em;
+      text-align: left;
+      font-size: 85%;
+    }
+    div.abstract-title {
+      font-weight: bold;
+      text-align: center;
+      padding: 0;
+      margin-bottom: 0.5em;
+    }
+    $endif$
+    code {
+      font-family: $if(monofont)$$monofont$$else$Menlo, Monaco, Consolas, 'Lucida Console', monospace$endif$;
+    $if(monobackgroundcolor)$
+      background-color: $monobackgroundcolor$;
+      padding: .2em .4em;
+    $endif$
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+    $if(monobackgroundcolor)$
+      background-color: $monobackgroundcolor$;
+      padding: 1em;
+    $endif$
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+    $if(table-caption-below)$
+      caption-side: bottom;
+      margin-top: 0.75em;
+    $else$
+      margin-bottom: 0.75em;
+    $endif$
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid $if(fontcolor)$$fontcolor$$else$#1a1a1a$endif$;
+      border-bottom: 1px solid $if(fontcolor)$$fontcolor$$else$#1a1a1a$endif$;
+    }
+    th {
+      border-top: 1px solid $if(fontcolor)$$fontcolor$$else$#1a1a1a$endif$;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    $endif$
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    $if(quotes)$
+    q { quotes: "“" "”" "‘" "’"; }
+    $endif$
+    $if(displaymath-css)$
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    $endif$
+    $if(highlighting-css)$
+    /* CSS for syntax highlighting */
+    $highlighting-css$
+    $endif$
+    $if(csl-css)$
+    $styles.citations.html()$
+    $endif$
+  /* Embedded faces, so the document renders the same off this machine.
+     --embed-resources base64s anything behind a url(), so these travel inside
+     the HTML; without them a recipient just falls back to their own default
+     serif and monospace, since having the fonts installed locally does nothing
+     for them. The family names deliberately match the mainfont and monofont
+     values in the nix pandoc defaults, because that is what pandoc writes into
+     the template's own html{} and code{} rules.
+
+     Subsetted to Latin-1, Latin Extended-A (Polish diacritics in the store
+     names) and General Punctuation (the en dash in the period labels): 840 KB
+     of OTF down to 176 KB. Regenerate with pyftsubset piped through
+     woff2_compress if the coverage ever needs widening.
+
+     Code Pro Medium rather than Regular to match monofontoptions =
+     [ "Weight=Medium" ] in the nix defaults, so HTML and PDF agree. */
+  @font-face {
+    font-family: "Source Serif";
+    src: url("fonts/SourceSerif4-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Source Serif";
+    src: url("fonts/SourceSerif4-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Source Serif";
+    src: url("fonts/SourceSerif4-It.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Source Code Pro";
+    src: url("fonts/SourceCodePro-Medium.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Source Code Pro";
+    src: url("fonts/SourceCodePro-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  /* Raw {=html}, so this whole block is dropped for PDF output.
+
+     Measure and type size. pandoc's default stylesheet sets
+     html{font-size:11pt} and body{max-width:36em}, the latter hardcoded in the
+     template with no variable behind it, so it can only be moved from CSS.
+     36em is ~72 characters, which suits prose but is cramped for this
+     document's tables. Guarded by min-width so pandoc's own small-screen rule
+     still wins on phones. Note max-width is in em against body's own
+     font-size, so raising the type widens the column for free. */
+  @media (min-width: 601px) {
+    body {
+      font-size: 13pt;
+      max-width: 44em;
+    }
+  }
+
+  /* Monospace tables, to line up the store IDs and prices. Source Code Pro is
+     the same face the PDF uses, and it is embedded above, so this no longer
+     depends on the reader having it installed. 11pt against the 14pt body
+     stops the wider mono advance pushing the tables out further. th inherits
+     from table, so headers come along without a separate rule. */
+  table {
+    font-family: "Source Code Pro", ui-monospace, monospace;
+    font-size: 11pt;
+    /* Lightest step of the ColorBrewer Greys ramp the plotly figure already
+       uses, so the tint matches. Deliberately faint against pandoc's #fdfdfd
+       page; #f0f0f0 is the next step down the same ramp if it reads too
+       subtle. */
+    background-color: #f7f7f7;
+  }
+
+  /* Grid lines. Two steps down the same ColorBrewer Greys ramp as the tint, so
+     the rules read as structure rather than competing with the text.
+     border-collapse is already collapse in pandoc's stylesheet, so adjacent
+     cell borders merge into one line rather than doubling up. */
+  th,
+  td {
+    border: 1px solid #d9d9d9;
+  }
+
+  /* Header row. The 2px rule restores the hierarchy the grid flattened: under
+     border-collapse the wider border wins before element priority is
+     considered, so 2px beats the 1px cell borders either side of it. The
+     browser's own stylesheet centres th, which sits badly above left-aligned
+     mono columns, so that is overridden here; the pipe tables all use plain
+     --- separators with no alignment colons, so pandoc emits no inline
+     text-align to compete with this rule. Headers are already bold from the
+     browser stylesheet, so weight is left alone. */
+  th {
+    background-color: #f7f7f7;
+    border-bottom: 2px solid #1a1a1a;
+    text-align: left;
+  }
+
+  /* Inline code carries the same tint as the tables, so the two kinds of
+     monospace read as one family. pandoc's stylesheet already sets the face
+     and an 85% size on code, so only the fill and a little breathing room are
+     added here. The pre code reset keeps fenced blocks flat: without it every
+     line inside a block would get its own tinted box. */
+  code {
+    background-color: #f7f7f7;
+    padding: 0.1em 0.3em;
+    border-radius: 2px;
+  }
+
+  pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+
+  /* Breaks a figure out of the text column: left is 50% of the 44em containing
+     block, then translateX pulls back 50% of the element's own width, which
+     nets out to a band centred on the viewport rather than on the column. */
+  img.wide,
+  iframe.wide {
+    display: block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  img.wide {
+    width: 70vw;
+    max-width: 70vw;
+  }
+
+  /* One knob, here. width and height on an iframe element are presentational
+     attributes and lose to CSS, so both are set here and the element carries
+     neither - having half the size in the markup and half in the stylesheet is
+     what made this hard to tune.
+
+     The embedded document needs the plotly figure's size plus the 8px default
+     body margin on each side, so the 1050x700 set in discount_distributions.py
+     needs 1066x716. The extra ~24px is deliberate slack: an exact fit still
+     scrolls once sub-pixel rounding is involved. Keep the slack small, because
+     the figure renders at its natural size anchored top-left, so any surplus
+     becomes dead space on the right and reads as the figure being off-centre
+     rather than as a wider frame. Coupled to the two numbers in that script. */
+  iframe.wide {
+    width: 1090px;
+    max-width: 96vw;
+    height: 740px;
+    border: 0;
+  }
+

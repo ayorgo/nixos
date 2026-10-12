@@ -1,0 +1,29 @@
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+$if(title)$
+  \title{$title$}
+$endif$
+$if(author)$
+  \author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
+$if(date)$
+  \date{$date$}
+$endif$
+
+\begin{document}
+
+$if(title)$
+  \maketitle
+$endif$
+
+$if(toc)$
+  \tableofcontents
+$endif$
+
+$body$
+
+\end{document}
