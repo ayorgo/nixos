@@ -32,7 +32,6 @@
     initLua = builtins.readFile ./init.lua;
   };
   home.file.".bigqueryrc".text = ''
-    --project_id=kf-gds-markdown-promo-dev-01
     --format=csv
 
     [query]
