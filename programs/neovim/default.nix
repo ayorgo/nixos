@@ -38,4 +38,9 @@
     --use_legacy_sql=false
     --max_rows=30000
   '';
+  home.file.".psqlrc".text = ''
+    \set QUIET 1
+    \pset format csv
+    \unset QUIET
+  '';
 }

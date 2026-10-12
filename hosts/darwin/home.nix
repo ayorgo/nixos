@@ -39,6 +39,7 @@
     tree
     claude-code
     pgadmin4
+    postgresql
     visidata
   ];
   imports = [
