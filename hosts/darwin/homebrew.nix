@@ -1,8 +1,8 @@
 {
   enable = true;
   onActivation.cleanup = "zap"; # anything not mentioned here is removed
-  onActivation.autoUpdate = true;
-  onActivation.upgrade = true;
+  onActivation.autoUpdate = false;
+  onActivation.upgrade = false;
   casks = [
     "qobuz"
     "karabiner-elements"
