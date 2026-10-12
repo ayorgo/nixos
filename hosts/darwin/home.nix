@@ -29,7 +29,7 @@
     just
     yq-go
     nixfmt
-    texlive.combined.scheme-full
+    texliveFull
     texlivePackages.minted
     python313Packages.pygments
     ty
@@ -41,6 +41,7 @@
     pgadmin4
     postgresql
     visidata
+    google-cloud-sql-proxy
   ];
   imports = [
     ../../programs/emacs
