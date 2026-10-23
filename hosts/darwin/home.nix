@@ -55,6 +55,7 @@
     ../../programs/opencode
     ../../programs/pandoc
     ../../programs/starship
+    ../../programs/yazi.nix
     ../../programs/zsh
     ../../programs/karabiner-elements
   ];
